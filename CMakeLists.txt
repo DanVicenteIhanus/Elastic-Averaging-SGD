@@ -11,7 +11,7 @@ include_directories(SYSTEM ${MPI_C_INCLUDE_PATH} ${MPI_CXX_INCLUDE_PATH})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
-add_executable(torchtest torchtest.cpp)
+add_executable(torchtest src/torchtest.cpp)
 
 target_link_libraries(torchtest ${TORCH_LIBRARIES})
 

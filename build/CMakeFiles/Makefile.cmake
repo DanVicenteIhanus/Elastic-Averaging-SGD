@@ -7,10 +7,16 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
+  "/Users/danvicente/opt/usr/libtorch/share/cmake/Caffe2/Caffe2Config.cmake"
+  "/Users/danvicente/opt/usr/libtorch/share/cmake/Caffe2/Caffe2Targets-release.cmake"
+  "/Users/danvicente/opt/usr/libtorch/share/cmake/Caffe2/Caffe2Targets.cmake"
+  "/Users/danvicente/opt/usr/libtorch/share/cmake/Caffe2/public/utils.cmake"
+  "/Users/danvicente/opt/usr/libtorch/share/cmake/Torch/TorchConfig.cmake"
+  "/Users/danvicente/opt/usr/libtorch/share/cmake/Torch/TorchConfigVersion.cmake"
+  "/Users/danvicente/skola/SF2568 - Parallell/Project/CMakeLists.txt"
   "CMakeFiles/3.29.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.29.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.29.1/CMakeSystem.cmake"
-  "CMakeLists.txt"
   "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/CMakeCInformation.cmake"
   "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/CMakeCXXInformation.cmake"
   "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
@@ -36,12 +42,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/Platform/Darwin-Initialize.cmake"
   "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/Platform/Darwin.cmake"
   "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/Platform/UnixPaths.cmake"
-  "/usr/local/libtorch/share/cmake/Caffe2/Caffe2Config.cmake"
-  "/usr/local/libtorch/share/cmake/Caffe2/Caffe2Targets-release.cmake"
-  "/usr/local/libtorch/share/cmake/Caffe2/Caffe2Targets.cmake"
-  "/usr/local/libtorch/share/cmake/Caffe2/public/utils.cmake"
-  "/usr/local/libtorch/share/cmake/Torch/TorchConfig.cmake"
-  "/usr/local/libtorch/share/cmake/Torch/TorchConfigVersion.cmake"
   )
 
 # The corresponding makefile is:
@@ -57,5 +57,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/main.dir/DependInfo.cmake"
+  "CMakeFiles/torchtest.dir/DependInfo.cmake"
   )

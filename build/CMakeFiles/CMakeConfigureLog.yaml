@@ -1976,3 +1976,894 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-Gao4AS"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-Gao4AS"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-Gao4AS'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_0f111/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_0f111.dir/build.make CMakeFiles/cmTC_0f111.dir/build
+        Building C object CMakeFiles/cmTC_0f111.dir/test_mpi.c.o
+        /usr/bin/clang  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_0f111.dir/test_mpi.c.o -MF CMakeFiles/cmTC_0f111.dir/test_mpi.c.o.d -o CMakeFiles/cmTC_0f111.dir/test_mpi.c.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-Gao4AS/test_mpi.c"
+        Linking C executable cmTC_0f111
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0f111.dir/link.txt --verbose=1
+        /usr/bin/clang  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_0f111.dir/test_mpi.c.o -o cmTC_0f111  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-bfp8Ex"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-bfp8Ex"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-bfp8Ex'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_8472d/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_8472d.dir/build.make CMakeFiles/cmTC_8472d.dir/build
+        Building CXX object CMakeFiles/cmTC_8472d.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_8472d.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_8472d.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_8472d.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-bfp8Ex/test_mpi.cpp"
+        Linking CXX executable cmTC_8472d
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8472d.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_8472d.dir/test_mpi.cpp.o -o cmTC_8472d  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1672 (_MPI_try_staged_settings)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode MPICXX"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-1kQagN"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-1kQagN"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_MPICXX"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-1kQagN'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_d15c4/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_d15c4.dir/build.make CMakeFiles/cmTC_d15c4.dir/build
+        Building CXX object CMakeFiles/cmTC_d15c4.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_d15c4.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_d15c4.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_d15c4.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-1kQagN/test_mpi.cpp"
+        Linking CXX executable cmTC_d15c4
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d15c4.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_d15c4.dir/test_mpi.cpp.o -o cmTC_d15c4  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-brJHEa"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-brJHEa"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-brJHEa'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_dab63/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_dab63.dir/build.make CMakeFiles/cmTC_dab63.dir/build
+        Building C object CMakeFiles/cmTC_dab63.dir/test_mpi.c.o
+        /usr/bin/clang  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_dab63.dir/test_mpi.c.o -MF CMakeFiles/cmTC_dab63.dir/test_mpi.c.o.d -o CMakeFiles/cmTC_dab63.dir/test_mpi.c.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-brJHEa/test_mpi.c"
+        Linking C executable cmTC_dab63
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dab63.dir/link.txt --verbose=1
+        /usr/bin/clang  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_dab63.dir/test_mpi.c.o -o cmTC_dab63  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-re742F"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-re742F"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-re742F'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_79d71/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_79d71.dir/build.make CMakeFiles/cmTC_79d71.dir/build
+        Building CXX object CMakeFiles/cmTC_79d71.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_79d71.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_79d71.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_79d71.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-re742F/test_mpi.cpp"
+        Linking CXX executable cmTC_79d71
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_79d71.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_79d71.dir/test_mpi.cpp.o -o cmTC_79d71  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1672 (_MPI_try_staged_settings)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode MPICXX"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-KU6aWG"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-KU6aWG"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_MPICXX"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-KU6aWG'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_2f934/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_2f934.dir/build.make CMakeFiles/cmTC_2f934.dir/build
+        Building CXX object CMakeFiles/cmTC_2f934.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_2f934.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_2f934.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_2f934.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-KU6aWG/test_mpi.cpp"
+        Linking CXX executable cmTC_2f934
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2f934.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_2f934.dir/test_mpi.cpp.o -o cmTC_2f934  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-9cQfe9"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-9cQfe9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-9cQfe9'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_54e8a/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_54e8a.dir/build.make CMakeFiles/cmTC_54e8a.dir/build
+        Building C object CMakeFiles/cmTC_54e8a.dir/test_mpi.c.o
+        /usr/bin/clang  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_54e8a.dir/test_mpi.c.o -MF CMakeFiles/cmTC_54e8a.dir/test_mpi.c.o.d -o CMakeFiles/cmTC_54e8a.dir/test_mpi.c.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-9cQfe9/test_mpi.c"
+        Linking C executable cmTC_54e8a
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_54e8a.dir/link.txt --verbose=1
+        /usr/bin/clang  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_54e8a.dir/test_mpi.c.o -o cmTC_54e8a  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-T5k59u"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-T5k59u"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-T5k59u'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_aa4cf/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_aa4cf.dir/build.make CMakeFiles/cmTC_aa4cf.dir/build
+        Building CXX object CMakeFiles/cmTC_aa4cf.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_aa4cf.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_aa4cf.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_aa4cf.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-T5k59u/test_mpi.cpp"
+        Linking CXX executable cmTC_aa4cf
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aa4cf.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_aa4cf.dir/test_mpi.cpp.o -o cmTC_aa4cf  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1672 (_MPI_try_staged_settings)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode MPICXX"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-wMQD2t"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-wMQD2t"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_MPICXX"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-wMQD2t'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_67335/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_67335.dir/build.make CMakeFiles/cmTC_67335.dir/build
+        Building CXX object CMakeFiles/cmTC_67335.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_67335.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_67335.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_67335.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-wMQD2t/test_mpi.cpp"
+        Linking CXX executable cmTC_67335
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_67335.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_67335.dir/test_mpi.cpp.o -o cmTC_67335  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-J8tFWh"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-J8tFWh"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-J8tFWh'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_413aa/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_413aa.dir/build.make CMakeFiles/cmTC_413aa.dir/build
+        Building C object CMakeFiles/cmTC_413aa.dir/test_mpi.c.o
+        /usr/bin/clang  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_413aa.dir/test_mpi.c.o -MF CMakeFiles/cmTC_413aa.dir/test_mpi.c.o.d -o CMakeFiles/cmTC_413aa.dir/test_mpi.c.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-J8tFWh/test_mpi.c"
+        Linking C executable cmTC_413aa
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_413aa.dir/link.txt --verbose=1
+        /usr/bin/clang  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_413aa.dir/test_mpi.c.o -o cmTC_413aa  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-Hus7Yi"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-Hus7Yi"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-Hus7Yi'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_911c0/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_911c0.dir/build.make CMakeFiles/cmTC_911c0.dir/build
+        Building CXX object CMakeFiles/cmTC_911c0.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_911c0.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_911c0.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_911c0.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-Hus7Yi/test_mpi.cpp"
+        Linking CXX executable cmTC_911c0
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_911c0.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_911c0.dir/test_mpi.cpp.o -o cmTC_911c0  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1672 (_MPI_try_staged_settings)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode MPICXX"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-t6lob5"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-t6lob5"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_MPICXX"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-t6lob5'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_7e70a/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_7e70a.dir/build.make CMakeFiles/cmTC_7e70a.dir/build
+        Building CXX object CMakeFiles/cmTC_7e70a.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_7e70a.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_7e70a.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_7e70a.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-t6lob5/test_mpi.cpp"
+        Linking CXX executable cmTC_7e70a
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7e70a.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_7e70a.dir/test_mpi.cpp.o -o cmTC_7e70a  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-DXiujY"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-DXiujY"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-DXiujY'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_df560/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_df560.dir/build.make CMakeFiles/cmTC_df560.dir/build
+        Building C object CMakeFiles/cmTC_df560.dir/test_mpi.c.o
+        /usr/bin/clang  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_df560.dir/test_mpi.c.o -MF CMakeFiles/cmTC_df560.dir/test_mpi.c.o.d -o CMakeFiles/cmTC_df560.dir/test_mpi.c.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-DXiujY/test_mpi.c"
+        Linking C executable cmTC_df560
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_df560.dir/link.txt --verbose=1
+        /usr/bin/clang  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_df560.dir/test_mpi.c.o -o cmTC_df560  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-MTqauh"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-MTqauh"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-MTqauh'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_951d0/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_951d0.dir/build.make CMakeFiles/cmTC_951d0.dir/build
+        Building CXX object CMakeFiles/cmTC_951d0.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_951d0.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_951d0.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_951d0.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-MTqauh/test_mpi.cpp"
+        Linking CXX executable cmTC_951d0
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_951d0.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_951d0.dir/test_mpi.cpp.o -o cmTC_951d0  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1672 (_MPI_try_staged_settings)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode MPICXX"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-FdCYtM"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-FdCYtM"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_MPICXX"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-FdCYtM'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_211cb/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_211cb.dir/build.make CMakeFiles/cmTC_211cb.dir/build
+        Building CXX object CMakeFiles/cmTC_211cb.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_211cb.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_211cb.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_211cb.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-FdCYtM/test_mpi.cpp"
+        Linking CXX executable cmTC_211cb
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_211cb.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_211cb.dir/test_mpi.cpp.o -o cmTC_211cb  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-mfh3Hk"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-mfh3Hk"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-mfh3Hk'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_c25f0/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_c25f0.dir/build.make CMakeFiles/cmTC_c25f0.dir/build
+        Building C object CMakeFiles/cmTC_c25f0.dir/test_mpi.c.o
+        /usr/bin/clang  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_c25f0.dir/test_mpi.c.o -MF CMakeFiles/cmTC_c25f0.dir/test_mpi.c.o.d -o CMakeFiles/cmTC_c25f0.dir/test_mpi.c.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-mfh3Hk/test_mpi.c"
+        Linking C executable cmTC_c25f0
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c25f0.dir/link.txt --verbose=1
+        /usr/bin/clang  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_c25f0.dir/test_mpi.c.o -o cmTC_c25f0  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-x5Ozk4"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-x5Ozk4"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-x5Ozk4'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_fcea9/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_fcea9.dir/build.make CMakeFiles/cmTC_fcea9.dir/build
+        Building CXX object CMakeFiles/cmTC_fcea9.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_fcea9.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_fcea9.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_fcea9.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-x5Ozk4/test_mpi.cpp"
+        Linking CXX executable cmTC_fcea9
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fcea9.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_fcea9.dir/test_mpi.cpp.o -o cmTC_fcea9  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1672 (_MPI_try_staged_settings)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode MPICXX"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-amTA5Y"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-amTA5Y"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_MPICXX"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-amTA5Y'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_809d7/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_809d7.dir/build.make CMakeFiles/cmTC_809d7.dir/build
+        Building CXX object CMakeFiles/cmTC_809d7.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_809d7.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_809d7.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_809d7.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-amTA5Y/test_mpi.cpp"
+        Linking CXX executable cmTC_809d7
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_809d7.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_809d7.dir/test_mpi.cpp.o -o cmTC_809d7  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-woLXAb"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-woLXAb"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-woLXAb'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_b6486/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_b6486.dir/build.make CMakeFiles/cmTC_b6486.dir/build
+        Building C object CMakeFiles/cmTC_b6486.dir/test_mpi.c.o
+        /usr/bin/clang  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_b6486.dir/test_mpi.c.o -MF CMakeFiles/cmTC_b6486.dir/test_mpi.c.o.d -o CMakeFiles/cmTC_b6486.dir/test_mpi.c.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-woLXAb/test_mpi.c"
+        Linking C executable cmTC_b6486
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b6486.dir/link.txt --verbose=1
+        /usr/bin/clang  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_b6486.dir/test_mpi.c.o -o cmTC_b6486  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-BFKfzF"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-BFKfzF"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-BFKfzF'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_58b7f/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_58b7f.dir/build.make CMakeFiles/cmTC_58b7f.dir/build
+        Building CXX object CMakeFiles/cmTC_58b7f.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_58b7f.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_58b7f.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_58b7f.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-BFKfzF/test_mpi.cpp"
+        Linking CXX executable cmTC_58b7f
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_58b7f.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_58b7f.dir/test_mpi.cpp.o -o cmTC_58b7f  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1672 (_MPI_try_staged_settings)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode MPICXX"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-K0bd0i"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-K0bd0i"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_MPICXX"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-K0bd0i'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_dccc7/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_dccc7.dir/build.make CMakeFiles/cmTC_dccc7.dir/build
+        Building CXX object CMakeFiles/cmTC_dccc7.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_dccc7.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_dccc7.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_dccc7.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-K0bd0i/test_mpi.cpp"
+        Linking CXX executable cmTC_dccc7
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dccc7.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_dccc7.dir/test_mpi.cpp.o -o cmTC_dccc7  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-ocGeKz"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-ocGeKz"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-ocGeKz'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_0410c/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_0410c.dir/build.make CMakeFiles/cmTC_0410c.dir/build
+        Building C object CMakeFiles/cmTC_0410c.dir/test_mpi.c.o
+        /usr/bin/clang  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_0410c.dir/test_mpi.c.o -MF CMakeFiles/cmTC_0410c.dir/test_mpi.c.o.d -o CMakeFiles/cmTC_0410c.dir/test_mpi.c.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-ocGeKz/test_mpi.c"
+        Linking C executable cmTC_0410c
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0410c.dir/link.txt --verbose=1
+        /usr/bin/clang  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_0410c.dir/test_mpi.c.o -o cmTC_0410c  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-TXgMv9"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-TXgMv9"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-TXgMv9'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_69138/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_69138.dir/build.make CMakeFiles/cmTC_69138.dir/build
+        Building CXX object CMakeFiles/cmTC_69138.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_69138.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_69138.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_69138.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-TXgMv9/test_mpi.cpp"
+        Linking CXX executable cmTC_69138
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_69138.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_69138.dir/test_mpi.cpp.o -o cmTC_69138  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1672 (_MPI_try_staged_settings)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode MPICXX"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-TuocWJ"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-TuocWJ"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_MPICXX"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-TuocWJ'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_9bf59/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_9bf59.dir/build.make CMakeFiles/cmTC_9bf59.dir/build
+        Building CXX object CMakeFiles/cmTC_9bf59.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_9bf59.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_9bf59.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_9bf59.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-TuocWJ/test_mpi.cpp"
+        Linking CXX executable cmTC_9bf59
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9bf59.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_9bf59.dir/test_mpi.cpp.o -o cmTC_9bf59  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-EKvz49"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-EKvz49"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-EKvz49'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_dfcb7/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_dfcb7.dir/build.make CMakeFiles/cmTC_dfcb7.dir/build
+        Building C object CMakeFiles/cmTC_dfcb7.dir/test_mpi.c.o
+        /usr/bin/clang  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_dfcb7.dir/test_mpi.c.o -MF CMakeFiles/cmTC_dfcb7.dir/test_mpi.c.o.d -o CMakeFiles/cmTC_dfcb7.dir/test_mpi.c.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-EKvz49/test_mpi.c"
+        Linking C executable cmTC_dfcb7
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dfcb7.dir/link.txt --verbose=1
+        /usr/bin/clang  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_dfcb7.dir/test_mpi.c.o -o cmTC_dfcb7  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode normal"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-zEVB3p"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-zEVB3p"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-zEVB3p'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_acf2c/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_acf2c.dir/build.make CMakeFiles/cmTC_acf2c.dir/build
+        Building CXX object CMakeFiles/cmTC_acf2c.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_acf2c.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_acf2c.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_acf2c.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-zEVB3p/test_mpi.cpp"
+        Linking CXX executable cmTC_acf2c
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_acf2c.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_acf2c.dir/test_mpi.cpp.o -o cmTC_acf2c  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/opt/homebrew/Cellar/cmake/3.29.1/share/cmake/Modules/FindMPI.cmake:1672 (_MPI_try_staged_settings)"
+      - "CMakeLists.txt:8 (find_package)"
+    description: "The MPI test test_mpi for CXX in mode MPICXX"
+    directories:
+      source: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-JnzLou"
+      binary: "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-JnzLou"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk"
+    buildResult:
+      variable: "MPI_RESULT_CXX_test_mpi_MPICXX"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-JnzLou'
+        
+        Run Build Command(s): /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_06bf3/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_06bf3.dir/build.make CMakeFiles/cmTC_06bf3.dir/build
+        Building CXX object CMakeFiles/cmTC_06bf3.dir/test_mpi.cpp.o
+        /usr/bin/clang++  -isystem /usr/local/include -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -MD -MT CMakeFiles/cmTC_06bf3.dir/test_mpi.cpp.o -MF CMakeFiles/cmTC_06bf3.dir/test_mpi.cpp.o.d -o CMakeFiles/cmTC_06bf3.dir/test_mpi.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/CMakeScratch/TryCompile-JnzLou/test_mpi.cpp"
+        Linking CXX executable cmTC_06bf3
+        /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_06bf3.dir/link.txt --verbose=1
+        /usr/bin/clang++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_06bf3.dir/test_mpi.cpp.o -o cmTC_06bf3  /usr/local/lib/libmpi.dylib
+        
+      exitCode: 0
+...
