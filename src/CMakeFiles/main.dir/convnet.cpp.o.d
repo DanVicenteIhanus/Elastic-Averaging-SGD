@@ -1,5 +1,6 @@
-CMakeFiles/torchtest.dir/torchtest.cpp.o: \
-  /Users/danvicente/skola/SF2568\ -\ Parallell/Project/src/torchtest.cpp \
+CMakeFiles/main.dir/convnet.cpp.o: \
+  /Users/danvicente/skola/SF2568\ -\ Parallell/Project/src/convnet.cpp \
+  /Users/danvicente/skola/SF2568\ -\ Parallell/Project/src/../include/convnet.h \
   /usr/local/libtorch/include/torch/csrc/api/include/torch/torch.h \
   /usr/local/libtorch/include/torch/csrc/api/include/torch/all.h \
   /usr/local/libtorch/include/torch/csrc/api/include/torch/autograd.h \
@@ -5271,5 +5272,4 @@ CMakeFiles/torchtest.dir/torchtest.cpp.o: \
   /usr/local/libtorch/include/torch/csrc/api/include/torch/optim/schedulers/step_lr.h \
   /usr/local/libtorch/include/torch/csrc/api/include/torch/sparse.h \
   /usr/local/libtorch/include/torch/csrc/api/include/torch/special.h \
-  /usr/local/libtorch/include/torch/csrc/api/include/torch/version.h \
-  /usr/local/include/mpi.h /usr/local/include/mpi_portable_platform.h
+  /usr/local/libtorch/include/torch/csrc/api/include/torch/version.h

@@ -129,6 +129,30 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+convnet.o: convnet.cpp.o
+.PHONY : convnet.o
+
+# target to build an object file
+convnet.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet.cpp.o
+.PHONY : convnet.cpp.o
+
+convnet.i: convnet.cpp.i
+.PHONY : convnet.i
+
+# target to preprocess a source file
+convnet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet.cpp.i
+.PHONY : convnet.cpp.i
+
+convnet.s: convnet.cpp.s
+.PHONY : convnet.s
+
+# target to generate assembly for a file
+convnet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet.cpp.s
+.PHONY : convnet.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
+	@echo "... convnet.o"
+	@echo "... convnet.i"
+	@echo "... convnet.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

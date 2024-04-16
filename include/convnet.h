@@ -1,4 +1,5 @@
 #include <torch/torch.h>
+#include <iostream>
 
 class ConvNetImpl : public torch::nn::Module {
  public:
@@ -7,23 +8,23 @@ class ConvNetImpl : public torch::nn::Module {
 
  private:
     torch::nn::Sequential layer1{
-        torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 16, 3).stride(1)),
-        torch::nn::BatchNorm2d(16),
-        torch::nn::ReLU(),
-        torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
+        torch::nn::Conv2d(torch::nn::Conv2dOptions(28, 3, 3).stride(1)),
+        //torch::nn::BatchNorm2d(16),
+        torch::nn::ReLU()
+        //torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
     };
 
     torch::nn::Sequential layer2{
-        torch::nn::Conv2d(torch::nn::Conv2dOptions(16, 32, 3).stride(1)),
-        torch::nn::BatchNorm2d(32),
-        torch::nn::ReLU(),
-        torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
+        torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 6, 3).stride(1)),
+        //torch::nn::BatchNorm2d(32),
+        torch::nn::ReLU()
+        //torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
     };
 
     torch::nn::Sequential layer3{
-        torch::nn::Conv2d(torch::nn::Conv2dOptions(32, 64, 3).stride(1)),
-        torch::nn::BatchNorm2d(64),
-        torch::nn::ReLU(),
+        torch::nn::Conv2d(torch::nn::Conv2dOptions(6, 12, 3).stride(1)),
+        //torch::nn::BatchNorm2d(),
+        torch::nn::ReLU()
     };
 
     torch::nn::AdaptiveAvgPool2d pool{torch::nn::AdaptiveAvgPool2dOptions({4, 4})};

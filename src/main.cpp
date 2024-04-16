@@ -28,13 +28,15 @@ int main(int argc, char* argv[]) {
   //    MPI-setup     //
   // ================ // 
   int size, rank, ierr;
+  /*
   ierr = MPI_Init(&argc, &argv);
   ierr = MPI_Comm_size(MPI_COMM_WORLD, &size);
   ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
+  
   // testing MPI
   std::cout << "Hi, this is process " << rank << ", whats up? \n";
-  
+  */
+
   //MNIST data from pytorch datasets
   const std::string MNIST_path = "../data/mnist/";
   auto train_dataset =
@@ -55,10 +57,9 @@ int main(int argc, char* argv[]) {
   ConvNet model(num_classes);
   model->to(device);
   torch::optim::SGD optimizer(model->parameters(), torch::optim::SGDOptions(lr));
-
   for (int epoch = 0; epoch < num_epochs; epoch++) {
     for (auto& batch : *train_loader) {
-      auto data = batch.data.view({batch_size, -1}).to(device);
+      auto data = batch.data;
       auto target = batch.target.to(device);
 
       // forward pass
@@ -73,6 +74,6 @@ int main(int argc, char* argv[]) {
     }
   }
 
-  ierr = MPI_Finalize();
+  //ierr = MPI_Finalize();
   return 0;
 }
