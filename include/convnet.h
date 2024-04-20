@@ -8,21 +8,21 @@ class ConvNetImpl : public torch::nn::Module {
 
 	private:
 		torch::nn::Sequential conv1{
-			torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 16, 3).stride(1).padding(1)),
-			torch::nn::BatchNorm2d(16),
+			torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 4, 3).stride(1).padding(1)),
+			torch::nn::BatchNorm2d(4),
 			torch::nn::ReLU(),
 			torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
 		};
 
 		torch::nn::Sequential conv2{
-			torch::nn::Conv2d(torch::nn::Conv2dOptions(16, 32, 3).stride(1).padding(1)),
-			torch::nn::BatchNorm2d(32),
+			torch::nn::Conv2d(torch::nn::Conv2dOptions(4, 8, 3).stride(1).padding(1)),
+			torch::nn::BatchNorm2d(8),
 			torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
 		};
 
 		torch::nn::Sequential conv3{
-			torch::nn::Conv2d(torch::nn::Conv2dOptions(32, 64, 3).stride(1).padding(1)),
-			torch::nn::BatchNorm2d(64),
+			torch::nn::Conv2d(torch::nn::Conv2dOptions(8, 16, 3).stride(1).padding(1)),
+			torch::nn::BatchNorm2d(16),
 			torch::nn::ReLU()
 		};
 

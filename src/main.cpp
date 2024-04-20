@@ -129,12 +129,12 @@ int main(int argc, char* argv[]) {
     num_correct += prediction.eq(target).sum().item<int64_t>();
   }
 
-    std::cout << "Testing finished!\n";
+  std::cout << "Testing finished!\n";
 
-    auto test_accuracy = static_cast<double>(num_correct) / num_test_samples;
-    auto test_sample_mean_loss = running_loss / num_test_samples;
+  auto test_accuracy = static_cast<double>(num_correct) / num_test_samples;
+  auto test_sample_mean_loss = running_loss / num_test_samples;
 
-    std::cout << "Testset - Loss: " << test_sample_mean_loss << ", Accuracy: " << test_accuracy << '\n';
+  std::cout << "Testset - Loss: " << test_sample_mean_loss << ", Accuracy: " << test_accuracy << '\n';
   //ierr = MPI_Finalize();
   return 0;
 }
