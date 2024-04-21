@@ -7,28 +7,43 @@ class ConvNetImpl : public torch::nn::Module {
 		torch::Tensor forward(torch::Tensor x);
 
 	private:
-		torch::nn::Sequential conv1{
-			torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 4, 3).stride(1).padding(1)),
-			torch::nn::BatchNorm2d(4),
+		torch::nn::Sequential conv1 {
+			torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 20, 5).stride(1)),
+			// add padding by .padding(1) (or whatever number < 28, instead of 1)
+			//torch::nn::BatchNorm2d(20)
 			torch::nn::ReLU(),
 			torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
 		};
 
-		torch::nn::Sequential conv2{
-			torch::nn::Conv2d(torch::nn::Conv2dOptions(4, 8, 3).stride(1).padding(1)),
-			torch::nn::BatchNorm2d(8),
+		torch::nn::Sequential conv2 {
+			torch::nn::Conv2d(torch::nn::Conv2dOptions(20, 50, 5).stride(1)),
+			torch::nn::ReLU(),
+			//torch::nn::BatchNorm2d(50)
 			torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
 		};
 
-		torch::nn::Sequential conv3{
-			torch::nn::Conv2d(torch::nn::Conv2dOptions(8, 16, 3).stride(1).padding(1)),
-			torch::nn::BatchNorm2d(16),
+		/*
+		torch::nn::Sequential conv3 {
+			torch::nn::Conv2d(torch::nn::Conv2dOptions(40, 30, 3).stride(1).padding(1)),
+			torch::nn::Dropout2d(torch::nn::Dropout2dOptions(0.05)),
 			torch::nn::ReLU()
 		};
+		*/
 
-		// adaptive average pooling and fully connected final layer
-		torch::nn::AdaptiveAvgPool2d pool{torch::nn::AdaptiveAvgPool2dOptions({1, 1})};
-		torch::nn::Linear fc;
+		torch::nn::Sequential fc1 {
+			torch::nn::Linear(torch::nn::LinearOptions(4*4*50, 500)),
+			torch::nn::ReLU(),
+			torch::nn::Dropout2d(torch::nn::Dropout2dOptions(0.4))
+		};
+
+		torch::nn::Sequential fc2 {
+			torch::nn::Linear(torch::nn::LinearOptions(500, 10))
+		};
+
+		// adaptive average pooling and fully connected final layers
+		//torch::nn::AdaptiveAvgPool2d pool{torch::nn::AdaptiveAvgPool2dOptions({1, 1})};	
+		//torch::nn::Linear fc1;
+		//torch::nn::Linear fc2;
 	};
 
 	TORCH_MODULE(ConvNet);

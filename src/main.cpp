@@ -9,17 +9,19 @@ torch::Device device(torch::kCPU);
 /* 
 
 TODO:
-  1. Use the MNIST dataset to define CNN <- OK?
-  2. backprop (sequentially) <- 
-  3. Store the results
+  1. Use the MNIST dataset to define CNN - OK?
+  2. backprop (sequentially) - OK?
+  3. Tune hyperparameters <- 
   4. Print classification error?
 */
+
 int main(int argc, char* argv[]) {
   // == Hyperparameters == //
   const int num_classes = 10;
   const int batch_size = 1; 
-  const int num_epochs = 10; 
-  const double lr = 0.001;
+  const int num_epochs = 20; 
+  const double rho = 0.001;
+  const double lr = 0.01;
   
   // ================ //
   //    MPI-setup     //
@@ -47,7 +49,7 @@ int main(int argc, char* argv[]) {
 
   int num_train_samples = train_dataset.size().value(); // 60,000 samples
   auto num_test_samples = test_dataset.size().value();  // 10,000 samples
-  
+
   // create training and test data
   auto train_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
     std::move(train_dataset), batch_size);
@@ -60,28 +62,29 @@ int main(int argc, char* argv[]) {
   model->to(device);
   
   // define optimizer
-  torch::optim::SGD optimizer(model->parameters(), torch::optim::SGDOptions(lr));
+  torch::optim::SGDOptions options(lr);
+  options.momentum(0).dampening(0).weight_decay(rho);
+
+  torch::optim::SGD optimizer(model->parameters(), options);
 
   // ============== //
   // TRAINING PHASE //
   // ============== //
-
-  // Training
   std::cout << std::fixed << std::setprecision(4);
-  std::cout << "Training CNN...\n";
-
+  std::cout << "---------------------------------------------------\n";
+  std::cout << "Training CNN... num_epochs = " << num_epochs << "\n";
+  std::cout << "---------------------------------------------------\n";
   for (int epoch = 0; epoch < num_epochs; epoch++) {
     double running_loss = 0.0;
     size_t num_correct = 0;
-    int bar_width = 70;
     for (auto& batch : *train_loader) {
       auto data = batch.data.to(device);
       auto target = batch.target.to(device);
-
+    
       // forward pass
       auto output = model->forward(data);
       
-      // compute + update loss
+      // compute loss
       auto loss = torch::nn::functional::cross_entropy(output, target);
       running_loss += loss.item<double>() * data.size(0);
 
@@ -95,7 +98,25 @@ int main(int argc, char* argv[]) {
       optimizer.zero_grad();
       loss.backward();
       optimizer.step();
-    }
+
+      // Compute validation error:
+      /*
+      model->eval(); 
+      {
+        double val_running_loss = 0.0;
+        torch::InferenceMode no_grad;  
+        for (const auto& batch : *test_loader) {
+          auto data = batch.data.to(device);
+          auto target = batch.target.to(device);
+          auto output = model->forward(data);
+          auto val_loss = torch::nn::functional::cross_entropy(output, target);
+          val_running_loss += val_loss.item<double>() * data.size(0);
+        }
+       
+      model->train();
+      */
+      }
+
     auto sample_mean_loss = running_loss / num_train_samples;
     auto accuracy = static_cast<double>(num_correct) / num_train_samples;
 
@@ -106,33 +127,40 @@ int main(int argc, char* argv[]) {
   // ============= //
   // TESTING PHASE //
   // ============= //
-
+  
   std::cout << "Training finished!\n\n";
-  std::cout << "Testing...\n";
+  std::cout << "---------------------------------------------------\n";
+  std::cout << "Testing... num_test_samples = " << num_test_samples << "\n";
+  std::cout << "---------------------------------------------------\n";
+
   // Test the model
   model->eval();
   torch::InferenceMode no_grad;
 
-  double running_loss = 0.0;
-  size_t num_correct = 0;
+  double test_running_loss = 0.0;
+  size_t test_num_correct = 0;
 
   for (const auto& batch : *test_loader) {
     auto data = batch.data.to(device);
     auto target = batch.target.to(device);
 
+    // forward pass
     auto output = model->forward(data);
 
+    // loss update
     auto loss = torch::nn::functional::cross_entropy(output, target);
-    running_loss += loss.item<double>() * data.size(0);
+    test_running_loss += loss.item<double>() * data.size(0);
 
+    // prediction & accuracy
     auto prediction = output.argmax(1);
-    num_correct += prediction.eq(target).sum().item<int64_t>();
+    test_num_correct += prediction.eq(target).sum().item<int64_t>();
+  
   }
 
   std::cout << "Testing finished!\n";
 
-  auto test_accuracy = static_cast<double>(num_correct) / num_test_samples;
-  auto test_sample_mean_loss = running_loss / num_test_samples;
+  auto test_accuracy = static_cast<double>(test_num_correct) / num_test_samples;
+  auto test_sample_mean_loss = test_running_loss / num_test_samples;
 
   std::cout << "Testset - Loss: " << test_sample_mean_loss << ", Accuracy: " << test_accuracy << '\n';
   //ierr = MPI_Finalize();
