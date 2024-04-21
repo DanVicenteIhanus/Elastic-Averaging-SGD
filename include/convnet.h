@@ -8,7 +8,7 @@ class ConvNetImpl : public torch::nn::Module {
 
 	private:
 		torch::nn::Sequential conv1 {
-			torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 20, 5).stride(1)),
+			torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 30, 5).stride(1)),
 			// add padding by .padding(1) (or whatever number < 28, instead of 1)
 			//torch::nn::BatchNorm2d(20)
 			torch::nn::ReLU(),
@@ -16,9 +16,9 @@ class ConvNetImpl : public torch::nn::Module {
 		};
 
 		torch::nn::Sequential conv2 {
-			torch::nn::Conv2d(torch::nn::Conv2dOptions(20, 50, 5).stride(1)),
+			torch::nn::Conv2d(torch::nn::Conv2dOptions(30, 40, 5).stride(1)),
 			torch::nn::ReLU(),
-			//torch::nn::BatchNorm2d(50)
+			torch::nn::BatchNorm2d(40),
 			torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
 		};
 
@@ -31,7 +31,7 @@ class ConvNetImpl : public torch::nn::Module {
 		*/
 
 		torch::nn::Sequential fc1 {
-			torch::nn::Linear(torch::nn::LinearOptions(4*4*50, 500)),
+			torch::nn::Linear(torch::nn::LinearOptions(4*4*40, 500)),
 			torch::nn::ReLU(),
 			torch::nn::Dropout2d(torch::nn::Dropout2dOptions(0.4))
 		};
@@ -42,8 +42,6 @@ class ConvNetImpl : public torch::nn::Module {
 
 		// adaptive average pooling and fully connected final layers
 		//torch::nn::AdaptiveAvgPool2d pool{torch::nn::AdaptiveAvgPool2dOptions({1, 1})};	
-		//torch::nn::Linear fc1;
-		//torch::nn::Linear fc2;
 	};
 
 	TORCH_MODULE(ConvNet);

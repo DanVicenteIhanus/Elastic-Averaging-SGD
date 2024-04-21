@@ -19,7 +19,7 @@ torch::Tensor ConvNetImpl::forward(torch::Tensor x) {
 	x = conv2->forward(x);
 	//x = conv3->forward(x);
 	//x = pool->forward(x);
-	x = x.view({-1, 4*4*50});
+	x = x.view({-1, 4*4*40});
 	x = fc1->forward(x);
 	return fc2->forward(x);
 }
