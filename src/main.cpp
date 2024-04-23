@@ -9,17 +9,16 @@ torch::Device device(torch::kCPU);
 /* 
 
 TODO:
-  1. Use the MNIST dataset to define CNN - OK?
-  2. backprop (sequentially) - OK?
-  3. Tune hyperparameters <- 
-  4. Print classification error?
+  1. Asynchronous EASGD <-
+  2. Tune hyperparameters (elastic force etc)
+  3. 
 */
 
 int main(int argc, char* argv[]) {
   // == Hyperparameters == //
   const int num_classes = 10;
-  const int batch_size = 1; 
-  const int num_epochs = 20; 
+  const int batch_size = 100; 
+  const int num_epochs = 50; 
   const double rho = 0.001;
   const double lr = 0.01;
   
@@ -29,7 +28,7 @@ int main(int argc, char* argv[]) {
   int size, rank, ierr;
   /*
   ierr = MPI_Init(&argc, &argv);
-  ierr = MPI_Comm_size(MPI_COMM_WORLD, &size);
+  ierr = MPI_Comm_size(MPI_COMM_WORLD, &size);p
   ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   
   // testing MPI
@@ -54,7 +53,7 @@ int main(int argc, char* argv[]) {
   auto train_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
     std::move(train_dataset), batch_size);
   
-  auto test_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
+  auto test_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
         std::move(test_dataset), batch_size);
   
   // create CNN
@@ -63,7 +62,7 @@ int main(int argc, char* argv[]) {
   
   // define optimizer
   torch::optim::SGDOptions options(lr);
-  options.momentum(0).dampening(0).weight_decay(rho);
+  //options.weight_decay(rho);
 
   torch::optim::SGD optimizer(model->parameters(), options);
 
@@ -71,9 +70,9 @@ int main(int argc, char* argv[]) {
   // TRAINING PHASE //
   // ============== //
   std::cout << std::fixed << std::setprecision(4);
-  std::cout << "---------------------------------------------------\n";
-  std::cout << "Training CNN... num_epochs = " << num_epochs << "\n";
-  std::cout << "---------------------------------------------------\n";
+  std::cout << "--------------------------------------------------------\n";
+  std::cout << "Training CNN... num_epochs = " << num_epochs << ", batch_size = " << batch_size <<"\n";
+  std::cout << "--------------------------------------------------------\n";
   for (int epoch = 0; epoch < num_epochs; epoch++) {
     double running_loss = 0.0;
     size_t num_correct = 0;
@@ -92,29 +91,13 @@ int main(int argc, char* argv[]) {
       auto prediction = output.argmax(1);
 
       // update # correctly classified samples
-      num_correct += prediction.eq(target).sum().item<int64_t>();
+      num_correct += prediction.eq(target).sum().item<int64_t>(); //np.sum(prediction == target)
 
       // backprop + gradient step
       optimizer.zero_grad();
       loss.backward();
       optimizer.step();
 
-      // Compute validation error:
-      /*
-      model->eval(); 
-      {
-        double val_running_loss = 0.0;
-        torch::InferenceMode no_grad;  
-        for (const auto& batch : *test_loader) {
-          auto data = batch.data.to(device);
-          auto target = batch.target.to(device);
-          auto output = model->forward(data);
-          auto val_loss = torch::nn::functional::cross_entropy(output, target);
-          val_running_loss += val_loss.item<double>() * data.size(0);
-        }
-       
-      model->train();
-      */
       }
 
     auto sample_mean_loss = running_loss / num_train_samples;
@@ -129,9 +112,9 @@ int main(int argc, char* argv[]) {
   // ============= //
   
   std::cout << "Training finished!\n\n";
-  std::cout << "---------------------------------------------------\n";
+  std::cout << "--------------------------------------------------------\n";
   std::cout << "Testing... num_test_samples = " << num_test_samples << "\n";
-  std::cout << "---------------------------------------------------\n";
+  std::cout << "--------------------------------------------------------\n";
 
   // Test the model
   model->eval();
