@@ -16,9 +16,10 @@ TODO:
 
 int main(int argc, char* argv[]) {
   // == Hyperparameters == //
+  // testing
   const int num_classes = 10;
   const int batch_size = 100; 
-  const int num_epochs = 50; 
+  const int num_epochs = 10; 
   const double rho = 0.001;
   const double lr = 0.01;
   
