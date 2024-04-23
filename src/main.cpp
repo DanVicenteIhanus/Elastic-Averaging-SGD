@@ -34,8 +34,8 @@ int main(int argc, char* argv[]) {
   ierr = MPI_Init(&argc, &argv);
   ierr = MPI_Comm_size(MPI_COMM_WORLD, &size);
   ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  MPI_Status status;
-  MPI_Request req1, req2;
+  MPI_Status statuses[2];
+  MPI_Request reqs[2];
 
   // MNIST data from pytorch datasets
   const std::string MNIST_path = "../data/mnist/";
@@ -98,62 +98,57 @@ int main(int argc, char* argv[]) {
     std::cout << "Training CNN... num_epochs = " << num_epochs << ", batch_size = " << batch_size <<"\n";
     std::cout << "--------------------------------------------------------\n";
     for (int epoch = 0; epoch < num_epochs; epoch++) {
-      for (int k = 0; k < num_train_samples/batch_size; k++) {
-        
-        // testing periodic mpi communication
-        std::vector<int> send_data(100);
-        std::vector<int> recv_data(100);
-        std::vector<MPI_Request> requests(size - 1);
-        
-        for (int i = 0; i < 100; i++) {
-          send_data[i] = i;
-        }
-        for (int p = 1; p < size; p++) {
-          for (auto i = 0; i < sz; i++) {
-            // getting dimensions of tensor
+      for (auto &batch : *train_loader) {
+        if (t % tau == 0) {
+          for (int p = 1; p < size; p++) {
+            for (auto i = 0; i < sz; i++) {
+              // complexity = O(epoch*num_batches*P*network_size)
+              // getting dimensions of tensor
 
-            int num_dim = param[i].value().dim();
-            std::vector<int64_t> dim_array;
-            for (int j = 0; j < num_dim; j++) {
-                dim_array.push_back(param[i].value().size(j));
-            }
+              int num_dim = param[i].value().dim();
+              std::vector<int64_t> dim_array;
+              for (int j = 0; j < num_dim; j++) {
+                  dim_array.push_back(param[i].value().size(j));
+              }
 
-            // flattening the tensor and copying it to a 1-D vector
-            auto flat = torch::flatten(param[i].value());
+              // flattening the tensor and copying it to a 1-D vector
+              auto flat = torch::flatten(param[i].value());
 
-            auto temp = (float *)calloc(flat.numel(),
-                                        flat.numel() * param_elem_size);
-            for (int j = 0; j < flat.numel(); j++) {
-                *(temp + j) = flat[j].item<float>();
-            }
+              auto temp = (float *)calloc(flat.numel(),
+                                          flat.numel() * param_elem_size);
+              for (int j = 0; j < flat.numel(); j++) {
+                  *(temp + j) = flat[j].item<float>();
+              }
 
-            // send parameters to root
-            MPI_Isend(temp, flat.numel(), MPI_FLOAT, p, 0, MPI_COMM_WORLD, &req1);
-            // receive from root
-            MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, p, 0, MPI_COMM_WORLD, &req2);
-            MPI_Wait(&req1, &status);
-            MPI_Wait(&req2, &status);
+              //// send parameters to root
+              //MPI_Isend(temp, flat.numel(), MPI_FLOAT, p, 0, MPI_COMM_WORLD, &req1);
+              MPI_Isend(temp, flat.numel(), MPI_FLOAT, p, 0 , MPI_COMM_WORLD, &reqs[0]);
+              MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, p, 0, MPI_COMM_WORLD, &reqs[1]);
 
-            // unpack 1-D vector
-            auto p_recv = (float *)calloc(
-                flat.numel(), flat.numel() * param_elem_size);
-            for (int j = 0; j < flat.numel(); j++) {
-                *(p_recv + j) = *(param_partner + j);
-            }
+              //// receive from partner
+              //MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, p, 0, MPI_COMM_WORLD, &req2);
+              MPI_Waitall(2, reqs, statuses);
+              //MPI_Wait(&req2, &status);
 
-            torch::Tensor p_tensor =
-                torch::from_blob(p_recv, dim_array, torch::kFloat)
-                    .clone();
-            // freeing temp arrays
-            free(temp);
-            free(p_recv);
-          }
-        }
-      }
-    }
-    
-  }
-  else {
+              // unpack 1-D vector
+              auto p_recv = (float *)calloc(
+                  flat.numel(), flat.numel() * param_elem_size);
+              for (int j = 0; j < flat.numel(); j++) {
+                  *(p_recv + j) = *(param_partner + j);
+              }
+
+              torch::Tensor p_tensor =
+                  torch::from_blob(p_recv, dim_array, torch::kFloat).clone();
+              // freeing temp arrays
+              free(temp);
+              free(p_recv);
+              }
+            } // parameter loop
+        } // process loop
+      t++;
+      } // batch loop
+    } // epoch loop
+  } else {
   // non-root processes
     for (int epoch = 0; epoch < num_epochs; epoch++) {
       double running_loss = 0.0;
@@ -202,13 +197,13 @@ int main(int argc, char* argv[]) {
                 *(temp + j) = flat[j].item<float>();
             }
 
-            // receive from root
-            MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &req2);
-            // send parameters to root
-            MPI_Isend(temp, flat.numel(), MPI_FLOAT, 0, 0,MPI_COMM_WORLD, &req1);
-            MPI_Wait(&req1, &status);
-            MPI_Wait(&req2, &status);
-
+            //// receive from root
+            MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &reqs[1]);
+            MPI_Isend(temp, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &reqs[0]);
+            //MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &req2);
+            // //send parameters to root
+            // MPI_Isend(temp, flat.numel(), MPI_FLOAT, 0, 0,MPI_COMM_WORLD, &req1);
+            MPI_Waitall(2, reqs, statuses);
             // unpack 1-D vector form corresponding displacement and form
             // tensor
             auto root_recv = (float *)calloc(
@@ -219,8 +214,7 @@ int main(int argc, char* argv[]) {
             }
 
             torch::Tensor root_tensor =
-                torch::from_blob(root_recv, dim_array, torch::kFloat)
-                    .clone();
+                torch::from_blob(root_recv, dim_array, torch::kFloat).clone();
             /*                    
             // average gradients
             param[i].value().data().add_(root_tensor.data());
@@ -247,7 +241,7 @@ int main(int argc, char* argv[]) {
   // ============= //
   // TESTING PHASE //
   // ============= //
-  
+  std::cout << "Rank " << rank << " is done with the training! \n";
   if (rank == 0 ) {
     std::cout << "Training finished!\n\n";
     std::cout << "--------------------------------------------------------\n";
