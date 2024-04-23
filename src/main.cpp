@@ -9,9 +9,9 @@ torch::Device device(torch::kCPU);
 /* 
 
 TODO:
-  1. Asynchronous EASGD <-
-    - Step 1. Fix deadlock in communication. <-
-    - Step 2. Add/Subtract/Multiply parameters of model
+  1. Asynchronous EASGD <--
+    - Step 1. Fix deadlock in communication. -- OK!
+    - Step 2. Add/Subtract/Multiply parameters of model <-
   2.Plotting / Saving data efficiently (from root)
   3. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
   4. 
@@ -241,7 +241,6 @@ int main(int argc, char* argv[]) {
   // ============= //
   // TESTING PHASE //
   // ============= //
-  std::cout << "Rank " << rank << " is done with the training! \n";
   if (rank == 0 ) {
     std::cout << "Training finished!\n\n";
     std::cout << "--------------------------------------------------------\n";
