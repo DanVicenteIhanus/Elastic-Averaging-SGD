@@ -17,6 +17,8 @@ example_string = "workers = 2, $\\tau$ = 5, $\\beta$ = 3.98"
 pattern = r"(\d+(\.\d+)?)"
 formatted_string = re.sub(pattern, "{}", example_string)
 
+fontSize = 15
+
 # Loop over each file in the directory
 for filename in os.listdir(folder_path):
     # Check if the entry is a file
@@ -37,19 +39,21 @@ for filename in os.listdir(folder_path):
             df['Duration'] = df['Duration']/1000
             #Plot 1: accuracy
             plt.figure()
+            plt.rcParams.update({'font.size': fontSize})
             plt.plot(df['Duration'], df['Accuracy'])
             plt.title('Training accuracy: ' + new_string)
-            plt.xlabel('Wall-clock time (s)')
-            plt.ylabel('Classification accuracy')
+            plt.xlabel('Wall-clock time (s)', fontsize=fontSize)
+            plt.ylabel('Classification accuracy', fontsize=fontSize)
             plt.savefig(plots_path + original_string[:-3] + "_accuracy.png")
             plt.close()
             
             #Plot 2: loss
             plt.figure()
+            plt.rcParams.update({'font.size': fontSize})
             plt.plot(df['Duration'], df['Sample_Mean_Loss'])
             plt.title('Training loss: ' + new_string)
-            plt.xlabel('Wall-clock time (s)')
-            plt.ylabel('Mean loss')
+            plt.xlabel('Wall-clock time (s)', fontsize=fontSize)
+            plt.ylabel('Mean loss', fontsize=fontSize)
             plt.savefig(plots_path + original_string[:-3] + "_loss.png")
             plt.close()
             pass
