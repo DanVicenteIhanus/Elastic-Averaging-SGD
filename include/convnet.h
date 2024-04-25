@@ -21,14 +21,6 @@ class ConvNetImpl : public torch::nn::Module {
 			torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
 		};
 
-		/*
-		torch::nn::Sequential conv3 {
-			torch::nn::Conv2d(torch::nn::Conv2dOptions(40, 30, 3).stride(1).padding(1)),
-			torch::nn::Dropout2d(torch::nn::Dropout2dOptions(0.05)),
-			torch::nn::ReLU()
-		};
-		*/
-
 		torch::nn::Sequential fc1 {
 			torch::nn::Linear(torch::nn::LinearOptions(4*4*40, 700)),
 			torch::nn::ReLU(),

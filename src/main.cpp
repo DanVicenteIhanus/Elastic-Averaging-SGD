@@ -12,9 +12,9 @@ torch::Device device(torch::kCPU);
 
 /* 
 TODO:
-  1. Plotting / Saving data efficiently <-
-  2. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
-  3. 
+  1. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
+  2. Grid-search to generate more data
+  3. Refactor code..
 */
 
 int main(int argc, char* argv[]) {
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
   // == Hyperparameters == //
   const int num_classes = 10;
   const int batch_size = 1000; 
-  const int num_epochs = 5; 
+  const int num_epochs = 20; 
   const double lr = 0.01;
 
   const int tau = 4; // communication period
@@ -321,12 +321,9 @@ int main(int argc, char* argv[]) {
       test_num_correct += prediction.eq(target).sum().item<int64_t>();
     
     }
-
     std::cout << "Testing finished!\n";
-
     auto test_accuracy = static_cast<double>(test_num_correct) / num_test_samples;
     auto test_sample_mean_loss = test_running_loss / num_test_samples;
-
     std::cout << "Testset - Loss: " << test_sample_mean_loss << ", Accuracy: " << test_accuracy << '\n';
   }
   file.close();
