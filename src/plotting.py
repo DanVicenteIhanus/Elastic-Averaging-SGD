@@ -40,21 +40,21 @@ for filename in os.listdir(folder_path):
             #Plot 1: accuracy
             plt.figure()
             plt.rcParams.update({'font.size': fontSize})
-            plt.plot(df['Duration'], df['Accuracy'])
+            plt.plot(df['Duration'], df['Accuracy'], ":or", lw=0.5)
             plt.title('Training accuracy: ' + new_string)
             plt.xlabel('Wall-clock time (s)', fontsize=fontSize)
             plt.ylabel('Classification accuracy', fontsize=fontSize)
-            plt.savefig(plots_path + original_string[:-3] + "_accuracy.png")
+            plt.savefig(plots_path + original_string[:-3] + "_accuracy.pdf", bbox_inches="tight")
             plt.close()
             
             #Plot 2: loss
             plt.figure()
             plt.rcParams.update({'font.size': fontSize})
-            plt.plot(df['Duration'], df['Sample_Mean_Loss'])
+            plt.plot(df['Duration'], df['Sample_Mean_Loss'], ":*b", lw=0.5)
             plt.title('Training loss: ' + new_string)
             plt.xlabel('Wall-clock time (s)', fontsize=fontSize)
             plt.ylabel('Mean loss', fontsize=fontSize)
-            plt.savefig(plots_path + original_string[:-3] + "_loss.png")
+            plt.savefig(plots_path + original_string[:-3] + "_loss.pdf", bbox_inches="tight")
             plt.close()
             pass
         except:

@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/danvicente/skola/SF2568 - Parallell/Project/src"
+CMAKE_SOURCE_DIR = "/Users/danvicente/skola/SF2568 - Parallell/project/src"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/danvicente/skola/SF2568 - Parallell/Project/src"
+CMAKE_BINARY_DIR = "/Users/danvicente/skola/SF2568 - Parallell/project/src"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/SF2568 - Parallell/Project/src/CMakeFiles" "/Users/danvicente/skola/SF2568 - Parallell/Project/src//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" "/Users/danvicente/skola/SF2568 - Parallell/project/src//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/SF2568 - Parallell/Project/src/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -153,29 +153,29 @@ convnet.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet.cpp.s
 .PHONY : convnet.cpp.s
 
-main.o: main.cpp.o
-.PHONY : main.o
+sgd.o: sgd.cpp.o
+.PHONY : sgd.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
-.PHONY : main.cpp.o
+sgd.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/sgd.cpp.o
+.PHONY : sgd.cpp.o
 
-main.i: main.cpp.i
-.PHONY : main.i
+sgd.i: sgd.cpp.i
+.PHONY : sgd.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
-.PHONY : main.cpp.i
+sgd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/sgd.cpp.i
+.PHONY : sgd.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+sgd.s: sgd.cpp.s
+.PHONY : sgd.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
-.PHONY : main.cpp.s
+sgd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/sgd.cpp.s
+.PHONY : sgd.cpp.s
 
 # Help Target
 help:
@@ -189,9 +189,9 @@ help:
 	@echo "... convnet.o"
 	@echo "... convnet.i"
 	@echo "... convnet.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... sgd.o"
+	@echo "... sgd.i"
+	@echo "... sgd.s"
 .PHONY : help
 
 

@@ -12,6 +12,8 @@ torch::Device device(torch::kCPU);
 
 /* 
 TODO:
+  1. Build nonparallell training
+   
   1. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
   2. Grid-search to generate more data
   3. Refactor code..

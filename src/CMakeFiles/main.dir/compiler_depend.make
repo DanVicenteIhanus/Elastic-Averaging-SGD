@@ -769,7 +769,7 @@ CMakeFiles/main.dir/convnet.cpp.o: convnet.cpp \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h \
-  /Users/danvicente/skola/SF2568\ -\ Parallell/Project/include/convnet.h \
+  /Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet.h \
   /usr/local/libtorch/include/ATen/ATen.h \
   /usr/local/libtorch/include/ATen/CPUGeneratorImpl.h \
   /usr/local/libtorch/include/ATen/Config.h \
@@ -5276,7 +5276,7 @@ CMakeFiles/main.dir/convnet.cpp.o: convnet.cpp \
   /usr/local/libtorch/include/torch/custom_class_detail.h \
   /usr/local/libtorch/include/torch/library.h
 
-CMakeFiles/main.dir/main.cpp.o: main.cpp \
+CMakeFiles/main.dir/sgd.cpp.o: sgd.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/Availability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityInternal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityVersions.h \
@@ -6061,9 +6061,7 @@ CMakeFiles/main.dir/main.cpp.o: main.cpp \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h \
-  /Users/danvicente/skola/SF2568\ -\ Parallell/Project/include/convnet.h \
-  /usr/local/include/mpi.h \
-  /usr/local/include/mpi_portable_platform.h \
+  /Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet.h \
   /usr/local/libtorch/include/ATen/ATen.h \
   /usr/local/libtorch/include/ATen/CPUGeneratorImpl.h \
   /usr/local/libtorch/include/ATen/Config.h \
@@ -10571,8 +10569,6 @@ CMakeFiles/main.dir/main.cpp.o: main.cpp \
   /usr/local/libtorch/include/torch/library.h
 
 
-/usr/local/include/mpi_portable_platform.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__filesystem/space_info.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__filesystem/perm_options.h:
@@ -10584,8 +10580,6 @@ CMakeFiles/main.dir/main.cpp.o: main.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__filesystem/file_status.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__filesystem/directory_iterator.h:
-
-main.cpp:
 
 /usr/local/libtorch/include/torch/library.h:
 
@@ -11067,6 +11061,8 @@ main.cpp:
 
 /usr/local/libtorch/include/ATen/ops/unbind_ops.h:
 
+sgd.cpp:
+
 /usr/local/libtorch/include/ATen/ops/unbind_copy_native.h:
 
 /usr/local/libtorch/include/ATen/ops/unbind_copy.h:
@@ -11252,8 +11248,6 @@ main.cpp:
 /usr/local/libtorch/include/ATen/ops/sub.h:
 
 /usr/local/libtorch/include/ATen/ops/stride_native.h:
-
-/usr/local/include/mpi.h:
 
 /usr/local/libtorch/include/ATen/ops/stft_native.h:
 
@@ -12828,8 +12822,6 @@ main.cpp:
 /usr/local/libtorch/include/ATen/ops/log_sigmoid_backward_ops.h:
 
 /usr/local/libtorch/include/ATen/ops/log_sigmoid_backward_native.h:
-
-/usr/local/libtorch/include/ATen/ops/log_ops.h:
 
 /usr/local/libtorch/include/ATen/ops/log_normal_native.h:
 
@@ -18153,8 +18145,6 @@ main.cpp:
 
 /usr/local/libtorch/include/ATen/ops/_batch_norm_impl_index_backward.h:
 
-/Users/danvicente/skola/SF2568\ -\ Parallell/Project/include/convnet.h:
-
 /usr/local/libtorch/include/torch/csrc/api/include/torch/nn/options/fold.h:
 
 /usr/local/libtorch/include/ATen/ops/linalg_cross_ops.h:
@@ -18744,6 +18734,14 @@ main.cpp:
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__type_traits/enable_if.h:
 
 /usr/local/libtorch/include/ATen/ATen.h:
+
+/usr/local/libtorch/include/ATen/ops/special_erfcx.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__algorithm/is_heap_until.h:
+
+/usr/local/libtorch/include/ATen/ops/log_ops.h:
+
+/Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet.h:
 
 /usr/local/libtorch/include/ATen/ops/linear_ops.h:
 
@@ -20986,10 +20984,6 @@ convnet.cpp:
 /usr/local/libtorch/include/ATen/ops/_slow_conv2d_forward.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__algorithm/search_n.h:
-
-/usr/local/libtorch/include/ATen/ops/special_erfcx.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__algorithm/is_heap_until.h:
 
 /usr/local/libtorch/include/ATen/ops/cudnn_convolution_transpose_ops.h:
 

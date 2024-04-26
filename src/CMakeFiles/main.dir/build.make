@@ -53,10 +53,10 @@ RM = /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/danvicente/skola/SF2568 - Parallell/Project/src"
+CMAKE_SOURCE_DIR = "/Users/danvicente/skola/SF2568 - Parallell/project/src"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/danvicente/skola/SF2568 - Parallell/Project/src"
+CMAKE_BINARY_DIR = "/Users/danvicente/skola/SF2568 - Parallell/project/src"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/main.dir/depend.make
@@ -69,43 +69,43 @@ include CMakeFiles/main.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/main.dir/flags.make
 
-CMakeFiles/main.dir/main.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/main.cpp.o: main.cpp
-CMakeFiles/main.dir/main.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/Project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/main.cpp.o -MF CMakeFiles/main.dir/main.cpp.o.d -o CMakeFiles/main.dir/main.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/src/main.cpp"
+CMakeFiles/main.dir/sgd.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/sgd.cpp.o: sgd.cpp
+CMakeFiles/main.dir/sgd.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/sgd.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/sgd.cpp.o -MF CMakeFiles/main.dir/sgd.cpp.o.d -o CMakeFiles/main.dir/sgd.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/project/src/sgd.cpp"
 
-CMakeFiles/main.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/danvicente/skola/SF2568 - Parallell/Project/src/main.cpp" > CMakeFiles/main.dir/main.cpp.i
+CMakeFiles/main.dir/sgd.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/sgd.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/danvicente/skola/SF2568 - Parallell/project/src/sgd.cpp" > CMakeFiles/main.dir/sgd.cpp.i
 
-CMakeFiles/main.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danvicente/skola/SF2568 - Parallell/Project/src/main.cpp" -o CMakeFiles/main.dir/main.cpp.s
+CMakeFiles/main.dir/sgd.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/sgd.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danvicente/skola/SF2568 - Parallell/project/src/sgd.cpp" -o CMakeFiles/main.dir/sgd.cpp.s
 
 CMakeFiles/main.dir/convnet.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/convnet.cpp.o: convnet.cpp
 CMakeFiles/main.dir/convnet.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/Project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/convnet.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/convnet.cpp.o -MF CMakeFiles/main.dir/convnet.cpp.o.d -o CMakeFiles/main.dir/convnet.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/Project/src/convnet.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/convnet.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/convnet.cpp.o -MF CMakeFiles/main.dir/convnet.cpp.o.d -o CMakeFiles/main.dir/convnet.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/project/src/convnet.cpp"
 
 CMakeFiles/main.dir/convnet.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/convnet.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/danvicente/skola/SF2568 - Parallell/Project/src/convnet.cpp" > CMakeFiles/main.dir/convnet.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/danvicente/skola/SF2568 - Parallell/project/src/convnet.cpp" > CMakeFiles/main.dir/convnet.cpp.i
 
 CMakeFiles/main.dir/convnet.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/convnet.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danvicente/skola/SF2568 - Parallell/Project/src/convnet.cpp" -o CMakeFiles/main.dir/convnet.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danvicente/skola/SF2568 - Parallell/project/src/convnet.cpp" -o CMakeFiles/main.dir/convnet.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/main.cpp.o" \
+"CMakeFiles/main.dir/sgd.cpp.o" \
 "CMakeFiles/main.dir/convnet.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
-main: CMakeFiles/main.dir/main.cpp.o
+main: CMakeFiles/main.dir/sgd.cpp.o
 main: CMakeFiles/main.dir/convnet.cpp.o
 main: CMakeFiles/main.dir/build.make
 main: /usr/local/libtorch/lib/libc10.dylib
@@ -115,7 +115,7 @@ main: /usr/local/libtorch/lib/libtorch.dylib
 main: /usr/local/libtorch/lib/libtorch_cpu.dylib
 main: /usr/local/libtorch/lib/libc10.dylib
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/Project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -127,6 +127,6 @@ CMakeFiles/main.dir/clean:
 .PHONY : CMakeFiles/main.dir/clean
 
 CMakeFiles/main.dir/depend:
-	cd "/Users/danvicente/skola/SF2568 - Parallell/Project/src" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/Users/danvicente/skola/SF2568 - Parallell/Project/src" "/Users/danvicente/skola/SF2568 - Parallell/Project/src" "/Users/danvicente/skola/SF2568 - Parallell/Project/src" "/Users/danvicente/skola/SF2568 - Parallell/Project/src" "/Users/danvicente/skola/SF2568 - Parallell/Project/src/CMakeFiles/main.dir/DependInfo.cmake" "--color=$(COLOR)"
+	cd "/Users/danvicente/skola/SF2568 - Parallell/project/src" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/Users/danvicente/skola/SF2568 - Parallell/project/src" "/Users/danvicente/skola/SF2568 - Parallell/project/src" "/Users/danvicente/skola/SF2568 - Parallell/project/src" "/Users/danvicente/skola/SF2568 - Parallell/project/src" "/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles/main.dir/DependInfo.cmake" "--color=$(COLOR)"
 .PHONY : CMakeFiles/main.dir/depend
 

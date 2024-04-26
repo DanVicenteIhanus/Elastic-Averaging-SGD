@@ -1,6 +1,6 @@
 CMakeFiles/main.dir/convnet.cpp.o: \
-  /Users/danvicente/skola/SF2568\ -\ Parallell/Project/src/convnet.cpp \
-  /Users/danvicente/skola/SF2568\ -\ Parallell/Project/src/../include/convnet.h \
+  /Users/danvicente/skola/SF2568\ -\ Parallell/project/src/convnet.cpp \
+  /Users/danvicente/skola/SF2568\ -\ Parallell/project/src/../include/convnet.h \
   /usr/local/libtorch/include/torch/csrc/api/include/torch/torch.h \
   /usr/local/libtorch/include/torch/csrc/api/include/torch/all.h \
   /usr/local/libtorch/include/torch/csrc/api/include/torch/autograd.h \
