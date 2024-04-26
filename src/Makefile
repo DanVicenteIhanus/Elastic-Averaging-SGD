@@ -153,29 +153,29 @@ convnet.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet.cpp.s
 .PHONY : convnet.cpp.s
 
-sgd.o: sgd.cpp.o
-.PHONY : sgd.o
+easgd.o: easgd.cpp.o
+.PHONY : easgd.o
 
 # target to build an object file
-sgd.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/sgd.cpp.o
-.PHONY : sgd.cpp.o
+easgd.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/easgd.cpp.o
+.PHONY : easgd.cpp.o
 
-sgd.i: sgd.cpp.i
-.PHONY : sgd.i
+easgd.i: easgd.cpp.i
+.PHONY : easgd.i
 
 # target to preprocess a source file
-sgd.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/sgd.cpp.i
-.PHONY : sgd.cpp.i
+easgd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/easgd.cpp.i
+.PHONY : easgd.cpp.i
 
-sgd.s: sgd.cpp.s
-.PHONY : sgd.s
+easgd.s: easgd.cpp.s
+.PHONY : easgd.s
 
 # target to generate assembly for a file
-sgd.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/sgd.cpp.s
-.PHONY : sgd.cpp.s
+easgd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/easgd.cpp.s
+.PHONY : easgd.cpp.s
 
 # Help Target
 help:
@@ -189,9 +189,9 @@ help:
 	@echo "... convnet.o"
 	@echo "... convnet.i"
 	@echo "... convnet.s"
-	@echo "... sgd.o"
-	@echo "... sgd.i"
-	@echo "... sgd.s"
+	@echo "... easgd.o"
+	@echo "... easgd.i"
+	@echo "... easgd.s"
 .PHONY : help
 
 

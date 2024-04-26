@@ -69,19 +69,19 @@ include CMakeFiles/main.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/main.dir/flags.make
 
-CMakeFiles/main.dir/sgd.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/sgd.cpp.o: sgd.cpp
-CMakeFiles/main.dir/sgd.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/sgd.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/sgd.cpp.o -MF CMakeFiles/main.dir/sgd.cpp.o.d -o CMakeFiles/main.dir/sgd.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/project/src/sgd.cpp"
+CMakeFiles/main.dir/easgd.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/easgd.cpp.o: easgd.cpp
+CMakeFiles/main.dir/easgd.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/easgd.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/easgd.cpp.o -MF CMakeFiles/main.dir/easgd.cpp.o.d -o CMakeFiles/main.dir/easgd.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/project/src/easgd.cpp"
 
-CMakeFiles/main.dir/sgd.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/sgd.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/danvicente/skola/SF2568 - Parallell/project/src/sgd.cpp" > CMakeFiles/main.dir/sgd.cpp.i
+CMakeFiles/main.dir/easgd.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/easgd.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/danvicente/skola/SF2568 - Parallell/project/src/easgd.cpp" > CMakeFiles/main.dir/easgd.cpp.i
 
-CMakeFiles/main.dir/sgd.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/sgd.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danvicente/skola/SF2568 - Parallell/project/src/sgd.cpp" -o CMakeFiles/main.dir/sgd.cpp.s
+CMakeFiles/main.dir/easgd.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/easgd.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danvicente/skola/SF2568 - Parallell/project/src/easgd.cpp" -o CMakeFiles/main.dir/easgd.cpp.s
 
 CMakeFiles/main.dir/convnet.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/convnet.cpp.o: convnet.cpp
@@ -99,13 +99,13 @@ CMakeFiles/main.dir/convnet.cpp.s: cmake_force
 
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/sgd.cpp.o" \
+"CMakeFiles/main.dir/easgd.cpp.o" \
 "CMakeFiles/main.dir/convnet.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
-main: CMakeFiles/main.dir/sgd.cpp.o
+main: CMakeFiles/main.dir/easgd.cpp.o
 main: CMakeFiles/main.dir/convnet.cpp.o
 main: CMakeFiles/main.dir/build.make
 main: /usr/local/libtorch/lib/libc10.dylib
