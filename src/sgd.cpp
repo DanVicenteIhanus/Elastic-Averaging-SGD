@@ -11,10 +11,9 @@ torch::Device device(torch::kCPU);
 
 /* 
 TODO:
-	1. Cmake file for the sequential sgd -> Add sgd.cpp to the existing makefile?
-  1. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
-  2. Grid-search to generate more data
-  3. Refactor code..
+  2. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
+  3. Grid-search to generate more data
+  4. Refactor code..
 */
 
 int main(int argc, char* argv[]) {

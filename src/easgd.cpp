@@ -10,6 +10,7 @@ using namespace std::chrono;
 
 torch::Device device(torch::kCPU);
 
+// workers = 2, tau = 16, beta = 3.96
 /* 
 TODO:
   1. Build nonparallell training
@@ -27,7 +28,7 @@ int main(int argc, char* argv[]) {
   const double lr = 0.01;
 
   const int tau = 16; // communication period
-  const double beta = 4;
+  const double beta = 3.96;
   
   auto start = high_resolution_clock::now(); // timing the training
   
@@ -59,9 +60,9 @@ int main(int argc, char* argv[]) {
   }
 
   // elastic hyperparameter
-  //const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
-  const float alpha = 0.3;
-  
+  const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
+  //const float alpha = 0.3;
+
   // MNIST data from pytorch datasets
   const std::string MNIST_path = "../data/mnist/";
   auto train_dataset =
