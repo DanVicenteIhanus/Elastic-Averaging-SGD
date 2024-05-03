@@ -24,7 +24,7 @@ class ConvNetImpl : public torch::nn::Module {
 		torch::nn::Sequential fc1 {
 			torch::nn::Linear(torch::nn::LinearOptions(4*4*40, 700)),
 			torch::nn::ReLU(),
-			//torch::nn::Dropout2d(torch::nn::Dropout2dOptions(0.2))
+			//torch::nn::Dropout2d(torch::nn::Dropout2dOptions(0.3)) // too much dropout?
 		};
 
 		torch::nn::Sequential fc2 {
