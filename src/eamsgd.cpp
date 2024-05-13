@@ -19,6 +19,13 @@ TODO:
   3. Refactor code..
 */
 
+void initialize_parameters_to_zero(torch::nn::Module& module) {
+  torch::NoGradGuard no_grad;
+    for (auto& param : module.parameters()) {
+        param.zero_();
+    }
+}
+
 int main(int argc, char* argv[]) {
   
   // == Hyperparameters == //
@@ -29,6 +36,7 @@ int main(int argc, char* argv[]) {
 
   const int tau = 8; // communication period
   const double beta = 3.96;
+  const double delta = 0.99;
   
   auto start = high_resolution_clock::now(); // timing the training
   
@@ -47,7 +55,7 @@ int main(int argc, char* argv[]) {
   // Setup file for results
   // ====================== //
   std::ostringstream filename;
-  filename << "../data/training_stats_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << ".txt";
+  filename << "../data/training_stats_measgd_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << ".txt";
   
   // Open file for writing
   std::fstream file;
@@ -61,7 +69,9 @@ int main(int argc, char* argv[]) {
 
   // elastic hyperparameter
   const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
+  
   //const float alpha = 0.3;
+  
 
   // MNIST data from pytorch datasets
   const std::string MNIST_path = "../data/mnist/";
@@ -87,7 +97,23 @@ int main(int argc, char* argv[]) {
   // create CNN
   ConvNet model(num_classes);
   model->to(device);
-  
+
+  ConvNet momentum_model(num_classes);
+  momentum_model->to(device);
+  initialize_parameters_to_zero(*momentum_model);
+  auto momentum = momentum_model->named_parameters();
+
+  ConvNet x_old_model(num_classes);
+  x_old_model->to(device);
+  initialize_parameters_to_zero(*x_old_model);
+  auto x_old = x_old_model->named_parameters();
+
+  ConvNet step_model(num_classes);
+  step_model->to(device);
+  initialize_parameters_to_zero(*step_model);
+  auto step = step_model->named_parameters();
+
+
   // define optimizer
   torch::optim::SGDOptions options(lr);
   torch::optim::SGD optimizer(model->parameters(), options);
@@ -97,11 +123,11 @@ int main(int argc, char* argv[]) {
   auto param = model->named_parameters();
   int num_elem_param = 0;
   for (int i = 0; i < sz; i++) {
-      num_elem_param += param[i].value().numel();
+    num_elem_param += param[i].value().numel();
   }
   if (rank == 0) {
-      std::cout << "Number of parameters - " << sz << std::endl;
-      std::cout << "Number of elements - " << num_elem_param << std::endl;
+    std::cout << "Number of parameters - " << sz << std::endl;
+    std::cout << "Number of elements - " << num_elem_param << std::endl;
   }
   float param_partner[num_elem_param];
   
@@ -228,13 +254,25 @@ int main(int argc, char* argv[]) {
         // update # correctly classified samples
         num_correct += prediction.eq(target).sum().item<int64_t>(); //np.sum(prediction == target)
         
-        // backprop + gradient step
+        for (auto i = 0; i < sz; i++) {
+          x_old[i].value() = param[i].value();
+          momentum[i].value().data().multiply_(delta);
+          param[i].value().data().add_(momentum[i].value().data());
+          //momentum[i].value().data().divide_(delta);
+        }
+        
+        // gradient step
         optimizer.zero_grad();
         loss.backward();
-        
-        if (t % tau == 0) {
-          for (auto i = 0; i < sz; i++) {
-            // getting dimensions of tensor
+        optimizer.step();
+
+        for (auto i = 0; i < sz; i++) {
+          param[i].value().data().subtract_(momentum[i].value().data());
+          step[i].value().data() = param[i].value().data();
+          step[i].value().data().subtract_(x_old[i].value().data());
+          param[i].value().data() = x_old[i].value().data();
+          
+          if (t % tau == 0) {
 
             int num_dim = param[i].value().dim();
             std::vector<int64_t> dim_array;
@@ -254,12 +292,9 @@ int main(int argc, char* argv[]) {
             // receive from communication partner
             MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &reqs[1]);
             MPI_Isend(temp, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &reqs[0]);
-            //MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &req2);
-            // //send parameters to root
-            // MPI_Isend(temp, flat.numel(), MPI_FLOAT, 0, 0,MPI_COMM_WORLD, &req1);
             MPI_Waitall(2, reqs, statuses);
+            
             // unpack 1-D vector form corresponding displacement and form
-            // tensor
             auto root_recv = (float *)calloc(
                 flat.numel(), flat.numel() * param_elem_size);
             // fp << "left - " << std::endl;
@@ -273,14 +308,15 @@ int main(int argc, char* argv[]) {
             // x  = x + alpha*(x_i - x)
             x_temp.data().subtract_(param[i].value().data()); // x_temp - \tilde{x}
             x_temp.data().multiply_(alpha); 
-            param[i].value().data().add_(x_temp.data()); // update tensor parameters
+            param[i].value().data().add_(x_temp.data());      // update tensor parameters
 
             // freeing temp arrays
             free(temp);
             free(root_recv);
-          } // parameter loop
-        } // tau loop
-        optimizer.step();
+          }
+          momentum[i].value().data().add_(step[i].value().data());
+          param[i].value().data().add_(momentum[i].value().data()); // x^i += 
+        }
         t ++;
       } // batch loop
 

@@ -37,4 +37,3 @@ class ConvNetImpl : public torch::nn::Module {
 
 	TORCH_MODULE(ConvNet);
 
-
