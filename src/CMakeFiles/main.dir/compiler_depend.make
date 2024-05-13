@@ -5276,7 +5276,7 @@ CMakeFiles/main.dir/convnet.cpp.o: convnet.cpp \
   /usr/local/libtorch/include/torch/custom_class_detail.h \
   /usr/local/libtorch/include/torch/library.h
 
-CMakeFiles/main.dir/easgd.cpp.o: easgd.cpp \
+CMakeFiles/main.dir/sgd.cpp.o: sgd.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/Availability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityInternal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityVersions.h \
@@ -6062,8 +6062,6 @@ CMakeFiles/main.dir/easgd.cpp.o: easgd.cpp \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h \
   /Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet.h \
-  /usr/local/include/mpi.h \
-  /usr/local/include/mpi_portable_platform.h \
   /usr/local/libtorch/include/ATen/ATen.h \
   /usr/local/libtorch/include/ATen/CPUGeneratorImpl.h \
   /usr/local/libtorch/include/ATen/Config.h \
@@ -10571,8 +10569,6 @@ CMakeFiles/main.dir/easgd.cpp.o: easgd.cpp \
   /usr/local/libtorch/include/torch/library.h
 
 
-/usr/local/include/mpi_portable_platform.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__filesystem/space_info.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__filesystem/perm_options.h:
@@ -10628,8 +10624,6 @@ CMakeFiles/main.dir/easgd.cpp.o: easgd.cpp \
 /usr/local/libtorch/include/torch/csrc/autograd/forward_grad.h:
 
 /usr/local/libtorch/include/torch/csrc/autograd/edge.h:
-
-easgd.cpp:
 
 /usr/local/libtorch/include/torch/csrc/autograd/custom_function.h:
 
@@ -11067,6 +11061,8 @@ easgd.cpp:
 
 /usr/local/libtorch/include/ATen/ops/unbind_ops.h:
 
+sgd.cpp:
+
 /usr/local/libtorch/include/ATen/ops/unbind_copy_native.h:
 
 /usr/local/libtorch/include/ATen/ops/unbind_copy.h:
@@ -11252,8 +11248,6 @@ easgd.cpp:
 /usr/local/libtorch/include/ATen/ops/sub.h:
 
 /usr/local/libtorch/include/ATen/ops/stride_native.h:
-
-/usr/local/include/mpi.h:
 
 /usr/local/libtorch/include/ATen/ops/stft_native.h:
 

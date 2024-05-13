@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/main.dir/convnet.cpp.o"
   "CMakeFiles/main.dir/convnet.cpp.o.d"
-  "CMakeFiles/main.dir/easgd.cpp.o"
-  "CMakeFiles/main.dir/easgd.cpp.o.d"
+  "CMakeFiles/main.dir/sgd.cpp.o"
+  "CMakeFiles/main.dir/sgd.cpp.o.d"
   "main"
   "main.pdb"
 )
