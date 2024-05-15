@@ -153,53 +153,53 @@ cifar10.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/cifar10.cpp.s
 .PHONY : cifar10.cpp.s
 
-convnet.o: convnet.cpp.o
-.PHONY : convnet.o
+convnet_cifar.o: convnet_cifar.cpp.o
+.PHONY : convnet_cifar.o
 
 # target to build an object file
-convnet.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet.cpp.o
-.PHONY : convnet.cpp.o
+convnet_cifar.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet_cifar.cpp.o
+.PHONY : convnet_cifar.cpp.o
 
-convnet.i: convnet.cpp.i
-.PHONY : convnet.i
+convnet_cifar.i: convnet_cifar.cpp.i
+.PHONY : convnet_cifar.i
 
 # target to preprocess a source file
-convnet.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet.cpp.i
-.PHONY : convnet.cpp.i
+convnet_cifar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet_cifar.cpp.i
+.PHONY : convnet_cifar.cpp.i
 
-convnet.s: convnet.cpp.s
-.PHONY : convnet.s
+convnet_cifar.s: convnet_cifar.cpp.s
+.PHONY : convnet_cifar.s
 
 # target to generate assembly for a file
-convnet.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet.cpp.s
-.PHONY : convnet.cpp.s
+convnet_cifar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet_cifar.cpp.s
+.PHONY : convnet_cifar.cpp.s
 
-msgd_cifar.o: msgd_cifar.cpp.o
-.PHONY : msgd_cifar.o
+eamsgd_cifar.o: eamsgd_cifar.cpp.o
+.PHONY : eamsgd_cifar.o
 
 # target to build an object file
-msgd_cifar.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/msgd_cifar.cpp.o
-.PHONY : msgd_cifar.cpp.o
+eamsgd_cifar.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/eamsgd_cifar.cpp.o
+.PHONY : eamsgd_cifar.cpp.o
 
-msgd_cifar.i: msgd_cifar.cpp.i
-.PHONY : msgd_cifar.i
+eamsgd_cifar.i: eamsgd_cifar.cpp.i
+.PHONY : eamsgd_cifar.i
 
 # target to preprocess a source file
-msgd_cifar.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/msgd_cifar.cpp.i
-.PHONY : msgd_cifar.cpp.i
+eamsgd_cifar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/eamsgd_cifar.cpp.i
+.PHONY : eamsgd_cifar.cpp.i
 
-msgd_cifar.s: msgd_cifar.cpp.s
-.PHONY : msgd_cifar.s
+eamsgd_cifar.s: eamsgd_cifar.cpp.s
+.PHONY : eamsgd_cifar.s
 
 # target to generate assembly for a file
-msgd_cifar.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/msgd_cifar.cpp.s
-.PHONY : msgd_cifar.cpp.s
+eamsgd_cifar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/eamsgd_cifar.cpp.s
+.PHONY : eamsgd_cifar.cpp.s
 
 # Help Target
 help:
@@ -213,12 +213,12 @@ help:
 	@echo "... cifar10.o"
 	@echo "... cifar10.i"
 	@echo "... cifar10.s"
-	@echo "... convnet.o"
-	@echo "... convnet.i"
-	@echo "... convnet.s"
-	@echo "... msgd_cifar.o"
-	@echo "... msgd_cifar.i"
-	@echo "... msgd_cifar.s"
+	@echo "... convnet_cifar.o"
+	@echo "... convnet_cifar.i"
+	@echo "... convnet_cifar.s"
+	@echo "... eamsgd_cifar.o"
+	@echo "... eamsgd_cifar.i"
+	@echo "... eamsgd_cifar.s"
 .PHONY : help
 
 

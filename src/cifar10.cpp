@@ -134,7 +134,7 @@ torch::Tensor read_images(const std::string& root, bool train)
     std::vector<torch::Tensor> image_tensors;
 
     for (const std::string& data_set_file_path : data_set_file_paths)
-    {
+    {   
         torch::Tensor images = read_images_from_file(data_set_file_path);
         image_tensors.push_back(images);
     }

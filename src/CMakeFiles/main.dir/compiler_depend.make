@@ -5293,7 +5293,7 @@ CMakeFiles/main.dir/cifar10.cpp.o: cifar10.cpp \
   /usr/local/libtorch/include/torch/custom_class_detail.h \
   /usr/local/libtorch/include/torch/library.h
 
-CMakeFiles/main.dir/convnet.cpp.o: convnet.cpp \
+CMakeFiles/main.dir/convnet_cifar.cpp.o: convnet_cifar.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/Availability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityInternal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityVersions.h \
@@ -6061,7 +6061,7 @@ CMakeFiles/main.dir/convnet.cpp.o: convnet.cpp \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h \
-  /Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet.h \
+  /Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet_cifar.h \
   /usr/local/libtorch/include/ATen/ATen.h \
   /usr/local/libtorch/include/ATen/CPUGeneratorImpl.h \
   /usr/local/libtorch/include/ATen/Config.h \
@@ -10568,7 +10568,7 @@ CMakeFiles/main.dir/convnet.cpp.o: convnet.cpp \
   /usr/local/libtorch/include/torch/custom_class_detail.h \
   /usr/local/libtorch/include/torch/library.h
 
-CMakeFiles/main.dir/msgd_cifar.cpp.o: msgd_cifar.cpp \
+CMakeFiles/main.dir/eamsgd_cifar.cpp.o: eamsgd_cifar.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/Availability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityInternal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityVersions.h \
@@ -11354,7 +11354,9 @@ CMakeFiles/main.dir/msgd_cifar.cpp.o: msgd_cifar.cpp \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h \
   /Users/danvicente/skola/SF2568\ -\ Parallell/project/include/cifar10.h \
-  /Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet.h \
+  /Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet_cifar.h \
+  /usr/local/include/mpi.h \
+  /usr/local/include/mpi_portable_platform.h \
   /usr/local/libtorch/include/ATen/ATen.h \
   /usr/local/libtorch/include/ATen/CPUGeneratorImpl.h \
   /usr/local/libtorch/include/ATen/Config.h \
@@ -15862,7 +15864,9 @@ CMakeFiles/main.dir/msgd_cifar.cpp.o: msgd_cifar.cpp \
   /usr/local/libtorch/include/torch/library.h
 
 
-convnet.cpp:
+/usr/local/include/mpi_portable_platform.h:
+
+eamsgd_cifar.cpp:
 
 /usr/local/libtorch/include/torch/library.h:
 
@@ -15991,6 +15995,8 @@ convnet.cpp:
 /usr/local/libtorch/include/torch/csrc/api/include/torch/nn/functional/pixelshuffle.h:
 
 /usr/local/libtorch/include/torch/csrc/api/include/torch/nn/functional/normalization.h:
+
+/Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet_cifar.h:
 
 /usr/local/libtorch/include/torch/csrc/api/include/torch/nn/functional/linear.h:
 
@@ -16510,8 +16516,6 @@ convnet.cpp:
 
 /usr/local/libtorch/include/ATen/ops/sum_ops.h:
 
-msgd_cifar.cpp:
-
 /usr/local/libtorch/include/ATen/ops/sum_meta.h:
 
 /usr/local/libtorch/include/ATen/ops/sum.h:
@@ -16527,6 +16531,8 @@ msgd_cifar.cpp:
 /usr/local/libtorch/include/ATen/ops/sub.h:
 
 /usr/local/libtorch/include/ATen/ops/stride_native.h:
+
+/usr/local/include/mpi.h:
 
 /usr/local/libtorch/include/ATen/ops/stft_native.h:
 
@@ -18097,8 +18103,6 @@ msgd_cifar.cpp:
 /usr/local/libtorch/include/ATen/ops/log_sigmoid_backward_ops.h:
 
 /usr/local/libtorch/include/ATen/ops/log_sigmoid_backward_native.h:
-
-/Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet.h:
 
 /usr/local/libtorch/include/ATen/ops/log_ops.h:
 
@@ -22087,6 +22091,8 @@ msgd_cifar.cpp:
 /usr/local/libtorch/include/ATen/ops/_is_zerotensor_native.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__algorithm/ranges_remove.h:
+
+convnet_cifar.cpp:
 
 /usr/local/libtorch/include/ATen/ops/_int_mm_ops.h:
 

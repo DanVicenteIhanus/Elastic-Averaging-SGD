@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <torch/torch.h>
-#include "../include/convnet.h"
+#include "../include/convnet_cifar.h"
 #include <chrono>
 #include "../include/cifar10.h"
 
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
   
   // == Hyperparameters == //
   const int num_classes = 10;
-  const int batch_size = 1000; 
+  const int batch_size = 100; 
   const int num_epochs = 10; 
   const double lr = 0.01;
   const double momentum = 0.9;
@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
   // Setup file for results
   // ====================== //
   std::ostringstream filename;
-  filename << "../data/training_stats_sequential_momentum_batch_size_" << batch_size << ".txt";
+  filename << "../data/training_stats_cifar10_sequential_momentum_batch_size_" << batch_size << ".txt";
   
   // Open file for writing
   std::fstream file;
@@ -45,40 +45,35 @@ int main(int argc, char* argv[]) {
     file << "Duration,Accuracy,Sample_Mean_Loss\n"; // write the header
   }
 
-  // -- CIFAR10 test + training -- 
-  
+  // ============ //
+  // CIFAR10 data //
+  // ============ //
   const std::string dataset_root{"../dataset/cifar-10-batches-bin"};
   CIFAR10 train_set{dataset_root, CIFAR10::Mode::kTrain};
   CIFAR10 test_set{dataset_root, CIFAR10::Mode::kTest};
 
-  
-  auto train_dataset =
-  train_set
-      .map(torch::data::transforms::Normalize<>({0.4914, 0.4822, 0.4465},
-                                                  {0.2023, 0.1994, 0.2010}))
+  auto train_dataset = train_set
+      .map(torch::data::transforms::Normalize<>({0.4914, 0.4822, 0.4465}, {0.2023, 0.1994, 0.2010}))
       .map(torch::data::transforms::Stack<>());
 
-  auto test_dataset =
-  test_set
-      .map(torch::data::transforms::Normalize<>({0.4914, 0.4822, 0.4465},
-                                                  {0.2023, 0.1994, 0.2010}))
+  auto test_dataset = test_set
+      .map(torch::data::transforms::Normalize<>({0.4914, 0.4822, 0.4465}, {0.2023, 0.1994, 0.2010}))
       .map(torch::data::transforms::Stack<>());
 
-  auto train_loader = torch::data::make_data_loader(
-  std::move(train_dataset), torch::data::DataLoaderOptions()
-                                          .batch_size(batch_size)
-                                          .enforce_ordering(true));
+  int num_train_samples = train_dataset.size().value(); 
+  auto num_test_samples = test_dataset.size().value(); 
+  std::cout << "number of training samples = "<< num_train_samples << "\n";
+  std::cout << "number of testing samples = " << num_test_samples << "\n";
 
-  auto test_loader = torch::data::make_data_loader(
-  std::move(test_dataset), torch::data::DataLoaderOptions()
-                                          .batch_size(batch_size)
-                                          .enforce_ordering(true));
-  
-  int num_train_samples = train_dataset.size().value(); // 60,000 samples
-  auto num_test_samples = test_dataset.size().value();  // 10,000 samples
+  auto train_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
+      std::move(train_dataset), torch::data::DataLoaderOptions().batch_size(batch_size).enforce_ordering(true));
+
+  auto test_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
+      std::move(test_dataset), torch::data::DataLoaderOptions().batch_size(batch_size).enforce_ordering(true));
+
 
   // create CNN
-  ConvNet model(num_classes);
+  ConvNet model(num_classes, 3);
   model->to(device);
   
   // define optimizer
@@ -115,12 +110,11 @@ int main(int argc, char* argv[]) {
 		double running_loss = 0.0;
 		size_t num_correct = 0;
 		for (auto &batch : *train_loader) {
-			// getting dimensions of tensor
-      
+
 			auto data = batch.data.to(device);
 			auto target = batch.target.to(device);
 
-			// forward pass d
+			// forward pass
 			auto output = model->forward(data);
 			
 			// compute loss
@@ -130,10 +124,10 @@ int main(int argc, char* argv[]) {
 			// predict
 			auto prediction = output.argmax(1);
       
-        optimizer.zero_grad();
-        loss.backward();
-        optimizer.step();
-		num_correct += prediction.eq(target).sum().item<int64_t>(); //np.sum(prediction == target)
+      optimizer.zero_grad();
+      loss.backward();
+      optimizer.step();
+		  num_correct += prediction.eq(target).sum().item<int64_t>(); //np.sum(prediction == target)
 		} // batch loop
 
     // print epoch results in terminal

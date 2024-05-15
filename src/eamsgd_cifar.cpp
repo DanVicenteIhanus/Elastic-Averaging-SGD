@@ -4,31 +4,40 @@
 #include <sstream>
 #include <string>
 #include <torch/torch.h>
-#include "../include/convnet.h"
+#include "../include/convnet_cifar.h"
+#include "../include/cifar10.h"
 #include <chrono>
 using namespace std::chrono;
 
 torch::Device device(torch::kCPU);
 
+// workers = 2, tau = 16, beta = 3.96
 /* 
 TODO:
   1. Build nonparallell training
-   
   1. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
   2. Grid-search to generate more data
   3. Refactor code..
 */
+
+void initialize_parameters_to_zero(torch::nn::Module& module) {
+  torch::NoGradGuard no_grad;
+    for (auto& param : module.parameters()) {
+        param.zero_();
+    }
+}
 
 int main(int argc, char* argv[]) {
   
   // == Hyperparameters == //
   const int num_classes = 10;
   const int batch_size = 1000; 
-  const int num_epochs = 20; 
+  const int num_epochs = 10; 
   const double lr = 0.01;
 
-  const int tau = 4; // communication period
-  const double beta = 0.99*4;
+  const int tau = 8; // communication period
+  const double beta = 3.96;
+  const double delta = 0.9;
   
   auto start = high_resolution_clock::now(); // timing the training
   
@@ -42,12 +51,11 @@ int main(int argc, char* argv[]) {
   MPI_Status statuses[2];
   MPI_Request reqs[2];
   
-
   // ====================== //
   // Setup file for results
   // ====================== //
   std::ostringstream filename;
-  filename << "../data/training_stats_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << ".txt";
+  filename << "../data/training_stats_cifar_eamsgd_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << ".txt";
   
   // Open file for writing
   std::fstream file;
@@ -61,32 +69,55 @@ int main(int argc, char* argv[]) {
 
   // elastic hyperparameter
   const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
-
-  // MNIST data from pytorch datasets
-  const std::string MNIST_path = "../data/mnist/";
-  auto train_dataset =
-    torch::data::datasets::MNIST(MNIST_path)
-      .map(torch::data::transforms::Normalize<>(0.1307, 0.3081))
-      .map(torch::data::transforms::Stack<>());
-  auto test_dataset = 
-    torch::data::datasets::MNIST(MNIST_path, torch::data::datasets::MNIST::Mode::kTest)
-    .map(torch::data::transforms::Normalize<>(0.1307, 0.3081))
-    .map(torch::data::transforms::Stack<>());
-
-  int num_train_samples = train_dataset.size().value(); // 60,000 samples
-  auto num_test_samples = test_dataset.size().value();  // 10,000 samples
-
-  // create training and test data
-  auto train_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
-    std::move(train_dataset), batch_size);
   
+  //const float alpha = 0.3;
+  
+  // ============ //
+  // CIFAR10 data //
+  // ============ //
+  const std::string dataset_root{"../dataset/cifar-10-batches-bin"};
+  CIFAR10 train_set{dataset_root, CIFAR10::Mode::kTrain};
+  CIFAR10 test_set{dataset_root, CIFAR10::Mode::kTest};
+
+  auto train_dataset = train_set
+      .map(torch::data::transforms::Normalize<>({0.4914, 0.4822, 0.4465}, {0.2023, 0.1994, 0.2010}))
+      .map(torch::data::transforms::Stack<>());
+
+  auto test_dataset = test_set
+      .map(torch::data::transforms::Normalize<>({0.4914, 0.4822, 0.4465}, {0.2023, 0.1994, 0.2010}))
+      .map(torch::data::transforms::Stack<>());
+
+  int num_train_samples = train_dataset.size().value(); 
+  auto num_test_samples = test_dataset.size().value(); 
+  std::cout << "number of training samples = "<< num_train_samples << "\n";
+  std::cout << "number of testing samples = " << num_test_samples << "\n";
+
+  auto train_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
+      std::move(train_dataset), torch::data::DataLoaderOptions().batch_size(batch_size).enforce_ordering(true));
+
   auto test_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
-        std::move(test_dataset), batch_size);
+      std::move(test_dataset), torch::data::DataLoaderOptions().batch_size(batch_size).enforce_ordering(true));
   
   // create CNN
   ConvNet model(num_classes);
   model->to(device);
-  
+
+  ConvNet momentum_model(num_classes);
+  momentum_model->to(device);
+  initialize_parameters_to_zero(*momentum_model);
+  auto momentum = momentum_model->named_parameters();
+
+  ConvNet x_old_model(num_classes);
+  x_old_model->to(device);
+  initialize_parameters_to_zero(*x_old_model);
+  auto x_old = x_old_model->named_parameters();
+
+  ConvNet step_model(num_classes);
+  step_model->to(device);
+  initialize_parameters_to_zero(*step_model);
+  auto step = step_model->named_parameters();
+
+
   // define optimizer
   torch::optim::SGDOptions options(lr);
   torch::optim::SGD optimizer(model->parameters(), options);
@@ -96,11 +127,11 @@ int main(int argc, char* argv[]) {
   auto param = model->named_parameters();
   int num_elem_param = 0;
   for (int i = 0; i < sz; i++) {
-      num_elem_param += param[i].value().numel();
+    num_elem_param += param[i].value().numel();
   }
   if (rank == 0) {
-      std::cout << "Number of parameters - " << sz << std::endl;
-      std::cout << "Number of elements - " << num_elem_param << std::endl;
+    std::cout << "Number of parameters - " << sz << std::endl;
+    std::cout << "Number of elements - " << num_elem_param << std::endl;
   }
   float param_partner[num_elem_param];
   
@@ -227,13 +258,25 @@ int main(int argc, char* argv[]) {
         // update # correctly classified samples
         num_correct += prediction.eq(target).sum().item<int64_t>(); //np.sum(prediction == target)
         
-        // backprop + gradient step
+        for (auto i = 0; i < sz; i++) {
+          x_old[i].value() = param[i].value();
+          momentum[i].value().data().multiply_(delta);
+          param[i].value().data().add_(momentum[i].value().data());
+          //momentum[i].value().data().divide_(delta);
+        }
+        
+        // gradient step
         optimizer.zero_grad();
         loss.backward();
-        
-        if (t % tau == 0) {
-          for (auto i = 0; i < sz; i++) {
-            // getting dimensions of tensor
+        optimizer.step();
+
+        for (auto i = 0; i < sz; i++) {
+          param[i].value().data().subtract_(momentum[i].value().data());
+          step[i].value().data() = param[i].value().data();
+          step[i].value().data().subtract_(x_old[i].value().data());
+          param[i].value().data() = x_old[i].value().data();
+          
+          if (t % tau == 0) {
 
             int num_dim = param[i].value().dim();
             std::vector<int64_t> dim_array;
@@ -253,12 +296,9 @@ int main(int argc, char* argv[]) {
             // receive from communication partner
             MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &reqs[1]);
             MPI_Isend(temp, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &reqs[0]);
-            //MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &req2);
-            // //send parameters to root
-            // MPI_Isend(temp, flat.numel(), MPI_FLOAT, 0, 0,MPI_COMM_WORLD, &req1);
             MPI_Waitall(2, reqs, statuses);
+            
             // unpack 1-D vector form corresponding displacement and form
-            // tensor
             auto root_recv = (float *)calloc(
                 flat.numel(), flat.numel() * param_elem_size);
             // fp << "left - " << std::endl;
@@ -272,14 +312,15 @@ int main(int argc, char* argv[]) {
             // x  = x + alpha*(x_i - x)
             x_temp.data().subtract_(param[i].value().data()); // x_temp - \tilde{x}
             x_temp.data().multiply_(alpha); 
-            param[i].value().data().add_(x_temp.data()); // update tensor parameters
+            param[i].value().data().add_(x_temp.data());      // update tensor parameters
 
             // freeing temp arrays
             free(temp);
             free(root_recv);
-          } // parameter loop
-        } // tau loop
-        optimizer.step();
+          }
+          momentum[i].value().data().add_(step[i].value().data());
+          param[i].value().data().add_(momentum[i].value().data()); // x^i += 
+        }
         t ++;
       } // batch loop
 

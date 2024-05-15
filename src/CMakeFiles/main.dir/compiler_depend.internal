@@ -5294,8 +5294,8 @@ CMakeFiles/main.dir/cifar10.cpp.o
  /usr/local/libtorch/include/torch/custom_class_detail.h
  /usr/local/libtorch/include/torch/library.h
 
-CMakeFiles/main.dir/convnet.cpp.o
- /Users/danvicente/skola/SF2568 - Parallell/project/src/convnet.cpp
+CMakeFiles/main.dir/convnet_cifar.cpp.o
+ /Users/danvicente/skola/SF2568 - Parallell/project/src/convnet_cifar.cpp
  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/Availability.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityInternal.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityVersions.h
@@ -6063,7 +6063,7 @@ CMakeFiles/main.dir/convnet.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdarg.h
  /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h
  /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h
- /Users/danvicente/skola/SF2568 - Parallell/project/include/convnet.h
+ /Users/danvicente/skola/SF2568 - Parallell/project/include/convnet_cifar.h
  /usr/local/libtorch/include/ATen/ATen.h
  /usr/local/libtorch/include/ATen/CPUGeneratorImpl.h
  /usr/local/libtorch/include/ATen/Config.h
@@ -10570,8 +10570,8 @@ CMakeFiles/main.dir/convnet.cpp.o
  /usr/local/libtorch/include/torch/custom_class_detail.h
  /usr/local/libtorch/include/torch/library.h
 
-CMakeFiles/main.dir/msgd_cifar.cpp.o
- /Users/danvicente/skola/SF2568 - Parallell/project/src/msgd_cifar.cpp
+CMakeFiles/main.dir/eamsgd_cifar.cpp.o
+ /Users/danvicente/skola/SF2568 - Parallell/project/src/eamsgd_cifar.cpp
  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/Availability.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityInternal.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityVersions.h
@@ -11357,7 +11357,9 @@ CMakeFiles/main.dir/msgd_cifar.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h
  /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h
  /Users/danvicente/skola/SF2568 - Parallell/project/include/cifar10.h
- /Users/danvicente/skola/SF2568 - Parallell/project/include/convnet.h
+ /Users/danvicente/skola/SF2568 - Parallell/project/include/convnet_cifar.h
+ /usr/local/include/mpi.h
+ /usr/local/include/mpi_portable_platform.h
  /usr/local/libtorch/include/ATen/ATen.h
  /usr/local/libtorch/include/ATen/CPUGeneratorImpl.h
  /usr/local/libtorch/include/ATen/Config.h

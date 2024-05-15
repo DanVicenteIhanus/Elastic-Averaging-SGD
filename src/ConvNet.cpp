@@ -5,7 +5,7 @@ Forward pass is implemented here and the backprop is implemented in "main.cpp"
 #include "../include/convnet.h"
 #include <torch/torch.h>
 
-ConvNetImpl::ConvNetImpl(int64_t num_classes) {
+ConvNetImpl::ConvNetImpl(int64_t num_classe) {
 	register_module("conv1", conv1);
 	register_module("conv2", conv2);
 	register_module("fc1", fc1);

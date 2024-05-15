@@ -3,6 +3,9 @@
 // https://github.com/pytorch/pytorch/blob/abb215e22952ae44b764e501d3552bf219ceb95b/torch/csrc/api/include/torch/data/datasets/mnist.h
 // https://pytorch.org/cppdocs/api/classtorch_1_1data_1_1datasets_1_1_m_n_i_s_t.html#class-mnist
 
+#ifndef CIFAR10_H
+#define CIFAR10_H
+
 #include <string>
 #include <torch/torch.h>
 
@@ -34,3 +37,5 @@ private:
     // Returns all targets stacked into a single tensor.
     torch::Tensor images_, targets_;
 };
+
+#endif // CIFAR10_H
