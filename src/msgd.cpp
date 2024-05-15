@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
   // Setup file for results
   // ====================== //
   std::ostringstream filename;
-  filename << "../data/training_stats_sequential_batch_size_" << batch_size << ".txt";
+  filename << "../data/training_stats_sequential_momentum_batch_size_" << batch_size << ".txt";
   
   // Open file for writing
   std::fstream file;

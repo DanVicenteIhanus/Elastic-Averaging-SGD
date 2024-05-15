@@ -69,19 +69,19 @@ include CMakeFiles/main.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/main.dir/flags.make
 
-CMakeFiles/main.dir/eamsgd.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/eamsgd.cpp.o: eamsgd.cpp
-CMakeFiles/main.dir/eamsgd.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/eamsgd.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/eamsgd.cpp.o -MF CMakeFiles/main.dir/eamsgd.cpp.o.d -o CMakeFiles/main.dir/eamsgd.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/project/src/eamsgd.cpp"
+CMakeFiles/main.dir/msgd_cifar.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/msgd_cifar.cpp.o: msgd_cifar.cpp
+CMakeFiles/main.dir/msgd_cifar.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/msgd_cifar.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/msgd_cifar.cpp.o -MF CMakeFiles/main.dir/msgd_cifar.cpp.o.d -o CMakeFiles/main.dir/msgd_cifar.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/project/src/msgd_cifar.cpp"
 
-CMakeFiles/main.dir/eamsgd.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/eamsgd.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/danvicente/skola/SF2568 - Parallell/project/src/eamsgd.cpp" > CMakeFiles/main.dir/eamsgd.cpp.i
+CMakeFiles/main.dir/msgd_cifar.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/msgd_cifar.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/danvicente/skola/SF2568 - Parallell/project/src/msgd_cifar.cpp" > CMakeFiles/main.dir/msgd_cifar.cpp.i
 
-CMakeFiles/main.dir/eamsgd.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/eamsgd.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danvicente/skola/SF2568 - Parallell/project/src/eamsgd.cpp" -o CMakeFiles/main.dir/eamsgd.cpp.s
+CMakeFiles/main.dir/msgd_cifar.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/msgd_cifar.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danvicente/skola/SF2568 - Parallell/project/src/msgd_cifar.cpp" -o CMakeFiles/main.dir/msgd_cifar.cpp.s
 
 CMakeFiles/main.dir/convnet.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/convnet.cpp.o: convnet.cpp
@@ -97,16 +97,32 @@ CMakeFiles/main.dir/convnet.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/convnet.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danvicente/skola/SF2568 - Parallell/project/src/convnet.cpp" -o CMakeFiles/main.dir/convnet.cpp.s
 
+CMakeFiles/main.dir/cifar10.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/cifar10.cpp.o: cifar10.cpp
+CMakeFiles/main.dir/cifar10.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/cifar10.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/cifar10.cpp.o -MF CMakeFiles/main.dir/cifar10.cpp.o.d -o CMakeFiles/main.dir/cifar10.cpp.o -c "/Users/danvicente/skola/SF2568 - Parallell/project/src/cifar10.cpp"
+
+CMakeFiles/main.dir/cifar10.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/cifar10.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/danvicente/skola/SF2568 - Parallell/project/src/cifar10.cpp" > CMakeFiles/main.dir/cifar10.cpp.i
+
+CMakeFiles/main.dir/cifar10.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/cifar10.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danvicente/skola/SF2568 - Parallell/project/src/cifar10.cpp" -o CMakeFiles/main.dir/cifar10.cpp.s
+
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/eamsgd.cpp.o" \
-"CMakeFiles/main.dir/convnet.cpp.o"
+"CMakeFiles/main.dir/msgd_cifar.cpp.o" \
+"CMakeFiles/main.dir/convnet.cpp.o" \
+"CMakeFiles/main.dir/cifar10.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
-main: CMakeFiles/main.dir/eamsgd.cpp.o
+main: CMakeFiles/main.dir/msgd_cifar.cpp.o
 main: CMakeFiles/main.dir/convnet.cpp.o
+main: CMakeFiles/main.dir/cifar10.cpp.o
 main: CMakeFiles/main.dir/build.make
 main: /usr/local/libtorch/lib/libc10.dylib
 main: /usr/local/libtorch/lib/libkineto.a
@@ -115,7 +131,7 @@ main: /usr/local/libtorch/lib/libtorch.dylib
 main: /usr/local/libtorch/lib/libtorch_cpu.dylib
 main: /usr/local/libtorch/lib/libc10.dylib
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

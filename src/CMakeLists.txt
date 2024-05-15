@@ -11,7 +11,7 @@ include_directories(SYSTEM ${MPI_C_INCLUDE_PATH} ${MPI_CXX_INCLUDE_PATH})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
-add_executable(main eamsgd.cpp convnet.cpp)
+add_executable(main msgd_cifar.cpp convnet.cpp cifar10.cpp)
 
 target_link_libraries(main ${TORCH_LIBRARIES})
 

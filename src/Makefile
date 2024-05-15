@@ -129,6 +129,30 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+cifar10.o: cifar10.cpp.o
+.PHONY : cifar10.o
+
+# target to build an object file
+cifar10.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/cifar10.cpp.o
+.PHONY : cifar10.cpp.o
+
+cifar10.i: cifar10.cpp.i
+.PHONY : cifar10.i
+
+# target to preprocess a source file
+cifar10.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/cifar10.cpp.i
+.PHONY : cifar10.cpp.i
+
+cifar10.s: cifar10.cpp.s
+.PHONY : cifar10.s
+
+# target to generate assembly for a file
+cifar10.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/cifar10.cpp.s
+.PHONY : cifar10.cpp.s
+
 convnet.o: convnet.cpp.o
 .PHONY : convnet.o
 
@@ -153,29 +177,29 @@ convnet.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet.cpp.s
 .PHONY : convnet.cpp.s
 
-eamsgd.o: eamsgd.cpp.o
-.PHONY : eamsgd.o
+msgd_cifar.o: msgd_cifar.cpp.o
+.PHONY : msgd_cifar.o
 
 # target to build an object file
-eamsgd.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/eamsgd.cpp.o
-.PHONY : eamsgd.cpp.o
+msgd_cifar.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/msgd_cifar.cpp.o
+.PHONY : msgd_cifar.cpp.o
 
-eamsgd.i: eamsgd.cpp.i
-.PHONY : eamsgd.i
+msgd_cifar.i: msgd_cifar.cpp.i
+.PHONY : msgd_cifar.i
 
 # target to preprocess a source file
-eamsgd.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/eamsgd.cpp.i
-.PHONY : eamsgd.cpp.i
+msgd_cifar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/msgd_cifar.cpp.i
+.PHONY : msgd_cifar.cpp.i
 
-eamsgd.s: eamsgd.cpp.s
-.PHONY : eamsgd.s
+msgd_cifar.s: msgd_cifar.cpp.s
+.PHONY : msgd_cifar.s
 
 # target to generate assembly for a file
-eamsgd.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/eamsgd.cpp.s
-.PHONY : eamsgd.cpp.s
+msgd_cifar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/msgd_cifar.cpp.s
+.PHONY : msgd_cifar.cpp.s
 
 # Help Target
 help:
@@ -186,12 +210,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
+	@echo "... cifar10.o"
+	@echo "... cifar10.i"
+	@echo "... cifar10.s"
 	@echo "... convnet.o"
 	@echo "... convnet.i"
 	@echo "... convnet.s"
-	@echo "... eamsgd.o"
-	@echo "... eamsgd.i"
-	@echo "... eamsgd.s"
+	@echo "... msgd_cifar.o"
+	@echo "... msgd_cifar.i"
+	@echo "... msgd_cifar.s"
 .PHONY : help
 
 

@@ -5,7 +5,7 @@
 // CIFAR dataset
 // https://www.cs.toronto.edu/~kriz/cifar.html
 
-#include <bits/stdint-uintn.h>
+// #include <bits/stdint-uintn.h> ???
 #include <cassert>
 #include <fstream>
 #include <iostream>
@@ -13,7 +13,7 @@
 #include <torch/torch.h>
 #include <vector>
 
-#include "cifar10.h"
+#include "../include/cifar10.h"
 
 const std::vector<std::string> train_set_file_names{
     "data_batch_1.bin", "data_batch_2.bin", "data_batch_3.bin",
@@ -96,6 +96,7 @@ torch::Tensor read_images_from_file(const std::string& file_path)
             count += 1;
         }
     }
+    //std::cout << count;
 
     assert(
         (count == num_samples_per_file) &&

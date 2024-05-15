@@ -8,8 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/danvicente/skola/SF2568 - Parallell/project/src/cifar10.cpp" "CMakeFiles/main.dir/cifar10.cpp.o" "gcc" "CMakeFiles/main.dir/cifar10.cpp.o.d"
   "/Users/danvicente/skola/SF2568 - Parallell/project/src/convnet.cpp" "CMakeFiles/main.dir/convnet.cpp.o" "gcc" "CMakeFiles/main.dir/convnet.cpp.o.d"
-  "/Users/danvicente/skola/SF2568 - Parallell/project/src/eamsgd.cpp" "CMakeFiles/main.dir/eamsgd.cpp.o" "gcc" "CMakeFiles/main.dir/eamsgd.cpp.o.d"
+  "/Users/danvicente/skola/SF2568 - Parallell/project/src/msgd_cifar.cpp" "CMakeFiles/main.dir/msgd_cifar.cpp.o" "gcc" "CMakeFiles/main.dir/msgd_cifar.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
