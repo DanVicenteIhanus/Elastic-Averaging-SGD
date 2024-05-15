@@ -2,3 +2,4 @@
 .bin
 ./datasets/cifar-10-batches-bin
 datasets/cifar-10-batches-bin
+dataset/cifar-10-batches-bin
