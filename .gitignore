@@ -1,3 +1,4 @@
 .DS_Store
 .bin
 ./datasets/cifar-10-batches-bin
+datasets/cifar-10-batches-bin
