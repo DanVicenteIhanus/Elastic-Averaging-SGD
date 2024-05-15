@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
 
   const int tau = 8; // communication period
   const double beta = 3.96;
-  const double delta = 0.99;
+  const double delta = 0.9;
   
   auto start = high_resolution_clock::now(); // timing the training
   
@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
   // Setup file for results
   // ====================== //
   std::ostringstream filename;
-  filename << "../data/training_stats_measgd_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << ".txt";
+  filename << "../data/training_stats_eamsgd_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << ".txt";
   
   // Open file for writing
   std::fstream file;
