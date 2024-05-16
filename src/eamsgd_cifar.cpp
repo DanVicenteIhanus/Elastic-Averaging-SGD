@@ -32,12 +32,13 @@ int main(int argc, char* argv[]) {
   // == Hyperparameters == //
   const int num_classes = 10;
   const int batch_size = 1000; 
-  const int num_epochs = 10; 
+  const int num_epochs = 30; 
   const double lr = 0.01;
 
-  const int tau = 8; // communication period
+  const int tau = 4; // communication period
   const double beta = 3.96;
   const double delta = 0.9;
+  const double momentum_param = 0.9;
   
   auto start = high_resolution_clock::now(); // timing the training
   
@@ -55,7 +56,7 @@ int main(int argc, char* argv[]) {
   // Setup file for results
   // ====================== //
   std::ostringstream filename;
-  filename << "../data/training_stats_cifar_eamsgd_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << ".txt";
+  filename << "../data/training_stats_cifar_eamsgd_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << "_momentum_" << momentum_param << ".txt";
   
   // Open file for writing
   std::fstream file;
@@ -93,10 +94,10 @@ int main(int argc, char* argv[]) {
   std::cout << "number of testing samples = " << num_test_samples << "\n";
 
   auto train_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
-      std::move(train_dataset), torch::data::DataLoaderOptions().batch_size(batch_size).enforce_ordering(true));
+      std::move(train_dataset), torch::data::DataLoaderOptions().batch_size(batch_size));
 
   auto test_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
-      std::move(test_dataset), torch::data::DataLoaderOptions().batch_size(batch_size).enforce_ordering(true));
+      std::move(test_dataset), torch::data::DataLoaderOptions().batch_size(batch_size));
   
   // create CNN
   ConvNet model(num_classes);
@@ -120,6 +121,7 @@ int main(int argc, char* argv[]) {
 
   // define optimizer
   torch::optim::SGDOptions options(lr);
+  options.momentum(momentum_param); // MSGD for the workers
   torch::optim::SGD optimizer(model->parameters(), options);
 
   // get model-size and define array of parameters  
@@ -342,6 +344,7 @@ int main(int argc, char* argv[]) {
     std::cout << "--------------------------------------------------------\n";
     std::cout << "Testing... num_test_samples = " << num_test_samples << "\n";
     std::cout << "--------------------------------------------------------\n";
+    
     // Test the model
     model->eval();
     torch::InferenceMode no_grad;

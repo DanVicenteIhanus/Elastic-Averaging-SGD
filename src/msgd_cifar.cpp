@@ -22,8 +22,8 @@ int main(int argc, char* argv[]) {
   
   // == Hyperparameters == //
   const int num_classes = 10;
-  const int batch_size = 100; 
-  const int num_epochs = 10; 
+  const int batch_size = 1000; 
+  const int num_epochs = 30; 
   const double lr = 0.01;
   const double momentum = 0.9;
 
