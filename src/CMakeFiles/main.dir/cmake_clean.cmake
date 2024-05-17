@@ -3,8 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/cifar10.cpp.o.d"
   "CMakeFiles/main.dir/convnet_cifar.cpp.o"
   "CMakeFiles/main.dir/convnet_cifar.cpp.o.d"
-  "CMakeFiles/main.dir/eamsgd_cifar.cpp.o"
-  "CMakeFiles/main.dir/eamsgd_cifar.cpp.o.d"
+  "CMakeFiles/main.dir/msgd_cifar.cpp.o"
+  "CMakeFiles/main.dir/msgd_cifar.cpp.o.d"
   "main"
   "main.pdb"
 )

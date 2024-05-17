@@ -10568,7 +10568,7 @@ CMakeFiles/main.dir/convnet_cifar.cpp.o: convnet_cifar.cpp \
   /usr/local/libtorch/include/torch/custom_class_detail.h \
   /usr/local/libtorch/include/torch/library.h
 
-CMakeFiles/main.dir/eamsgd_cifar.cpp.o: eamsgd_cifar.cpp \
+CMakeFiles/main.dir/msgd_cifar.cpp.o: msgd_cifar.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/Availability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityInternal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/AvailabilityVersions.h \
@@ -11355,8 +11355,6 @@ CMakeFiles/main.dir/eamsgd_cifar.cpp.o: eamsgd_cifar.cpp \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h \
   /Users/danvicente/skola/SF2568\ -\ Parallell/project/include/cifar10.h \
   /Users/danvicente/skola/SF2568\ -\ Parallell/project/include/convnet_cifar.h \
-  /usr/local/include/mpi.h \
-  /usr/local/include/mpi_portable_platform.h \
   /usr/local/libtorch/include/ATen/ATen.h \
   /usr/local/libtorch/include/ATen/CPUGeneratorImpl.h \
   /usr/local/libtorch/include/ATen/Config.h \
@@ -15864,10 +15862,6 @@ CMakeFiles/main.dir/eamsgd_cifar.cpp.o: eamsgd_cifar.cpp \
   /usr/local/libtorch/include/torch/library.h
 
 
-/usr/local/include/mpi_portable_platform.h:
-
-eamsgd_cifar.cpp:
-
 /usr/local/libtorch/include/torch/library.h:
 
 /usr/local/libtorch/include/torch/custom_class_detail.h:
@@ -16516,6 +16510,8 @@ eamsgd_cifar.cpp:
 
 /usr/local/libtorch/include/ATen/ops/sum_ops.h:
 
+msgd_cifar.cpp:
+
 /usr/local/libtorch/include/ATen/ops/sum_meta.h:
 
 /usr/local/libtorch/include/ATen/ops/sum.h:
@@ -16531,8 +16527,6 @@ eamsgd_cifar.cpp:
 /usr/local/libtorch/include/ATen/ops/sub.h:
 
 /usr/local/libtorch/include/ATen/ops/stride_native.h:
-
-/usr/local/include/mpi.h:
 
 /usr/local/libtorch/include/ATen/ops/stft_native.h:
 
