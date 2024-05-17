@@ -18,9 +18,9 @@ TODO:
 
 void initialize_parameters_to_zero(torch::nn::Module& module) {
   torch::NoGradGuard no_grad;
-    for (auto& param : module.parameters()) {
-        param.zero_();
-    }
+  for (auto& param : module.parameters()) {
+    param.zero_();
+  } 
 }
 
 int main(int argc, char* argv[]) {
@@ -32,8 +32,8 @@ int main(int argc, char* argv[]) {
   const double lr = 0.01;
 
   // communication params
-  const int tau = 4; // communication period
-  const double beta = 3.96;
+  const int tau = 5; // communication period
+  const double beta = 3.99;
   const double delta = 0.99;
   const double momentum_param = 0.0;
 
@@ -43,6 +43,8 @@ int main(int argc, char* argv[]) {
   std::chrono::steady_clock::time_point comm_end;
   double comm_time;
   double total_comm_time = 0;
+  double test_accuracy;
+  double test_sample_mean_loss;
 
   // ================ //
   //    MPI-setup     //
@@ -58,7 +60,7 @@ int main(int argc, char* argv[]) {
   // Setup file for results
   // ====================== //
   std::ostringstream filename;
-  filename << "../data/cifar/eamsgd/training_stats_cifar_eamsgd_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << "_momentum_" << momentum_param << ".txt";
+  filename << "../results/cifar/eamsgd/stats_cifar_EAMSGD_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << "_momentum_" << momentum_param << ".txt";
   
   // Open file for writing
   std::fstream file;
@@ -67,13 +69,16 @@ int main(int argc, char* argv[]) {
   // Check if the file is new to write the header
   file.seekg(0, std::ios::end); // go to the end of file
   if (file.tellg() == 0) { // if file size is 0, it's new
-    file << "Duration,Accuracy,Sample_Mean_Loss,Total_comm_time\n"; // write the header
+    if (rank == 0) {
+      file << "Duration,Accuracy,Sample_Mean_Loss,Testing_accuracy,Testing_Mean_Loss\n"; // write the header
+    }
+    else {
+      file << "Duration, Accuracy, Sample_Mean_loss, Total_comm_time\n";
+    }
   }
 
   // elastic hyperparameter
   const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
-  
-  //const float alpha = 0.3;
   
   // ============ //
   // CIFAR10 data //
@@ -109,6 +114,11 @@ int main(int argc, char* argv[]) {
   ConvNet model(num_classes);
   model->to(device);
 
+  ConvNet step_model(num_classes);
+  step_model->to(device);
+  //initialize_parameters_to_zero(*step_model);
+  auto step = step_model->named_parameters();
+
   ConvNet momentum_model(num_classes);
   momentum_model->to(device);
   initialize_parameters_to_zero(*momentum_model);
@@ -116,13 +126,8 @@ int main(int argc, char* argv[]) {
 
   ConvNet x_old_model(num_classes);
   x_old_model->to(device);
-  initialize_parameters_to_zero(*x_old_model);
+  //initialize_parameters_to_zero(*x_old_model);
   auto x_old = x_old_model->named_parameters();
-
-  ConvNet step_model(num_classes);
-  step_model->to(device);
-  initialize_parameters_to_zero(*step_model);
-  auto step = step_model->named_parameters();
 
   // define optimizer
   torch::optim::SGDOptions options(lr);
@@ -163,6 +168,7 @@ int main(int argc, char* argv[]) {
       for (auto &batch : *train_loader) {
          // complexity = O(epoch*num_batches*P*network_size)
         // getting dimensions of tensor
+        model->train();
         auto data = batch.data.to(device);
         auto target = batch.target.to(device);
       
@@ -217,7 +223,6 @@ int main(int argc, char* argv[]) {
               // x  = x + alpha*(x_i - x)
               x_temp.data().subtract_(param[i].value().data()); // x_temp - \tilde{x}
               x_temp.data().multiply_(alpha); 
-
               param[i].value().data().add_(x_temp.data()); // update tensor parameters
 
               // freeing temp arrays
@@ -226,21 +231,50 @@ int main(int argc, char* argv[]) {
               }
             } // parameter loop
         } // process loop
+      
+      
       t++;
       } // batch loop
 
-    // print epoch results in terminal
-    auto sample_mean_loss = running_loss / num_train_samples;
-    auto accuracy = static_cast<double>(num_correct) / num_train_samples;
-    std::cout << "RANK: "<< rank << " Epoch [" << (epoch + 1) << "/" << num_epochs << "], Trainset - Loss: "
-        << sample_mean_loss << ", Accuracy: " << accuracy << '\n';
-    auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<milliseconds>(stop - start);
-    std::cout << "duration = " << duration.count() << "\n";
+      // print epoch results in terminal
+      auto sample_mean_loss = running_loss / num_train_samples;
+      auto accuracy = static_cast<double>(num_correct) / num_train_samples;
+      std::cout << "RANK: "<< rank << " Epoch [" << (epoch + 1) << "/" << num_epochs << "], Trainset - Loss: "
+          << sample_mean_loss << ", Accuracy: " << accuracy << '\n';
+      auto stop = high_resolution_clock::now();
+      auto duration = duration_cast<milliseconds>(stop - start);
+      std::cout << "duration = " << duration.count() << "\n";
 
+      // Test the model
+      model->eval();
+
+      double test_running_loss = 0.0;
+      size_t test_num_correct = 0;
+      { 
+        torch::InferenceMode no_grad;
+        for (const auto& batch : *test_loader) {
+          auto data = batch.data.to(device);
+          auto target = batch.target.to(device);
+
+          // forward pass
+          auto output = model->forward(data);
+
+          // loss update
+          auto loss = torch::nn::functional::cross_entropy(output, target);
+          test_running_loss += loss.item<double>() * data.size(0);
+
+          // prediction & accuracy
+          auto prediction = output.argmax(1);
+          test_num_correct += prediction.eq(target).sum().item<int64_t>();
+        
+        }
+        std::cout << "Testing finished!\n";
+        test_accuracy = static_cast<double>(test_num_correct) / num_test_samples;
+        test_sample_mean_loss = test_running_loss / num_test_samples;
+        std::cout << "Testset - Loss: " << test_sample_mean_loss << ", Accuracy: " << test_accuracy << '\n';
+    }
     // Log to file in txt
-    file << duration.count() << "," << accuracy << "," << sample_mean_loss << "\n";
-
+    file << duration.count() << "," << accuracy << "," << sample_mean_loss << "," << test_accuracy << "," << test_sample_mean_loss <<"\n";
     } // epoch loop
   } else {
   // non-root processes
@@ -248,7 +282,7 @@ int main(int argc, char* argv[]) {
       double running_loss = 0.0;
       size_t num_correct = 0;
       for (auto& batch : *train_loader) {
-
+        model->train();
         auto data = batch.data.to(device);
         auto target = batch.target.to(device);
       
@@ -266,7 +300,7 @@ int main(int argc, char* argv[]) {
         num_correct += prediction.eq(target).sum().item<int64_t>(); //np.sum(prediction == target)
         
         for (auto i = 0; i < sz; i++) {
-          x_old[i].value() = param[i].value();
+          x_old[i].value().data() = param[i].value().data();
           momentum[i].value().data().multiply_(delta);
           param[i].value().data().add_(momentum[i].value().data());
           //momentum[i].value().data().divide_(delta);
@@ -308,7 +342,6 @@ int main(int argc, char* argv[]) {
             MPI_Isend(temp, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &reqs[0]);
             MPI_Waitall(2, reqs, statuses);
             
-
             // unpack 1-D vector form corresponding displacement and form
             auto root_recv = (float *)calloc(
                 flat.numel(), flat.numel() * param_elem_size);
@@ -334,8 +367,9 @@ int main(int argc, char* argv[]) {
             comm_time = std::chrono::duration<float>(comm_end - comm_start).count();
             total_comm_time += comm_time;
           }
-          momentum[i].value().data().subtract_(step[i].value().data());
+          momentum[i].value().data().add_(step[i].value().data());
           param[i].value().data().add_(momentum[i].value().data()); 
+          auto blahonga = step[i].value().data().sum(); 
         }
         t ++;
       } // batch loop
@@ -349,42 +383,6 @@ int main(int argc, char* argv[]) {
       file << duration.count() << "," << accuracy << "," << sample_mean_loss << "," << total_comm_time << "\n";
     } // epoch loop
   }  
-  // ============= //
-  // TESTING PHASE //
-  // ============= //
-  if (rank == 0 ) {
-    std::cout << "Training finished!\n\n";
-    std::cout << "--------------------------------------------------------\n";
-    std::cout << "Testing... num_test_samples = " << num_test_samples << "\n";
-    std::cout << "--------------------------------------------------------\n";
-    
-    // Test the model
-    model->eval();
-    torch::InferenceMode no_grad;
-
-    double test_running_loss = 0.0;
-    size_t test_num_correct = 0;
-    for (const auto& batch : *test_loader) {
-      auto data = batch.data.to(device);
-      auto target = batch.target.to(device);
-
-      // forward pass
-      auto output = model->forward(data);
-
-      // loss update
-      auto loss = torch::nn::functional::cross_entropy(output, target);
-      test_running_loss += loss.item<double>() * data.size(0);
-
-      // prediction & accuracy
-      auto prediction = output.argmax(1);
-      test_num_correct += prediction.eq(target).sum().item<int64_t>();
-    
-    }
-    std::cout << "Testing finished!\n";
-    auto test_accuracy = static_cast<double>(test_num_correct) / num_test_samples;
-    auto test_sample_mean_loss = test_running_loss / num_test_samples;
-    std::cout << "Testset - Loss: " << test_sample_mean_loss << ", Accuracy: " << test_accuracy << '\n';
-  }
   file.close();
   ierr = MPI_Finalize();
   return 0;
