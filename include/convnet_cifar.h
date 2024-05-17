@@ -1,5 +1,5 @@
-#ifndef CONVNET_H
-#define CONVNET_H
+//#ifndef CONVNET_H
+//#define CONVNET_H
 
 #include <torch/torch.h>
 #include <iostream>
@@ -18,4 +18,4 @@ private:
 
 TORCH_MODULE(ConvNet);
 
-#endif // CONVNET_H
+//#endif // CONVNET_H

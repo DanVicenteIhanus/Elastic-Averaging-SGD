@@ -14,10 +14,6 @@ torch::Device device(torch::kCPU);
 // workers = 2, tau = 16, beta = 3.96
 /* 
 TODO:
-  1. Build nonparallell training
-  1. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
-  2. Grid-search to generate more data
-  3. Refactor code..
 */
 
 void initialize_parameters_to_zero(torch::nn::Module& module) {
@@ -32,16 +28,22 @@ int main(int argc, char* argv[]) {
   // == Hyperparameters == //
   const int num_classes = 10;
   const int batch_size = 1000; 
-  const int num_epochs = 30; 
+  const int num_epochs = 15; 
   const double lr = 0.01;
 
+  // communication params
   const int tau = 4; // communication period
   const double beta = 3.96;
-  const double delta = 0.9;
-  const double momentum_param = 0.9;
-  
+  const double delta = 0.99;
+  const double momentum_param = 0.0;
+
+  // clocks for timing
   auto start = high_resolution_clock::now(); // timing the training
-  
+  std::chrono::steady_clock::time_point comm_start;
+  std::chrono::steady_clock::time_point comm_end;
+  double comm_time;
+  double total_comm_time = 0;
+
   // ================ //
   //    MPI-setup     //
   // ================ // 
@@ -56,7 +58,7 @@ int main(int argc, char* argv[]) {
   // Setup file for results
   // ====================== //
   std::ostringstream filename;
-  filename << "../data/training_stats_cifar_eamsgd_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << "_momentum_" << momentum_param << ".txt";
+  filename << "../data/cifar/eamsgd/training_stats_cifar_eamsgd_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << "_momentum_" << momentum_param << ".txt";
   
   // Open file for writing
   std::fstream file;
@@ -65,7 +67,7 @@ int main(int argc, char* argv[]) {
   // Check if the file is new to write the header
   file.seekg(0, std::ios::end); // go to the end of file
   if (file.tellg() == 0) { // if file size is 0, it's new
-    file << "Duration,Accuracy,Sample_Mean_Loss\n"; // write the header
+    file << "Duration,Accuracy,Sample_Mean_Loss,Total_comm_time\n"; // write the header
   }
 
   // elastic hyperparameter
@@ -76,6 +78,7 @@ int main(int argc, char* argv[]) {
   // ============ //
   // CIFAR10 data //
   // ============ //
+
   const std::string dataset_root{"../dataset/cifar-10-batches-bin"};
   CIFAR10 train_set{dataset_root, CIFAR10::Mode::kTrain};
   CIFAR10 test_set{dataset_root, CIFAR10::Mode::kTest};
@@ -99,7 +102,10 @@ int main(int argc, char* argv[]) {
   auto test_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
       std::move(test_dataset), torch::data::DataLoaderOptions().batch_size(batch_size));
   
-  // create CNN
+  // ================= //
+  // == create CNNs == //
+  // ================= //
+
   ConvNet model(num_classes);
   model->to(device);
 
@@ -117,7 +123,6 @@ int main(int argc, char* argv[]) {
   step_model->to(device);
   initialize_parameters_to_zero(*step_model);
   auto step = step_model->named_parameters();
-
 
   // define optimizer
   torch::optim::SGDOptions options(lr);
@@ -280,6 +285,9 @@ int main(int argc, char* argv[]) {
           
           if (t % tau == 0) {
 
+            // start timing the communication 
+            comm_start = std::chrono::steady_clock::now();
+            
             int num_dim = param[i].value().dim();
             std::vector<int64_t> dim_array;
             for (int j = 0; j < num_dim; j++) {
@@ -300,6 +308,7 @@ int main(int argc, char* argv[]) {
             MPI_Isend(temp, flat.numel(), MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &reqs[0]);
             MPI_Waitall(2, reqs, statuses);
             
+
             // unpack 1-D vector form corresponding displacement and form
             auto root_recv = (float *)calloc(
                 flat.numel(), flat.numel() * param_elem_size);
@@ -319,9 +328,14 @@ int main(int argc, char* argv[]) {
             // freeing temp arrays
             free(temp);
             free(root_recv);
+            
+            // end communication
+            comm_end = std::chrono::steady_clock::now();
+            comm_time = std::chrono::duration<float>(comm_end - comm_start).count();
+            total_comm_time += comm_time;
           }
-          momentum[i].value().data().add_(step[i].value().data());
-          param[i].value().data().add_(momentum[i].value().data()); // x^i += 
+          momentum[i].value().data().subtract_(step[i].value().data());
+          param[i].value().data().add_(momentum[i].value().data()); 
         }
         t ++;
       } // batch loop
@@ -332,8 +346,7 @@ int main(int argc, char* argv[]) {
           << sample_mean_loss << ", Accuracy: " << accuracy << '\n';
       auto stop = high_resolution_clock::now();
       auto duration = duration_cast<milliseconds>(stop - start);
-      file << duration.count() << "," << accuracy << "," << sample_mean_loss << "\n";
-
+      file << duration.count() << "," << accuracy << "," << sample_mean_loss << "," << total_comm_time << "\n";
     } // epoch loop
   }  
   // ============= //

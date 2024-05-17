@@ -4,7 +4,8 @@
 #include <sstream>
 #include <string>
 #include <torch/torch.h>
-#include "../include/convnet.h"
+#include "../include/convnet_cifar.h"
+#include "../include/cifar10.h"
 #include <chrono>
 using namespace std::chrono;
 
@@ -47,7 +48,7 @@ int main(int argc, char* argv[]) {
   // Setup file for results
   // ====================== //
   std::ostringstream filename;
-  filename << "../data/training_stats_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << ".txt";
+  filename << "../results/cifar/easgd/training_stats_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << ".txt";
   
   // Open file for writing
   std::fstream file;
@@ -63,26 +64,32 @@ int main(int argc, char* argv[]) {
   const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
   //const float alpha = 0.3;
 
-  // MNIST data from pytorch datasets
-  const std::string MNIST_path = "../data/mnist/";
-  auto train_dataset =
-    torch::data::datasets::MNIST(MNIST_path)
-      .map(torch::data::transforms::Normalize<>(0.1307, 0.3081))
+  // ============ //
+  // CIFAR10 data //
+  // ============ //
+
+  const std::string dataset_root{"../dataset/cifar-10-batches-bin"};
+  CIFAR10 train_set{dataset_root, CIFAR10::Mode::kTrain};
+  CIFAR10 test_set{dataset_root, CIFAR10::Mode::kTest};
+
+  auto train_dataset = train_set
+      .map(torch::data::transforms::Normalize<>({0.4914, 0.4822, 0.4465}, {0.2023, 0.1994, 0.2010}))
       .map(torch::data::transforms::Stack<>());
-  auto test_dataset = 
-    torch::data::datasets::MNIST(MNIST_path, torch::data::datasets::MNIST::Mode::kTest)
-    .map(torch::data::transforms::Normalize<>(0.1307, 0.3081))
-    .map(torch::data::transforms::Stack<>());
 
-  int num_train_samples = train_dataset.size().value(); // 60,000 samples
-  auto num_test_samples = test_dataset.size().value();  // 10,000 samples
+  auto test_dataset = test_set
+      .map(torch::data::transforms::Normalize<>({0.4914, 0.4822, 0.4465}, {0.2023, 0.1994, 0.2010}))
+      .map(torch::data::transforms::Stack<>());
 
-  // create training and test data
+  int num_train_samples = train_dataset.size().value(); 
+  auto num_test_samples = test_dataset.size().value(); 
+  std::cout << "number of training samples = "<< num_train_samples << "\n";
+  std::cout << "number of testing samples = " << num_test_samples << "\n";
+
   auto train_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
-    std::move(train_dataset), batch_size);
-  
+      std::move(train_dataset), torch::data::DataLoaderOptions().batch_size(batch_size));
+
   auto test_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
-        std::move(test_dataset), batch_size);
+      std::move(test_dataset), torch::data::DataLoaderOptions().batch_size(batch_size));
   
   // create CNN
   ConvNet model(num_classes);
