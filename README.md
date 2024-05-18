@@ -4,7 +4,7 @@ ____
 ____
 ____
 #### Final project in the course SF2568 - Parallel Computations For Large-Scale Problems at KTH #####
-*Code written By **Dan Vicente** (*danvi@kth.se*) and **Erik Lindé** (*elinde2@kth.se*) during the spring of 2024, except for the code for parsing the $\texttt{CIFAR-10}$ dataset as a torch data object which was written by Lei Mao (https://github.com/leimao) in 2021 and modified by us in 2024.*
+*Code written By **Dan Vicente** (*danvi@kth.se*) and **Erik Lindé** (*elinde2@kth.se*) during the spring of 2024, except for the code for parsing the \(\texttt{CIFAR-10}\) dataset as a torch data object which was written by Lei Mao (https://github.com/leimao) in 2021 and modified by us in 2024.*
 ____
 
 This repository contains all the scripts used in our project in SF2568 at KTH. To get all the scripts and classes to your system, we recommend that you simply clone this repository into a suitable directory on your system. Full instructions for dependancies of this project follow.
