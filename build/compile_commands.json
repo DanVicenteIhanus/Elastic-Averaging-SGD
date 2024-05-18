@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/Users/danvicente/skola/SF2568 - Parallell/Project/build",
-  "command": "/usr/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -isystem /usr/local/include -isystem /Users/danvicente/opt/usr/libtorch/include -isystem /Users/danvicente/opt/usr/libtorch/include/torch/csrc/api/include -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -o CMakeFiles/torchtest.dir/src/torchtest.cpp.o -c \"/Users/danvicente/skola/SF2568 - Parallell/Project/src/torchtest.cpp\"",
-  "file": "/Users/danvicente/skola/SF2568 - Parallell/Project/src/torchtest.cpp",
-  "output": "CMakeFiles/torchtest.dir/src/torchtest.cpp.o"
-}
-]

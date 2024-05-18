@@ -14,6 +14,8 @@ torch::Device device(torch::kCPU);
 // workers = 2, tau = 16, beta = 3.96
 /* 
 TODO:
+  1. Generate more data according to experiments <-
+  2. Refactor code
 */
 
 void initialize_parameters_to_zero(torch::nn::Module& module) {
@@ -25,6 +27,11 @@ void initialize_parameters_to_zero(torch::nn::Module& module) {
 
 int main(int argc, char* argv[]) {
   
+  if (argc != 4) {
+    std::cerr << "Usage: " << argv[0] << " <tau> <beta> <delta>" << std::endl;
+    return 1;
+  }
+
   // == Hyperparameters == //
   const int num_classes = 10;
   const int batch_size = 1000; 
@@ -32,15 +39,18 @@ int main(int argc, char* argv[]) {
   const double lr = 0.01;
 
   // communication params
-  const int tau = 5; // communication period
-  const double beta = 3.99;
-  const double delta = 0.99;
+  int tau = std::stoi(argv[1]);
+  double beta = std::stod(argv[2]);
+  double delta = std::stod(argv[3]);
+
   const double momentum_param = 0.0;
 
   // clocks for timing
   auto start = high_resolution_clock::now(); // timing the training
   std::chrono::steady_clock::time_point comm_start;
   std::chrono::steady_clock::time_point comm_end;
+  
+  // allocate mem for stats
   double comm_time;
   double total_comm_time = 0;
   double test_accuracy;
@@ -369,7 +379,6 @@ int main(int argc, char* argv[]) {
           }
           momentum[i].value().data().add_(step[i].value().data());
           param[i].value().data().add_(momentum[i].value().data()); 
-          auto blahonga = step[i].value().data().sum(); 
         }
         t ++;
       } // batch loop

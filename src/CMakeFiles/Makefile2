@@ -63,7 +63,8 @@ CMAKE_BINARY_DIR = "/Users/danvicente/skola/SF2568 - Parallell/project/src"
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/main.dir/all
+all: CMakeFiles/msgd.dir/all
+all: CMakeFiles/eamsgd.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +72,61 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/main.dir/clean
+clean: CMakeFiles/msgd.dir/clean
+clean: CMakeFiles/eamsgd.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/main.dir
+# Target rules for target CMakeFiles/msgd.dir
 
 # All Build rule for target.
-CMakeFiles/main.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=1,2,3,4 "Built target main"
-.PHONY : CMakeFiles/main.dir/all
+CMakeFiles/msgd.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=5,6,7,8 "Built target msgd"
+.PHONY : CMakeFiles/msgd.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/main.dir/rule: cmake_check_build_system
+CMakeFiles/msgd.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" 4
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/main.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/msgd.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" 0
-.PHONY : CMakeFiles/main.dir/rule
+.PHONY : CMakeFiles/msgd.dir/rule
 
 # Convenience name for target.
-main: CMakeFiles/main.dir/rule
-.PHONY : main
+msgd: CMakeFiles/msgd.dir/rule
+.PHONY : msgd
 
 # clean rule for target.
-CMakeFiles/main.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/clean
-.PHONY : CMakeFiles/main.dir/clean
+CMakeFiles/msgd.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/clean
+.PHONY : CMakeFiles/msgd.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/eamsgd.dir
+
+# All Build rule for target.
+CMakeFiles/eamsgd.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" --progress-num=1,2,3,4 "Built target eamsgd"
+.PHONY : CMakeFiles/eamsgd.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/eamsgd.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/eamsgd.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" 0
+.PHONY : CMakeFiles/eamsgd.dir/rule
+
+# Convenience name for target.
+eamsgd: CMakeFiles/eamsgd.dir/rule
+.PHONY : eamsgd
+
+# clean rule for target.
+CMakeFiles/eamsgd.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/clean
+.PHONY : CMakeFiles/eamsgd.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

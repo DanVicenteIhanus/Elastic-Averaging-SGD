@@ -13,19 +13,25 @@ torch::Device device(torch::kCPU);
 
 /* 
 TODO:
-  2. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
-  3. Grid-search to generate more data
-  4. Refactor code..
+  1. Refactor code
 */
 
 int main(int argc, char* argv[]) {
   
+  if (argc != 2) {
+    std::cerr << "Usage: " << argv[0] << "<delta>" << std::endl;
+    return 1;
+  }
+
   // == Hyperparameters == //
   const int num_classes = 10;
   const int batch_size = 1000; 
   const int num_epochs = 15; 
   const double lr = 0.01;
-  const double momentum = 0.9;
+  
+  const double momentum = std::stod(argv[1]);
+  
+  // allocate mem for stats
   double test_accuracy;
   double test_sample_mean_loss;
   double sample_mean_loss;
@@ -33,7 +39,7 @@ int main(int argc, char* argv[]) {
   auto start = high_resolution_clock::now(); // timing the training
 
   // ====================== //
-  // Setup file for results
+  // Setup file for results // 
   // ====================== //
   std::ostringstream filename;
   filename << "../results/cifar/msgd/stats_cifar_MSGD_delta_" << momentum << ".txt";
@@ -45,7 +51,7 @@ int main(int argc, char* argv[]) {
   // Check if the file is new to write the header
   file.seekg(0, std::ios::end); // go to the end of file
   if (file.tellg() == 0) { // if file size is 0, it's new
-    file << "Duration,Accuracy,Sample_Mean_Loss\n"; // write the header
+    file << "Duration,Accuracy,Sample_Mean_Loss,Test_Accuracy,Test_Mean_loss\n"; // write the header
   }
 
   // ============ //
@@ -137,7 +143,7 @@ int main(int argc, char* argv[]) {
     // print epoch results in terminal
     sample_mean_loss = running_loss / num_train_samples;
     accuracy = static_cast<double>(num_correct) / num_train_samples;
-    std::cout << "RANK: "<< " Epoch [" << (epoch + 1) << "/" << num_epochs << "], Trainset - Loss: "
+    std::cout << " Epoch [" << (epoch + 1) << "/" << num_epochs << "], Trainset - Loss: "
         << sample_mean_loss << ", Accuracy: " << accuracy << '\n';
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>(stop - start);

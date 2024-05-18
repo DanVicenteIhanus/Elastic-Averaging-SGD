@@ -117,24 +117,38 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named main
+# Target rules for targets named msgd
 
 # Build rule for target.
-main: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
-.PHONY : main
+msgd: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 msgd
+.PHONY : msgd
 
 # fast build rule for target.
-main/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-.PHONY : main/fast
+msgd/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/build
+.PHONY : msgd/fast
+
+#=============================================================================
+# Target rules for targets named eamsgd
+
+# Build rule for target.
+eamsgd: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 eamsgd
+.PHONY : eamsgd
+
+# fast build rule for target.
+eamsgd/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/build
+.PHONY : eamsgd/fast
 
 cifar10.o: cifar10.cpp.o
 .PHONY : cifar10.o
 
 # target to build an object file
 cifar10.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/cifar10.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/cifar10.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/cifar10.cpp.o
 .PHONY : cifar10.cpp.o
 
 cifar10.i: cifar10.cpp.i
@@ -142,7 +156,8 @@ cifar10.i: cifar10.cpp.i
 
 # target to preprocess a source file
 cifar10.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/cifar10.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/cifar10.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/cifar10.cpp.i
 .PHONY : cifar10.cpp.i
 
 cifar10.s: cifar10.cpp.s
@@ -150,7 +165,8 @@ cifar10.s: cifar10.cpp.s
 
 # target to generate assembly for a file
 cifar10.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/cifar10.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/cifar10.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/cifar10.cpp.s
 .PHONY : cifar10.cpp.s
 
 convnet_cifar.o: convnet_cifar.cpp.o
@@ -158,7 +174,8 @@ convnet_cifar.o: convnet_cifar.cpp.o
 
 # target to build an object file
 convnet_cifar.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet_cifar.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/convnet_cifar.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/convnet_cifar.cpp.o
 .PHONY : convnet_cifar.cpp.o
 
 convnet_cifar.i: convnet_cifar.cpp.i
@@ -166,7 +183,8 @@ convnet_cifar.i: convnet_cifar.cpp.i
 
 # target to preprocess a source file
 convnet_cifar.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet_cifar.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/convnet_cifar.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/convnet_cifar.cpp.i
 .PHONY : convnet_cifar.cpp.i
 
 convnet_cifar.s: convnet_cifar.cpp.s
@@ -174,15 +192,40 @@ convnet_cifar.s: convnet_cifar.cpp.s
 
 # target to generate assembly for a file
 convnet_cifar.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/convnet_cifar.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/convnet_cifar.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/convnet_cifar.cpp.s
 .PHONY : convnet_cifar.cpp.s
+
+eamsgd_cifar.o: eamsgd_cifar.cpp.o
+.PHONY : eamsgd_cifar.o
+
+# target to build an object file
+eamsgd_cifar.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/eamsgd_cifar.cpp.o
+.PHONY : eamsgd_cifar.cpp.o
+
+eamsgd_cifar.i: eamsgd_cifar.cpp.i
+.PHONY : eamsgd_cifar.i
+
+# target to preprocess a source file
+eamsgd_cifar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/eamsgd_cifar.cpp.i
+.PHONY : eamsgd_cifar.cpp.i
+
+eamsgd_cifar.s: eamsgd_cifar.cpp.s
+.PHONY : eamsgd_cifar.s
+
+# target to generate assembly for a file
+eamsgd_cifar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/eamsgd_cifar.cpp.s
+.PHONY : eamsgd_cifar.cpp.s
 
 msgd_cifar.o: msgd_cifar.cpp.o
 .PHONY : msgd_cifar.o
 
 # target to build an object file
 msgd_cifar.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/msgd_cifar.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/msgd_cifar.cpp.o
 .PHONY : msgd_cifar.cpp.o
 
 msgd_cifar.i: msgd_cifar.cpp.i
@@ -190,7 +233,7 @@ msgd_cifar.i: msgd_cifar.cpp.i
 
 # target to preprocess a source file
 msgd_cifar.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/msgd_cifar.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/msgd_cifar.cpp.i
 .PHONY : msgd_cifar.cpp.i
 
 msgd_cifar.s: msgd_cifar.cpp.s
@@ -198,7 +241,7 @@ msgd_cifar.s: msgd_cifar.cpp.s
 
 # target to generate assembly for a file
 msgd_cifar.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/msgd_cifar.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/msgd_cifar.cpp.s
 .PHONY : msgd_cifar.cpp.s
 
 # Help Target
@@ -209,13 +252,17 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... main"
+	@echo "... eamsgd"
+	@echo "... msgd"
 	@echo "... cifar10.o"
 	@echo "... cifar10.i"
 	@echo "... cifar10.s"
 	@echo "... convnet_cifar.o"
 	@echo "... convnet_cifar.i"
 	@echo "... convnet_cifar.s"
+	@echo "... eamsgd_cifar.o"
+	@echo "... eamsgd_cifar.i"
+	@echo "... eamsgd_cifar.s"
 	@echo "... msgd_cifar.o"
 	@echo "... msgd_cifar.i"
 	@echo "... msgd_cifar.s"

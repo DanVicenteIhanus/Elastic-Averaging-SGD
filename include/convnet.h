@@ -3,14 +3,14 @@
 
 class ConvNetImpl : public torch::nn::Module {
 public:
-    explicit ConvNetImpl(int64_t num_classes = 10, int64_t num_channels = 1);
-    torch::Tensor forward(torch::Tensor x);
+  explicit ConvNetImpl(int64_t num_classes = 10, int64_t num_channels = 1);
+  torch::Tensor forward(torch::Tensor x);
 
 private:
-    torch::nn::Sequential conv1;
-    torch::nn::Sequential conv2;
-    torch::nn::Sequential fc1;
-    torch::nn::Sequential fc2;
+  torch::nn::Sequential conv1;
+  torch::nn::Sequential conv2;
+  torch::nn::Sequential fc1;
+  torch::nn::Sequential fc2;
 };
 
 TORCH_MODULE(ConvNet);
