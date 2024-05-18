@@ -41,7 +41,7 @@ $\texttt{MNIST}:$ https://github.com/cvdfoundation/mnist?tab=readme-ov-file
 
 $\texttt{CIFAR-10}:$ https://www.cs.toronto.edu/~kriz/cifar.html
 
-We use CMake to build/compile the scripts. At the moment of writing this documentation, $\texttt{libtorch}$ requires compilers with support for $\texttt{c++}17$. The current experiments are using $\texttt{EAMSGD\char`_cifar.cpp}$ and $\texttt{MSGD\char`_cifar.cpp}$. But you can modify the CMake file to run experiments for the $\texttt{MNIST}$ dataset as well.
+We use CMake to build/compile the scripts. At the moment of writing this documentation, $\texttt{libtorch}$ requires compilers with support for $\texttt{c++}17$. The current experiments are using $\texttt{EAMSGD\\_cifar.cpp}$ and $\texttt{MSGD\\_cifar.cpp}$. But you can modify the CMake file to run experiments for the $\texttt{MNIST}$ dataset as well.
 ____
 #### **STEP 3: TRAIN THE CNN** ####
 To build the projects, run the following in the terminal 
