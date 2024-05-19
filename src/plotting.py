@@ -4,6 +4,8 @@ import os
 import matplotlib.pyplot as plt
 import re
 
+import shutil
+
 def plotAllInFolder(folderPath,plotPath, isPlottingBenchmark,df_benchmark, hasMomentum,formattedString, formatPattern,isCifar, fontSize):
     dataset = "CIFAR" if isCifar else "MNIST"
     for filename in os.listdir(folderPath):
@@ -87,6 +89,38 @@ def plotAllInFolder(folderPath,plotPath, isPlottingBenchmark,df_benchmark, hasMo
 #     if title[:20] != 'training_stats_cifar' and title[:14] == 'training_stats':
 #         return True
 
+def renameToAlpha(formatPattern, formattedString):
+    folderPath = "../results/cifar/eamsgd/"
+    newFolderPath = "../results/cifar/eamsgd_new/"
+    
+    for filename in os.listdir(folderPath):
+        #resave beta files with alpha value
+        original_string = filename
+        numbers = re.findall(formatPattern, original_string)
+        
+        workers = int(numbers[0][0])-1
+        tau = int(numbers[2][0])
+        beta = int(numbers[3][0])
+        alpha = beta/tau/workers
+        new_string = re.sub(r'beta_\d+(\.\d+)?', 'alpha_' + str(alpha), original_string)
+
+        if alpha == 0.25 or alpha == 0.125:
+            print(folderPath + original_string)
+            print(newFolderPath + new_string)
+            shutil.copy(folderPath + original_string, newFolderPath + new_string)
+
+def copyAllAlphaFiles():
+    folderPath = "../results/cifar/eamsgd/"
+    newFolderPath = "../results/cifar/eamsgd_new/"
+    
+    for filename in os.listdir(folderPath):
+        if re.search(r"alpha", filename):
+            print(filename)
+            shutil.copy(folderPath + filename, newFolderPath + filename)
+        
+            
+
+
 fontSize = 15
 folder_path_CIFAR = "../results/CIFAR/"
 plotPath = "../plots/"
@@ -105,7 +139,7 @@ formattedStringEAMSGD = "workers = {}, $\\tau$ = {}, $\\beta$ = {},$\\delta$ = {
 
 #Plot MSGD
 folderPathMSGD = folder_path_CIFAR + "msgd/"
-plotAllInFolder(folderPathMSGD,plotPath, False,None,True, formattedStringMSGD, pattern,True, fontSize)
+#plotAllInFolder(folderPathMSGD,plotPath, False,None,True, formattedStringMSGD, pattern,True, fontSize)
 
 # Target string format
 
@@ -119,7 +153,8 @@ df_cifar_MSGD["Epoch"] = df_cifar_MSGD["Epoch"] + 1
 
 #Plot EAMSGD
 folderPathEAMSGD = folder_path_CIFAR + "eamsgd/"
-plotAllInFolder(folderPathEAMSGD,plotPath, True,df_cifar_MSGD,True, formattedStringEAMSGD, pattern,True, fontSize)
+#plotAllInFolder(folderPathEAMSGD,plotPath, True,df_cifar_MSGD,True, formattedStringEAMSGD, pattern,True, fontSize)
+copyAllAlphaFiles()
 
 #Plot EASGD
 # folderPathEASGD = folder_path_CIFAR + "easgd/"
