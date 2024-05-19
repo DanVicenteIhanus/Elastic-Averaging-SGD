@@ -18,10 +18,10 @@ void initialize_parameters_to_zero(torch::nn::Module& module) {
   } 
 }
 
-std::fstream setup_result_file(int size, int rank, int tau, double beta, double delta, double momentum_param) {
+std::fstream setup_result_file(int size, int rank, int tau, double alpha, double delta, double momentum_param) {
     std::ostringstream filename;
     filename << "../results/cifar/eamsgd/stats_cifar_EAMSGD_size" << size << "_rank_" << rank
-             << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << "_momentum_" << momentum_param << ".txt";
+             << "_tau_" << tau << "_alpha_" << alpha << "_delta_" << delta << "_momentum_" << momentum_param << ".txt";
     
     // Open file for writing
     std::fstream file;
@@ -42,7 +42,7 @@ std::fstream setup_result_file(int size, int rank, int tau, double beta, double 
 
 int main(int argc, char* argv[]) {
   if (argc != 4) {
-    std::cerr << "Usage: " << argv[0] << " <tau> <beta> <delta>" << std::endl;
+    std::cerr << "Usage: " << argv[0] << " <tau> <alpha> <delta>" << std::endl;
     return 1;
   }
   // ================ //
@@ -63,9 +63,9 @@ int main(int argc, char* argv[]) {
   
   // communication params
   int tau = std::stoi(argv[1]);
-  double beta = std::stod(argv[2]);
+  double alpha = std::stod(argv[2]);
   double delta = std::stod(argv[3]);
-  const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
+  //const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
   const double momentum_param = 0.0;
 
   // clocks for timing
@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
   double test_sample_mean_loss;
 
   // Setup file for results
-  std::fstream file = setup_result_file(size, rank, tau, beta, delta, momentum_param);
+  std::fstream file = setup_result_file(size, rank, tau, alpha, delta, momentum_param);
   
   // ============ //
   // CIFAR10 data //

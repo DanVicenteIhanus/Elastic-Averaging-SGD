@@ -24,6 +24,7 @@ std::fstream setup_result_file(double delta) {
     if (file.tellg() == 0) { // if file size is 0, it's new
       file << "Duration,Accuracy,Sample_Mean_Loss,Test_Accuracy,Test_Mean_loss\n"; // write the header
     }
+    return file;
 }
 
 int main(int argc, char* argv[]) {
