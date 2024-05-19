@@ -20,6 +20,11 @@ add_executable(eamsgd eamsgd_cifar.cpp convnet_cifar.cpp cifar10.cpp)
 target_link_libraries(eamsgd ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
 set_property(TARGET eamsgd PROPERTY CXX_STANDARD 17)
 
+# EASGD
+add_executable(easgd easgd_cifar.cpp convnet_cifar.cpp cifar10.cpp)
+target_link_libraries(easgd ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
+set_property(TARGET easgd PROPERTY CXX_STANDARD 17)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED_ON)
 

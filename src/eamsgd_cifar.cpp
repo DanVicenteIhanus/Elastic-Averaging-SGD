@@ -33,7 +33,7 @@ std::fstream setup_result_file(int size, int rank, int tau, double alpha, double
         if (rank == 0) {
             file << "Duration,Accuracy,Sample_Mean_Loss,Testing_accuracy,Testing_Mean_Loss\n"; // write the header
         } else {
-            file << "Duration, Accuracy, Sample_Mean_loss, Total_comm_time\n";
+            file << "Duration,Accuracy,Sample_Mean_loss,Total_comm_time\n";
         }
     }
 

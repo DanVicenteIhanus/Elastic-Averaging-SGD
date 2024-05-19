@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/danvicente/skola/SF2568 - Parallell/project/src"
+CMAKE_SOURCE_DIR = "/Users/danvicente/skola/sf2568 - parallell/project/src"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/danvicente/skola/SF2568 - Parallell/project/src"
+CMAKE_BINARY_DIR = "/Users/danvicente/skola/sf2568 - parallell/project/src"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" "/Users/danvicente/skola/SF2568 - Parallell/project/src//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/sf2568 - parallell/project/src/CMakeFiles" "/Users/danvicente/skola/sf2568 - parallell/project/src//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/danvicente/skola/sf2568 - parallell/project/src/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -142,6 +142,19 @@ eamsgd/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/build
 .PHONY : eamsgd/fast
 
+#=============================================================================
+# Target rules for targets named easgd
+
+# Build rule for target.
+easgd: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 easgd
+.PHONY : easgd
+
+# fast build rule for target.
+easgd/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/easgd.dir/build.make CMakeFiles/easgd.dir/build
+.PHONY : easgd/fast
+
 cifar10.o: cifar10.cpp.o
 .PHONY : cifar10.o
 
@@ -149,6 +162,7 @@ cifar10.o: cifar10.cpp.o
 cifar10.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/cifar10.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/cifar10.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/easgd.dir/build.make CMakeFiles/easgd.dir/cifar10.cpp.o
 .PHONY : cifar10.cpp.o
 
 cifar10.i: cifar10.cpp.i
@@ -158,6 +172,7 @@ cifar10.i: cifar10.cpp.i
 cifar10.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/cifar10.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/cifar10.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/easgd.dir/build.make CMakeFiles/easgd.dir/cifar10.cpp.i
 .PHONY : cifar10.cpp.i
 
 cifar10.s: cifar10.cpp.s
@@ -167,6 +182,7 @@ cifar10.s: cifar10.cpp.s
 cifar10.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/cifar10.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/cifar10.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/easgd.dir/build.make CMakeFiles/easgd.dir/cifar10.cpp.s
 .PHONY : cifar10.cpp.s
 
 convnet_cifar.o: convnet_cifar.cpp.o
@@ -176,6 +192,7 @@ convnet_cifar.o: convnet_cifar.cpp.o
 convnet_cifar.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/convnet_cifar.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/convnet_cifar.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/easgd.dir/build.make CMakeFiles/easgd.dir/convnet_cifar.cpp.o
 .PHONY : convnet_cifar.cpp.o
 
 convnet_cifar.i: convnet_cifar.cpp.i
@@ -185,6 +202,7 @@ convnet_cifar.i: convnet_cifar.cpp.i
 convnet_cifar.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/convnet_cifar.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/convnet_cifar.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/easgd.dir/build.make CMakeFiles/easgd.dir/convnet_cifar.cpp.i
 .PHONY : convnet_cifar.cpp.i
 
 convnet_cifar.s: convnet_cifar.cpp.s
@@ -194,6 +212,7 @@ convnet_cifar.s: convnet_cifar.cpp.s
 convnet_cifar.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/msgd.dir/build.make CMakeFiles/msgd.dir/convnet_cifar.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/convnet_cifar.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/easgd.dir/build.make CMakeFiles/easgd.dir/convnet_cifar.cpp.s
 .PHONY : convnet_cifar.cpp.s
 
 eamsgd_cifar.o: eamsgd_cifar.cpp.o
@@ -219,6 +238,30 @@ eamsgd_cifar.s: eamsgd_cifar.cpp.s
 eamsgd_cifar.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eamsgd.dir/build.make CMakeFiles/eamsgd.dir/eamsgd_cifar.cpp.s
 .PHONY : eamsgd_cifar.cpp.s
+
+easgd_cifar.o: easgd_cifar.cpp.o
+.PHONY : easgd_cifar.o
+
+# target to build an object file
+easgd_cifar.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/easgd.dir/build.make CMakeFiles/easgd.dir/easgd_cifar.cpp.o
+.PHONY : easgd_cifar.cpp.o
+
+easgd_cifar.i: easgd_cifar.cpp.i
+.PHONY : easgd_cifar.i
+
+# target to preprocess a source file
+easgd_cifar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/easgd.dir/build.make CMakeFiles/easgd.dir/easgd_cifar.cpp.i
+.PHONY : easgd_cifar.cpp.i
+
+easgd_cifar.s: easgd_cifar.cpp.s
+.PHONY : easgd_cifar.s
+
+# target to generate assembly for a file
+easgd_cifar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/easgd.dir/build.make CMakeFiles/easgd.dir/easgd_cifar.cpp.s
+.PHONY : easgd_cifar.cpp.s
 
 msgd_cifar.o: msgd_cifar.cpp.o
 .PHONY : msgd_cifar.o
@@ -253,6 +296,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... eamsgd"
+	@echo "... easgd"
 	@echo "... msgd"
 	@echo "... cifar10.o"
 	@echo "... cifar10.i"
@@ -263,6 +307,9 @@ help:
 	@echo "... eamsgd_cifar.o"
 	@echo "... eamsgd_cifar.i"
 	@echo "... eamsgd_cifar.s"
+	@echo "... easgd_cifar.o"
+	@echo "... easgd_cifar.i"
+	@echo "... easgd_cifar.s"
 	@echo "... msgd_cifar.o"
 	@echo "... msgd_cifar.i"
 	@echo "... msgd_cifar.s"

@@ -1,4 +1,5 @@
-/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles/msgd.dir
-/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles/eamsgd.dir
-/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles/edit_cache.dir
-/Users/danvicente/skola/SF2568 - Parallell/project/src/CMakeFiles/rebuild_cache.dir
+/Users/danvicente/skola/sf2568 - parallell/project/src/CMakeFiles/msgd.dir
+/Users/danvicente/skola/sf2568 - parallell/project/src/CMakeFiles/eamsgd.dir
+/Users/danvicente/skola/sf2568 - parallell/project/src/CMakeFiles/easgd.dir
+/Users/danvicente/skola/sf2568 - parallell/project/src/CMakeFiles/edit_cache.dir
+/Users/danvicente/skola/sf2568 - parallell/project/src/CMakeFiles/rebuild_cache.dir

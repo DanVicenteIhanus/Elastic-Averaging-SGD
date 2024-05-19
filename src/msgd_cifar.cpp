@@ -85,8 +85,10 @@ int main(int argc, char* argv[]) {
   
   // define optimizer
   torch::optim::SGDOptions options(lr);
-  options.momentum(delta);
-  options.nesterov(true);
+  if (delta > 0) {
+    options.momentum(delta);
+    options.nesterov(true);
+  }
   torch::optim::SGD optimizer(model->parameters(), options);
 
   // get model-size and define array of parameters  

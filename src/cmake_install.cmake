@@ -1,4 +1,4 @@
-# Install script for directory: /Users/danvicente/skola/SF2568 - Parallell/project/src
+# Install script for directory: /Users/danvicente/skola/sf2568 - parallell/project/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/danvicente/skola/SF2568 - Parallell/project/src/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/danvicente/skola/sf2568 - parallell/project/src/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
