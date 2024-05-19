@@ -2,7 +2,7 @@
 CNN with 3 conv-layers and 1 pooling layer.
 Forward pass is implemented here and the backprop is implemented in "main.cpp"
 */
-#include "../include/convnet_cifar.h"
+#include "../include/convnet.h"
 #include <torch/torch.h>
 
 ConvNetImpl::ConvNetImpl(int64_t num_classes, int64_t num_channels) {

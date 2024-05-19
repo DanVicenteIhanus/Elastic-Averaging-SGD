@@ -4,7 +4,7 @@
 #include <sstream>
 #include <string>
 #include <torch/torch.h>
-#include "../include/convnet_cifar.h"
+#include "../include/convnet.h"
 #include "../include/cifar10.h"
 #include <chrono>
 using namespace std::chrono;
@@ -111,22 +111,20 @@ int main(int argc, char* argv[]) {
   // == create CNNs == //
   // ================= //
 
-  ConvNet model(num_classes);
+  ConvNet model(num_classes, 3);
   model->to(device);
 
-  ConvNet step_model(num_classes);
+  ConvNet step_model(num_classes, 3);
   step_model->to(device);
-  //initialize_parameters_to_zero(*step_model);
   auto step = step_model->named_parameters();
 
-  ConvNet momentum_model(num_classes);
+  ConvNet momentum_model(num_classes, 3);
   momentum_model->to(device);
   initialize_parameters_to_zero(*momentum_model);
   auto momentum = momentum_model->named_parameters();
 
-  ConvNet x_old_model(num_classes);
+  ConvNet x_old_model(num_classes, 3);
   x_old_model->to(device);
-  //initialize_parameters_to_zero(*x_old_model);
   auto x_old = x_old_model->named_parameters();
 
   // define optimizer

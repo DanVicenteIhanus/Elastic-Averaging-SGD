@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <torch/torch.h>
-#include "../include/convnet_cifar.h"
+#include "../include/convnet.h"
 #include <chrono>
 #include "../include/cifar10.h"
 

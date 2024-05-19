@@ -4,7 +4,7 @@
 #include <sstream>
 #include <string>
 #include <torch/torch.h>
-#include "../include/convnet_cifar.h"
+#include "../include/convnet.h"
 #include "../include/cifar10.h"
 #include <chrono>
 using namespace std::chrono;
@@ -58,14 +58,10 @@ int main(int argc, char* argv[]) {
 
   // setup file for results
   std::fstream file = setup_result_file(size, rank, tau, beta);
-  
-  // elastic hyperparameter
-  //const float alpha = 0.3;
 
   // ============ //
   // CIFAR10 data //
   // ============ //
-
   const std::string dataset_root{"../dataset/cifar-10-batches-bin"};
   CIFAR10 train_set{dataset_root, CIFAR10::Mode::kTrain};
   CIFAR10 test_set{dataset_root, CIFAR10::Mode::kTest};
@@ -90,7 +86,7 @@ int main(int argc, char* argv[]) {
       std::move(test_dataset), torch::data::DataLoaderOptions().batch_size(batch_size));
   
   // create CNN
-  ConvNet model(num_classes);
+  ConvNet model(num_classes, 3);
   model->to(device);
   
   // define optimizer

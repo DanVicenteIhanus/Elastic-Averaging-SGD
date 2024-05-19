@@ -18,6 +18,15 @@ void initialize_parameters_to_zero(torch::nn::Module& module) {
 }
 
 int main(int argc, char* argv[]) {
+  // ================ //
+  //    MPI-setup     //
+  // ================ // 
+  int size, rank, ierr;
+  ierr = MPI_Init(&argc, &argv);
+  ierr = MPI_Comm_size(MPI_COMM_WORLD, &size);
+  ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  MPI_Status statuses[2];
+  MPI_Request reqs[2];
   
   // == Hyperparameters == //
   const int num_classes = 10;
@@ -30,16 +39,6 @@ int main(int argc, char* argv[]) {
   const double delta = 0.9;
   
   auto start = high_resolution_clock::now(); // timing the training
-  
-  // ================ //
-  //    MPI-setup     //
-  // ================ // 
-  int size, rank, ierr;
-  ierr = MPI_Init(&argc, &argv);
-  ierr = MPI_Comm_size(MPI_COMM_WORLD, &size);
-  ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  MPI_Status statuses[2];
-  MPI_Request reqs[2];
   
 
   // ====================== //
@@ -61,9 +60,6 @@ int main(int argc, char* argv[]) {
   // elastic hyperparameter
   const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
   
-  //const float alpha = 0.3;
-  
-
   // MNIST data from pytorch datasets
   const std::string MNIST_path = "../dataset/mnist/";
   auto train_dataset =
