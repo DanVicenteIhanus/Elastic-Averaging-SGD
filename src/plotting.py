@@ -119,8 +119,60 @@ def copyAllAlphaFiles():
             shutil.copy(folderPath + filename, newFolderPath + filename)
         
             
-
-
+def plotGridEAMSGD(folderPath,plotPath, df_benchmark):
+    taus = [2,4,8]
+    workers = [2,4,8]
+    for tau in taus:
+        for worker in workers:
+            dataFile = "stats_cifar_EAMSGD_size" + str(worker + 1) + "_rank_0_tau_" + str(tau) + "_alpha_0.25_delta_0.9_momentum_0.txt"
+            plotTitle = "$\\tau$ = " + str(tau) + ", p = " + str(worker)
+            fileTitle = "EAMSGD_tau"+str(tau) + "_p"+str(worker)
+            
+            
+            df = pd.read_csv(folderPath+ dataFile, sep = ",")
+            df['Duration'] = df['Duration']/1000
+            df = df.reset_index()
+            df = df.rename(columns={"index": "Epoch"})
+            df["Epoch"] = df["Epoch"] + 1
+                
+            #Plot 1: accuracy
+            plt.figure()
+            plt.rcParams.update({'font.size': fontSize})
+        
+            plt.plot(df['Epoch'], df.iloc[:,2], ":*b", lw=0.5,label='EAMSGD')
+            plt.plot(df_benchmark['Epoch'], df_benchmark['Accuracy'], ":^r", lw=0.5,label='MSGD')
+            plt.legend()
+            plt.title(plotTitle)
+            plt.xlabel('Number of Epochs', fontsize=fontSize)
+            plt.ylabel('Training accuracy', fontsize=fontSize)
+            plt.savefig(plotPath + fileTitle+ "_accuracy.pdf", bbox_inches="tight")
+            plt.close()
+            
+            #Plot 2: loss
+            plt.figure()
+            plt.rcParams.update({'font.size': fontSize})
+            plt.plot(df['Epoch'], df.iloc[:,3], ":*b", lw=0.5,label='EAMSGD')
+            plt.plot(df_benchmark['Epoch'], df_benchmark['Sample_Mean_Loss'], ":^r", lw=0.5,label='MSGD')
+            plt.legend()
+            plt.title(plotTitle)
+            plt.xlabel('Number of Epochs', fontsize=fontSize)
+            plt.ylabel('Mean training loss', fontsize=fontSize)
+            plt.savefig(plotPath + fileTitle+ "_loss.pdf", bbox_inches="tight")
+            plt.close()
+            
+            #Plot 3: test accuracy
+            plt.figure()
+            plt.rcParams.update({'font.size': fontSize})
+            plt.plot(df['Epoch'], df.iloc[:,4], ":*b", lw=0.5,label='EAMSGD')
+            plt.plot(df_benchmark['Epoch'], df_benchmark['Test_Accuracy'], ":^r", lw=0.5,label='MSGD')
+            plt.legend()
+            plt.title(plotTitle)
+            plt.xlabel('Number of Epochs', fontsize=fontSize)
+            plt.ylabel('Test accuracy', fontsize=fontSize)
+            plt.savefig(plotPath + fileTitle + "_test_accuracy.pdf", bbox_inches="tight")
+            plt.close()
+            
+ 
 fontSize = 15
 folder_path_CIFAR = "../results/CIFAR/"
 plotPath = "../plots/"
@@ -134,8 +186,8 @@ pattern = r"(\d+(\.\d+)?)"
 # print(formatted_string)
 
 formattedStringMSGD = "$\\delta$ = {}"
-formattedStringEASGD = "workers = {}, $\\tau$ = {}, $\\beta$ = {}"
-formattedStringEAMSGD = "workers = {}, $\\tau$ = {}, $\\beta$ = {},$\\delta$ = {}"
+formattedStringEASGD = "workers = {}, $\\tau$ = {}, $\\alpha$ = {}"
+formattedStringEAMSGD = "workers = {}, $\\tau$ = {}, $\\alpha$ = {},$\\delta$ = {}"
 
 #Plot MSGD
 folderPathMSGD = folder_path_CIFAR + "msgd/"
@@ -151,12 +203,11 @@ df_cifar_MSGD = df_cifar_MSGD.reset_index()
 df_cifar_MSGD = df_cifar_MSGD.rename(columns={"index": "Epoch"})
 df_cifar_MSGD["Epoch"] = df_cifar_MSGD["Epoch"] + 1
 
-#Plot EAMSGD
+#Plot all EAMSGD
 folderPathEAMSGD = folder_path_CIFAR + "eamsgd/"
 #plotAllInFolder(folderPathEAMSGD,plotPath, True,df_cifar_MSGD,True, formattedStringEAMSGD, pattern,True, fontSize)
-copyAllAlphaFiles()
 
-#Plot EASGD
+#Plot all EASGD
 # folderPathEASGD = folder_path_CIFAR + "easgd/"
 # plotAllInFolder(folderPathEASGD,plotPath, True,df_cifar_MSGD,True, formattedStringEASGD, pattern,True, fontSize)
 
@@ -165,6 +216,8 @@ copyAllAlphaFiles()
 # df_mnist = df_mnist.reset_index()
 # df_mnist = df_mnist.rename(columns={"index": "Epoch"})
 # df_mnist["Epoch"] = df_mnist["Epoch"] + 1
+
+plotGridEAMSGD(folderPathEAMSGD,plotPath,df_cifar_MSGD)
 
 
 
