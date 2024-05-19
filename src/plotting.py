@@ -9,28 +9,16 @@ def plotAllInFolder(folderPath,plotPath, isPlottingBenchmark,df_benchmark, hasMo
     for filename in os.listdir(folderPath):
     # Check if the entry is a file
         if os.path.isfile(os.path.join(folderPath, filename)):
-            #print(filename)  # Do whatever you want with the filename
-            #try:
-                # if isCifar(filename):
-                #     dataset = "CIFAR10"
-                #     df_benchmark = df_cifar
-                # elif isMNIST(filename):
-                #     print("hi")
-                #     dataset = "MNIST"
-                #     df_benchmark = df_mnist
-                #     print(filename)
-                #if isMNIST(filename):
-                #    print(filename)
-                # else:
-                #     continue
             original_string = filename
+            isRoot = False
             numbers = re.findall(formatPattern, original_string)
             if len(numbers) >1:
+                if numbers[1][0] == '0':
+                    isRoot = True
                 del numbers[1]
                 if not hasMomentum:
                     del numbers[-1]
                 numbers[0] = (str(int(numbers[0][0])-1),'') #reduce workers by 1 (because of root)
-
 
             # Format the string with the extracted numbers
             new_string = formattedString.format(*[number[0] for number in numbers])
@@ -73,6 +61,21 @@ def plotAllInFolder(folderPath,plotPath, isPlottingBenchmark,df_benchmark, hasMo
             plt.ylabel('Mean loss', fontsize=fontSize)
             plt.savefig(plotPath + original_string[:-3] + "_loss.pdf", bbox_inches="tight")
             plt.close()
+            
+            #Plot 3: test accuracy
+            plt.figure()
+            plt.rcParams.update({'font.size': fontSize})
+            plt.plot(df['Epoch'], df.iloc[:,4], ":*b", lw=0.5,label='EAMSGD')
+            if isPlottingBenchmark:
+                plt.plot(df_benchmark['Epoch'], df_benchmark['Test_Accuracy'], ":^r", lw=0.5,label='MSGD')
+                plt.legend()
+            plt.title(dataset + ' Test Accuracy: ' + new_string)
+            plt.xlabel('Number of Epochs', fontsize=fontSize)
+            plt.ylabel('Classification accuracy', fontsize=fontSize)
+            plt.savefig(plotPath + original_string[:-3] + "_test_accuracy.pdf", bbox_inches="tight")
+            plt.close()
+            
+            
             # except:
             #     pass
             
@@ -117,6 +120,10 @@ df_cifar_MSGD["Epoch"] = df_cifar_MSGD["Epoch"] + 1
 #Plot EAMSGD
 folderPathEAMSGD = folder_path_CIFAR + "eamsgd/"
 plotAllInFolder(folderPathEAMSGD,plotPath, True,df_cifar_MSGD,True, formattedStringEAMSGD, pattern,True, fontSize)
+
+#Plot EASGD
+# folderPathEASGD = folder_path_CIFAR + "easgd/"
+# plotAllInFolder(folderPathEASGD,plotPath, True,df_cifar_MSGD,True, formattedStringEASGD, pattern,True, fontSize)
 
 # df_mnist = pd.read_csv(folder_path + 'training_stats_sequential_batch_size_1000.txt')
 # df_mnist['Duration'] = df_mnist['Duration']/1000
