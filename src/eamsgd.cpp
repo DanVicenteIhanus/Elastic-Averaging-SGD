@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
   
 
   // MNIST data from pytorch datasets
-  const std::string MNIST_path = "../data/mnist/";
+  const std::string MNIST_path = "../dataset/mnist/";
   auto train_dataset =
     torch::data::datasets::MNIST(MNIST_path)
       .map(torch::data::transforms::Normalize<>(0.1307, 0.3081))
