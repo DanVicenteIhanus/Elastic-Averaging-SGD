@@ -4,6 +4,8 @@ import os
 import matplotlib.pyplot as plt
 import re
 
+import shutil
+
 def plotAllInFolder(folderPath,plotPath, isPlottingBenchmark,df_benchmark, hasMomentum,formattedString, formatPattern,isCifar, fontSize):
     dataset = "CIFAR" if isCifar else "MNIST"
     for filename in os.listdir(folderPath):
@@ -87,6 +89,90 @@ def plotAllInFolder(folderPath,plotPath, isPlottingBenchmark,df_benchmark, hasMo
 #     if title[:20] != 'training_stats_cifar' and title[:14] == 'training_stats':
 #         return True
 
+def renameToAlpha(formatPattern, formattedString):
+    folderPath = "../results/cifar/eamsgd/"
+    newFolderPath = "../results/cifar/eamsgd_new/"
+    
+    for filename in os.listdir(folderPath):
+        #resave beta files with alpha value
+        original_string = filename
+        numbers = re.findall(formatPattern, original_string)
+        
+        workers = int(numbers[0][0])-1
+        tau = int(numbers[2][0])
+        beta = int(numbers[3][0])
+        alpha = beta/tau/workers
+        new_string = re.sub(r'beta_\d+(\.\d+)?', 'alpha_' + str(alpha), original_string)
+
+        if alpha == 0.25 or alpha == 0.125:
+            print(folderPath + original_string)
+            print(newFolderPath + new_string)
+            shutil.copy(folderPath + original_string, newFolderPath + new_string)
+
+def copyAllAlphaFiles():
+    folderPath = "../results/cifar/eamsgd/"
+    newFolderPath = "../results/cifar/eamsgd_new/"
+    
+    for filename in os.listdir(folderPath):
+        if re.search(r"alpha", filename):
+            print(filename)
+            shutil.copy(folderPath + filename, newFolderPath + filename)
+        
+            
+def plotGridEAMSGD(folderPath,plotPath, df_benchmark):
+    taus = [2,4,8]
+    workers = [2,4,8]
+    for tau in taus:
+        for worker in workers:
+            dataFile = "stats_cifar_EAMSGD_size" + str(worker + 1) + "_rank_0_tau_" + str(tau) + "_alpha_0.25_delta_0.9_momentum_0.txt"
+            plotTitle = "$\\tau$ = " + str(tau) + ", p = " + str(worker)
+            fileTitle = "EAMSGD_tau"+str(tau) + "_p"+str(worker)
+            
+            
+            df = pd.read_csv(folderPath+ dataFile, sep = ",")
+            df['Duration'] = df['Duration']/1000
+            df = df.reset_index()
+            df = df.rename(columns={"index": "Epoch"})
+            df["Epoch"] = df["Epoch"] + 1
+                
+            #Plot 1: accuracy
+            plt.figure()
+            plt.rcParams.update({'font.size': fontSize})
+        
+            plt.plot(df['Epoch'], df.iloc[:,2], ":*b", lw=0.5,label='EAMSGD')
+            plt.plot(df_benchmark['Epoch'], df_benchmark['Accuracy'], ":^r", lw=0.5,label='MSGD')
+            plt.legend()
+            plt.title(plotTitle)
+            plt.xlabel('Number of Epochs', fontsize=fontSize)
+            plt.ylabel('Training accuracy', fontsize=fontSize)
+            plt.savefig(plotPath + fileTitle+ "_accuracy.pdf", bbox_inches="tight")
+            plt.close()
+            
+            #Plot 2: loss
+            plt.figure()
+            plt.rcParams.update({'font.size': fontSize})
+            plt.plot(df['Epoch'], df.iloc[:,3], ":*b", lw=0.5,label='EAMSGD')
+            plt.plot(df_benchmark['Epoch'], df_benchmark['Sample_Mean_Loss'], ":^r", lw=0.5,label='MSGD')
+            plt.legend()
+            plt.title(plotTitle)
+            plt.xlabel('Number of Epochs', fontsize=fontSize)
+            plt.ylabel('Mean training loss', fontsize=fontSize)
+            plt.savefig(plotPath + fileTitle+ "_loss.pdf", bbox_inches="tight")
+            plt.close()
+            
+            #Plot 3: test accuracy
+            plt.figure()
+            plt.rcParams.update({'font.size': fontSize})
+            plt.plot(df['Epoch'], df.iloc[:,4], ":*b", lw=0.5,label='EAMSGD')
+            plt.plot(df_benchmark['Epoch'], df_benchmark['Test_Accuracy'], ":^r", lw=0.5,label='MSGD')
+            plt.legend()
+            plt.title(plotTitle)
+            plt.xlabel('Number of Epochs', fontsize=fontSize)
+            plt.ylabel('Test accuracy', fontsize=fontSize)
+            plt.savefig(plotPath + fileTitle + "_test_accuracy.pdf", bbox_inches="tight")
+            plt.close()
+            
+ 
 fontSize = 15
 folder_path_CIFAR = "../results/CIFAR/"
 plotPath = "../plots/"
@@ -100,12 +186,12 @@ pattern = r"(\d+(\.\d+)?)"
 # print(formatted_string)
 
 formattedStringMSGD = "$\\delta$ = {}"
-formattedStringEASGD = "workers = {}, $\\tau$ = {}, $\\beta$ = {}"
-formattedStringEAMSGD = "workers = {}, $\\tau$ = {}, $\\beta$ = {},$\\delta$ = {}"
+formattedStringEASGD = "workers = {}, $\\tau$ = {}, $\\alpha$ = {}"
+formattedStringEAMSGD = "workers = {}, $\\tau$ = {}, $\\alpha$ = {},$\\delta$ = {}"
 
 #Plot MSGD
 folderPathMSGD = folder_path_CIFAR + "msgd/"
-plotAllInFolder(folderPathMSGD,plotPath, False,None,True, formattedStringMSGD, pattern,True, fontSize)
+#plotAllInFolder(folderPathMSGD,plotPath, False,None,True, formattedStringMSGD, pattern,True, fontSize)
 
 # Target string format
 
@@ -117,11 +203,11 @@ df_cifar_MSGD = df_cifar_MSGD.reset_index()
 df_cifar_MSGD = df_cifar_MSGD.rename(columns={"index": "Epoch"})
 df_cifar_MSGD["Epoch"] = df_cifar_MSGD["Epoch"] + 1
 
-#Plot EAMSGD
+#Plot all EAMSGD
 folderPathEAMSGD = folder_path_CIFAR + "eamsgd/"
-plotAllInFolder(folderPathEAMSGD,plotPath, True,df_cifar_MSGD,True, formattedStringEAMSGD, pattern,True, fontSize)
+#plotAllInFolder(folderPathEAMSGD,plotPath, True,df_cifar_MSGD,True, formattedStringEAMSGD, pattern,True, fontSize)
 
-#Plot EASGD
+#Plot all EASGD
 # folderPathEASGD = folder_path_CIFAR + "easgd/"
 # plotAllInFolder(folderPathEASGD,plotPath, True,df_cifar_MSGD,True, formattedStringEASGD, pattern,True, fontSize)
 
@@ -130,6 +216,8 @@ plotAllInFolder(folderPathEAMSGD,plotPath, True,df_cifar_MSGD,True, formattedStr
 # df_mnist = df_mnist.reset_index()
 # df_mnist = df_mnist.rename(columns={"index": "Epoch"})
 # df_mnist["Epoch"] = df_mnist["Epoch"] + 1
+
+plotGridEAMSGD(folderPathEAMSGD,plotPath,df_cifar_MSGD)
 
 
 
