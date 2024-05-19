@@ -11,28 +11,29 @@ using namespace std::chrono;
 
 torch::Device device(torch::kCPU);
 
-// workers = 2, tau = 16, beta = 3.96
-/* 
-TODO:
-  1. Build nonparallell training
-  1. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
-  2. Grid-search to generate more data
-  3. Refactor code..
-*/
+std::fstream setup_result_file(int size, int rank, int tau, double beta) {
+    std::ostringstream filename;
+    filename << "../results/cifar/easgd/stats_cifar_EASGD_size" << size << "_rank_" << rank
+             << "_tau_" << tau << "_beta_" << beta << ".txt";
+    
+    // Open file for writing
+    std::fstream file;
+    file.open(filename.str(), std::fstream::out | std::fstream::app);
+
+    // Check if the file is new to write the header
+    file.seekg(0, std::ios::end); // go to the end of file
+    if (file.tellg() == 0) { // if file size is 0, it's new
+        if (rank == 0) {
+            file << "Duration,Accuracy,Sample_Mean_Loss,Testing_accuracy,Testing_Mean_Loss\n"; // write the header
+        } else {
+            file << "Duration, Accuracy, Sample_Mean_loss, Total_comm_time\n";
+        }
+    }
+
+    return file;
+}
 
 int main(int argc, char* argv[]) {
-  
-  // == Hyperparameters == //
-  const int num_classes = 10;
-  const int batch_size = 100; 
-  const int num_epochs = 10; 
-  const double lr = 0.01;
-
-  const int tau = 8; // communication period
-  const double beta = 3.96;
-  
-  auto start = high_resolution_clock::now(); // timing the training
-  
   // ================ //
   //    MPI-setup     //
   // ================ // 
@@ -42,26 +43,23 @@ int main(int argc, char* argv[]) {
   ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Status statuses[2];
   MPI_Request reqs[2];
-  
 
-  // ====================== //
-  // Setup file for results
-  // ====================== //
-  std::ostringstream filename;
-  filename << "../results/cifar/easgd/training_stats_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << ".txt";
-  
-  // Open file for writing
-  std::fstream file;
-  file.open(filename.str(), std::fstream::out | std::fstream::app);
-  
-  // Check if the file is new to write the header
-  file.seekg(0, std::ios::end); // go to the end of file
-  if (file.tellg() == 0) { // if file size is 0, it's new
-    file << "Duration,Accuracy,Sample_Mean_Loss\n"; // write the header
-  }
+  // == Hyperparameters == //
+  const int num_classes = 10;
+  const int batch_size = 100; 
+  const int num_epochs = 10; 
+  const double lr = 0.01;
+  const int tau = 8; // communication period
+  const double beta = 3.96;
+  const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)  
 
+  // timing the training  
+  auto start = high_resolution_clock::now();
+
+  // setup file for results
+  std::fstream file = setup_result_file(size, rank, tau, beta);
+  
   // elastic hyperparameter
-  const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
   //const float alpha = 0.3;
 
   // ============ //

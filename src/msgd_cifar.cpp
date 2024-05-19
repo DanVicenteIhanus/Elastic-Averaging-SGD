@@ -11,10 +11,20 @@ using namespace std::chrono;
 
 torch::Device device(torch::kCPU);
 
-/* 
-TODO:
-  1. Refactor code
-*/
+std::fstream setup_result_file(double delta) {
+    std::ostringstream filename;
+    filename << "../results/cifar/msgd/stats_cifar_MSGD_delta_" << delta << ".txt";
+    
+    // Open file for writing
+    std::fstream file;
+    file.open(filename.str(), std::fstream::out | std::fstream::app);
+    
+    // Check if the file is new to write the header
+    file.seekg(0, std::ios::end); // go to the end of file
+    if (file.tellg() == 0) { // if file size is 0, it's new
+      file << "Duration,Accuracy,Sample_Mean_Loss,Test_Accuracy,Test_Mean_loss\n"; // write the header
+    }
+}
 
 int main(int argc, char* argv[]) {
   
@@ -29,7 +39,7 @@ int main(int argc, char* argv[]) {
   const int num_epochs = 15; 
   const double lr = 0.01;
   
-  const double momentum = std::stod(argv[1]);
+  const double delta = std::stod(argv[1]);
   
   // allocate mem for stats
   double test_accuracy;
@@ -38,21 +48,8 @@ int main(int argc, char* argv[]) {
   double accuracy;
   auto start = high_resolution_clock::now(); // timing the training
 
-  // ====================== //
-  // Setup file for results // 
-  // ====================== //
-  std::ostringstream filename;
-  filename << "../results/cifar/msgd/stats_cifar_MSGD_delta_" << momentum << ".txt";
-  
-  // Open file for writing
-  std::fstream file;
-  file.open(filename.str(), std::fstream::out | std::fstream::app);
-  
-  // Check if the file is new to write the header
-  file.seekg(0, std::ios::end); // go to the end of file
-  if (file.tellg() == 0) { // if file size is 0, it's new
-    file << "Duration,Accuracy,Sample_Mean_Loss,Test_Accuracy,Test_Mean_loss\n"; // write the header
-  }
+  // setup file for writing
+  std::fstream file = setup_result_file(delta);
 
   // ============ //
   // CIFAR10 data //
@@ -87,7 +84,7 @@ int main(int argc, char* argv[]) {
   
   // define optimizer
   torch::optim::SGDOptions options(lr);
-  options.momentum(momentum);
+  options.momentum(delta);
   options.nesterov(true);
   torch::optim::SGD optimizer(model->parameters(), options);
 
@@ -101,7 +98,6 @@ int main(int argc, char* argv[]) {
   std::cout << "Number of parameters - " << sz << std::endl;
   std::cout << "Number of elements - " << num_elem_param << std::endl;
   float param_partner[num_elem_param];
-  
   auto param_elem_size = param[0].value().element_size();
   
   // initializing parameters

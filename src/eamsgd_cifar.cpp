@@ -11,13 +11,6 @@ using namespace std::chrono;
 
 torch::Device device(torch::kCPU);
 
-// workers = 2, tau = 16, beta = 3.96
-/* 
-TODO:
-  1. Generate more data according to experiments <-
-  2. Refactor code
-*/
-
 void initialize_parameters_to_zero(torch::nn::Module& module) {
   torch::NoGradGuard no_grad;
   for (auto& param : module.parameters()) {
@@ -25,24 +18,54 @@ void initialize_parameters_to_zero(torch::nn::Module& module) {
   } 
 }
 
+std::fstream setup_result_file(int size, int rank, int tau, double beta, double delta, double momentum_param) {
+    std::ostringstream filename;
+    filename << "../results/cifar/eamsgd/stats_cifar_EAMSGD_size" << size << "_rank_" << rank
+             << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << "_momentum_" << momentum_param << ".txt";
+    
+    // Open file for writing
+    std::fstream file;
+    file.open(filename.str(), std::fstream::out | std::fstream::app);
+
+    // Check if the file is new to write the header
+    file.seekg(0, std::ios::end); // go to the end of file
+    if (file.tellg() == 0) { // if file size is 0, it's new
+        if (rank == 0) {
+            file << "Duration,Accuracy,Sample_Mean_Loss,Testing_accuracy,Testing_Mean_Loss\n"; // write the header
+        } else {
+            file << "Duration, Accuracy, Sample_Mean_loss, Total_comm_time\n";
+        }
+    }
+
+    return file;
+}
+
 int main(int argc, char* argv[]) {
-  
   if (argc != 4) {
     std::cerr << "Usage: " << argv[0] << " <tau> <beta> <delta>" << std::endl;
     return 1;
   }
-
+  // ================ //
+  //    MPI-setup     //
+  // ================ // 
+  int size, rank, ierr;
+  ierr = MPI_Init(&argc, &argv);
+  ierr = MPI_Comm_size(MPI_COMM_WORLD, &size);
+  ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  MPI_Status statuses[2];
+  MPI_Request reqs[2];
+  
   // == Hyperparameters == //
   const int num_classes = 10;
   const int batch_size = 1000; 
   const int num_epochs = 15; 
   const double lr = 0.01;
-
+  
   // communication params
   int tau = std::stoi(argv[1]);
   double beta = std::stod(argv[2]);
   double delta = std::stod(argv[3]);
-
+  const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
   const double momentum_param = 0.0;
 
   // clocks for timing
@@ -56,39 +79,8 @@ int main(int argc, char* argv[]) {
   double test_accuracy;
   double test_sample_mean_loss;
 
-  // ================ //
-  //    MPI-setup     //
-  // ================ // 
-  int size, rank, ierr;
-  ierr = MPI_Init(&argc, &argv);
-  ierr = MPI_Comm_size(MPI_COMM_WORLD, &size);
-  ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  MPI_Status statuses[2];
-  MPI_Request reqs[2];
-  
-  // ====================== //
   // Setup file for results
-  // ====================== //
-  std::ostringstream filename;
-  filename << "../results/cifar/eamsgd/stats_cifar_EAMSGD_size" <<  size << "_rank_" << rank << "_tau_" << tau << "_beta_" << beta << "_delta_" << delta << "_momentum_" << momentum_param << ".txt";
-  
-  // Open file for writing
-  std::fstream file;
-  file.open(filename.str(), std::fstream::out | std::fstream::app);
-  
-  // Check if the file is new to write the header
-  file.seekg(0, std::ios::end); // go to the end of file
-  if (file.tellg() == 0) { // if file size is 0, it's new
-    if (rank == 0) {
-      file << "Duration,Accuracy,Sample_Mean_Loss,Testing_accuracy,Testing_Mean_Loss\n"; // write the header
-    }
-    else {
-      file << "Duration, Accuracy, Sample_Mean_loss, Total_comm_time\n";
-    }
-  }
-
-  // elastic hyperparameter
-  const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
+  std::fstream file = setup_result_file(size, rank, tau, beta, delta, momentum_param);
   
   // ============ //
   // CIFAR10 data //
@@ -108,8 +100,6 @@ int main(int argc, char* argv[]) {
 
   int num_train_samples = train_dataset.size().value(); 
   auto num_test_samples = test_dataset.size().value(); 
-  std::cout << "number of training samples = "<< num_train_samples << "\n";
-  std::cout << "number of testing samples = " << num_test_samples << "\n";
 
   auto train_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>(
       std::move(train_dataset), torch::data::DataLoaderOptions().batch_size(batch_size));
@@ -152,13 +142,15 @@ int main(int argc, char* argv[]) {
     num_elem_param += param[i].value().numel();
   }
   if (rank == 0) {
-    std::cout << "Number of parameters - " << sz << std::endl;
-    std::cout << "Number of elements - " << num_elem_param << std::endl;
+    std::cout << "number of training samples = "<< num_train_samples << "\n";
+    std::cout << "number of testing samples = " << num_test_samples << "\n";
+    std::cout << "Number of layers - " << sz << std::endl;
+    std::cout << "Number of parameters - " << num_elem_param << std::endl;
   }
+
+  // initialize parameters for communication
   float param_partner[num_elem_param];
-  
   auto param_elem_size = param[0].value().element_size();
-  // initializing left and right params
   for (int i = 0; i < num_elem_param; i++) {
       param_partner[i] = 0.0;
   }
@@ -168,6 +160,7 @@ int main(int argc, char* argv[]) {
   // ============== //
   int t = 0;
   if (rank == 0) {
+    // root process
     std::cout << std::fixed << std::setprecision(4);
     std::cout << "--------------------------------------------------------\n";
     std::cout << "Training CNN... num_epochs = " << num_epochs << ", batch_size = " << batch_size <<"\n";
@@ -176,8 +169,7 @@ int main(int argc, char* argv[]) {
       double running_loss = 0.0;
       size_t num_correct = 0;
       for (auto &batch : *train_loader) {
-         // complexity = O(epoch*num_batches*P*network_size)
-        // getting dimensions of tensor
+        // set model to train-mode
         model->train();
         auto data = batch.data.to(device);
         auto target = batch.target.to(device);
@@ -205,19 +197,15 @@ int main(int argc, char* argv[]) {
 
               // flattening the tensor and copying it to a 1-D vector
               auto flat = torch::flatten(param[i].value());
-
               auto temp = (float *)calloc(flat.numel(),
                                           flat.numel() * param_elem_size);
-              
               for (int j = 0; j < flat.numel(); j++) {
                   *(temp + j) = flat[j].item<float>();
               }
 
-              // send parameters to root
+              // commmnunication
               MPI_Isend(temp, flat.numel(), MPI_FLOAT, p, 0 , MPI_COMM_WORLD, &reqs[0]);
               MPI_Irecv(param_partner, flat.numel(), MPI_FLOAT, p, 0, MPI_COMM_WORLD, &reqs[1]);
-
-              // receive from partner
               MPI_Waitall(2, reqs, statuses);
 
               // unpack 1-D vector
@@ -232,20 +220,17 @@ int main(int argc, char* argv[]) {
               
               // x  = x + alpha*(x_i - x)
               x_temp.data().subtract_(param[i].value().data()); // x_temp - \tilde{x}
-              x_temp.data().multiply_(alpha); 
-              param[i].value().data().add_(x_temp.data()); // update tensor parameters
+              x_temp.data().multiply_(alpha);                   // alpha*(x_temp - \tilde{x})
+              param[i].value().data().add_(x_temp.data());      // \tilde{x} = \tilde{x} + alpha*(x_temp - \tilde{x})
 
-              // freeing temp arrays
+              // free temp arrays
               free(temp);
               free(p_recv);
               }
-            } // parameter loop
-        } // process loop
-      
-      
+            } 
+        }
       t++;
-      } // batch loop
-
+      }
       // print epoch results in terminal
       auto sample_mean_loss = running_loss / num_train_samples;
       auto accuracy = static_cast<double>(num_correct) / num_train_samples;
@@ -253,11 +238,9 @@ int main(int argc, char* argv[]) {
           << sample_mean_loss << ", Accuracy: " << accuracy << '\n';
       auto stop = high_resolution_clock::now();
       auto duration = duration_cast<milliseconds>(stop - start);
-      std::cout << "duration = " << duration.count() << "\n";
 
       // Test the model
       model->eval();
-
       double test_running_loss = 0.0;
       size_t test_num_correct = 0;
       { 
@@ -276,7 +259,6 @@ int main(int argc, char* argv[]) {
           // prediction & accuracy
           auto prediction = output.argmax(1);
           test_num_correct += prediction.eq(target).sum().item<int64_t>();
-        
         }
         std::cout << "Testing finished!\n";
         test_accuracy = static_cast<double>(test_num_correct) / num_test_samples;
@@ -285,9 +267,9 @@ int main(int argc, char* argv[]) {
     }
     // Log to file in txt
     file << duration.count() << "," << accuracy << "," << sample_mean_loss << "," << test_accuracy << "," << test_sample_mean_loss <<"\n";
-    } // epoch loop
+    }
   } else {
-  // non-root processes
+    // non-root processes
     for (int epoch = 0; epoch < num_epochs; epoch++) {
       double running_loss = 0.0;
       size_t num_correct = 0;
@@ -313,25 +295,20 @@ int main(int argc, char* argv[]) {
           x_old[i].value().data() = param[i].value().data();
           momentum[i].value().data().multiply_(delta);
           param[i].value().data().add_(momentum[i].value().data());
-          //momentum[i].value().data().divide_(delta);
         }
         
         // gradient step
         optimizer.zero_grad();
         loss.backward();
         optimizer.step();
-
+        
         for (auto i = 0; i < sz; i++) {
           param[i].value().data().subtract_(momentum[i].value().data());
           step[i].value().data() = param[i].value().data();
           step[i].value().data().subtract_(x_old[i].value().data());
           param[i].value().data() = x_old[i].value().data();
-          
           if (t % tau == 0) {
-
-            // start timing the communication 
-            comm_start = std::chrono::steady_clock::now();
-            
+            comm_start = std::chrono::steady_clock::now(); // start timing communication
             int num_dim = param[i].value().dim();
             std::vector<int64_t> dim_array;
             for (int j = 0; j < num_dim; j++) {
@@ -340,9 +317,7 @@ int main(int argc, char* argv[]) {
 
             // flattening the tensor and copying it to a 1-D vector
             auto flat = torch::flatten(param[i].value());
-
-            auto temp = (float *)calloc(flat.numel(),
-                                        flat.numel() * param_elem_size);
+            auto temp = (float *)calloc(flat.numel(), flat.numel() * param_elem_size);
             for (int j = 0; j < flat.numel(); j++) {
                 *(temp + j) = flat[j].item<float>();
             }
@@ -359,7 +334,7 @@ int main(int argc, char* argv[]) {
             for (int j = 0; j < flat.numel(); j++) {
                 *(root_recv + j) = *(param_partner + j);
             }
-
+            
             torch::Tensor x_temp =
                 torch::from_blob(root_recv, dim_array, torch::kFloat).clone();
             
@@ -372,7 +347,7 @@ int main(int argc, char* argv[]) {
             free(temp);
             free(root_recv);
             
-            // end communication
+            // end timing communication
             comm_end = std::chrono::steady_clock::now();
             comm_time = std::chrono::duration<float>(comm_end - comm_start).count();
             total_comm_time += comm_time;
