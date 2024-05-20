@@ -118,12 +118,32 @@ def copyAllAlphaFiles():
             print(filename)
             shutil.copy(folderPath + filename, newFolderPath + filename)
         
+def communicationRatios(folderPath):
+    taus = [2,4,8]
+    workers = [2,4,8]
+    communicationRatios = np.zeros((len(taus),len(workers)))
+    print(communicationRatios.shape)
+    for i in range(len(taus)):
+        for j in range(len(workers)):
+            tau = taus[i]
+            worker = workers[j]
             
+            #Table value
+            for k in range(1,worker+1):
+                workerFile = "stats_cifar_EAMSGD_size" + str(worker + 1) + "_rank_" + str(k) + "_tau_" + str(tau) + "_alpha_0.25_delta_0.9_momentum_0.txt"
+                df = pd.read_csv(folderPath+ workerFile, sep = ",")
+                communicationRatios[j,i] += 1/worker * df[' Total_comm_time'].iloc[-1]/df['Duration'].iloc[-1]
+    
+    return communicationRatios
+    
+
 def plotGridEAMSGD(folderPath,plotPath, df_benchmark):
     taus = [2,4,8]
     workers = [2,4,8]
-    for tau in taus:
-        for worker in workers:
+    for i in range(len(taus)):
+        for j in range(len(workers)):
+            tau = taus[i]
+            worker = workers[j]
             dataFile = "stats_cifar_EAMSGD_size" + str(worker + 1) + "_rank_0_tau_" + str(tau) + "_alpha_0.25_delta_0.9_momentum_0.txt"
             plotTitle = "$\\tau$ = " + str(tau) + ", p = " + str(worker)
             fileTitle = "EAMSGD_tau"+str(tau) + "_p"+str(worker)
@@ -134,7 +154,7 @@ def plotGridEAMSGD(folderPath,plotPath, df_benchmark):
             df = df.reset_index()
             df = df.rename(columns={"index": "Epoch"})
             df["Epoch"] = df["Epoch"] + 1
-                
+            
             #Plot 1: accuracy
             plt.figure()
             plt.rcParams.update({'font.size': fontSize})
@@ -207,6 +227,8 @@ df_cifar_MSGD["Epoch"] = df_cifar_MSGD["Epoch"] + 1
 folderPathEAMSGD = folder_path_CIFAR + "eamsgd/"
 #plotAllInFolder(folderPathEAMSGD,plotPath, True,df_cifar_MSGD,True, formattedStringEAMSGD, pattern,True, fontSize)
 
+
+
 #Plot all EASGD
 # folderPathEASGD = folder_path_CIFAR + "easgd/"
 # plotAllInFolder(folderPathEASGD,plotPath, True,df_cifar_MSGD,True, formattedStringEASGD, pattern,True, fontSize)
@@ -217,7 +239,11 @@ folderPathEAMSGD = folder_path_CIFAR + "eamsgd/"
 # df_mnist = df_mnist.rename(columns={"index": "Epoch"})
 # df_mnist["Epoch"] = df_mnist["Epoch"] + 1
 
-plotGridEAMSGD(folderPathEAMSGD,plotPath,df_cifar_MSGD)
+#Time communication ratio 
+communicationRatioTable = communicationRatios(folderPathEAMSGD)
+print(communicationRatioTable*100)
+
+#plotGridEAMSGD(folderPathEAMSGD,plotPath,df_cifar_MSGD)
 
 
 
