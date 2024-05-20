@@ -6,7 +6,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/3.29.1/CMakeSystem.cmake"
+			"path" : "/Users/danvicente/skola/sf2568 - parallell/Project/build/CMakeFiles/3.29.1/CMakeSystem.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -20,11 +20,11 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/3.29.1/CMakeCCompiler.cmake"
+			"path" : "/Users/danvicente/skola/sf2568 - parallell/Project/build/CMakeFiles/3.29.1/CMakeCCompiler.cmake"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "/Users/danvicente/skola/SF2568 - Parallell/Project/build/CMakeFiles/3.29.1/CMakeCXXCompiler.cmake"
+			"path" : "/Users/danvicente/skola/sf2568 - parallell/Project/build/CMakeFiles/3.29.1/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -214,8 +214,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/Users/danvicente/skola/SF2568 - Parallell/Project/build",
-		"source" : "/Users/danvicente/skola/SF2568 - Parallell/Project/src"
+		"build" : "/Users/danvicente/skola/sf2568 - parallell/Project/build",
+		"source" : "/Users/danvicente/skola/sf2568 - parallell/Project/src"
 	},
 	"version" : 
 	{
