@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.5"
@@ -24,7 +24,7 @@
 					]
 				}
 			],
-			"name" : "",
+			"name" : "Debug",
 			"projects" : 
 			[
 				{
@@ -49,42 +49,42 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "eamsgd_cifar::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-eamsgd_cifar-776b0fc98122947a87f8.json",
+					"jsonFile" : "target-eamsgd_cifar-Debug-4eec895da8c08c92564c.json",
 					"name" : "eamsgd_cifar",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "eamsgd_mnist::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-eamsgd_mnist-d82fcec1a0da7cdbbb80.json",
+					"jsonFile" : "target-eamsgd_mnist-Debug-c51b7d3269d22041e465.json",
 					"name" : "eamsgd_mnist",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "easgd_cifar::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-easgd_cifar-433727ed2d9d0ca75e35.json",
+					"jsonFile" : "target-easgd_cifar-Debug-fbf91feba774027cb44d.json",
 					"name" : "easgd_cifar",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "easgd_mnist::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-easgd_mnist-0ec058164dc6287a089a.json",
+					"jsonFile" : "target-easgd_mnist-Debug-eb0ad482cbfca8207e03.json",
 					"name" : "easgd_mnist",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "msgd_cifar::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-msgd_cifar-2de4e1f2195e0c7603ea.json",
+					"jsonFile" : "target-msgd_cifar-Debug-121c08a8407d475887cb.json",
 					"name" : "msgd_cifar",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "msgd_mnist::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-msgd_mnist-1a0a3bd82c9ed24e21e3.json",
+					"jsonFile" : "target-msgd_mnist-Debug-8eeb86c7017ff8fe6919.json",
 					"name" : "msgd_mnist",
 					"projectIndex" : 0
 				}
