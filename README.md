@@ -11,7 +11,7 @@ This repository contains all the scripts used in our project in SF2568 at KTH. T
 
 EASGD is a parallel algorithm for training Neural Networks and acts as a parallel alternative to regular SGD or momentum methods like MSGD, ADAM etc. For the paper describing the idea, algorithm etc. we refer to [1]. 
 
-We have evaluated the performance of both the EASGD and EAMGSD algorithms introduced in [1] using CPUs communicating using the $\texttt{MPI}$ framework. We consider Convolutional Neural Networks for evaluating the algorithms and build them using $\texttt{pytorch}$. To efficiently make use of $\texttt{MPI}$ we use $\texttt{Libtorch}$, the $\texttt{c++}$ API of $\texttt{pytorch}$.
+We have evaluated the performance of both the EASGD and EAMGSD algorithms introduced in [1] using CPUs communicating using the $\texttt{MPI}$ framework. We consider Convolutional Neural Networks for evaluating the algorithms and build them using $\texttt{PyTorch}$. To efficiently make use of $\texttt{MPI}$ we use $\texttt{Libtorch}$, the $\texttt{C++}$ API of $\texttt{PyTorch}$.
 ____
 
 #### **STEP 1: MPI** ####
@@ -33,16 +33,17 @@ After download has been made, you unzip/untar to a folder openmpi-2.0.x/ and run
 ____
 #### **STEP 2: LIBTORCH** ####
 To install Libtorch, follow the link and download the appropriate build for your system configurations. https://pytorch.org/
-**NOTE:** we are using Mac (with M1) and thus the default C++/Java build for $\texttt{arm64}$. This version does not support ROCm and CUDA at the time of writing this documentation. We build Libtorch in $\texttt{/usr/local/libtorch}$, but you may specify the exact path in `/src/CMakeLists.txt`.
 
-The datasets we have used are $\texttt{MNIST}$ and $\texttt{CIFAR10}$. To make our scripts work, download the datasets into $\texttt{"../dataset/mnist"}$ and $\texttt{"../dataset/cifar-10-batches-bin"}$ from the following links,
+**NOTE:** we are using Mac (with M1) and thus the default C++/Java build for $\texttt{arm64}$. This version does not support ROCm and CUDA at the time of writing this documentation. We build Libtorch in `/usr/local/libtorch`, but you may specify the exact path in `/src/CMakeLists.txt`.
+
+The datasets we have used are $\texttt{MNIST}$ and $\texttt{CIFAR10}$. To make our scripts work, download the datasets into `../dataset/mnist` and `../dataset/cifar-10-batches-bin` from the following links,
 
 $\texttt{MNIST}:$ https://github.com/cvdfoundation/mnist?tab=readme-ov-file
 
 $\texttt{CIFAR-10}:$ https://www.cs.toronto.edu/~kriz/cifar.html
 ____
 #### **STEP 3: TRAIN THE CNN** ####
-We use CMake to build/compile the scripts. At the moment of writing this documentation, $\texttt{libtorch}$ requires compilers with support for $\texttt{c++}17$. To build everything according to `../src/CMakeLists.txt`, run
+We use CMake to build/compile the scripts. At the moment of writing this documentation, $\texttt{libtorch}$ requires compilers with support for $\texttt{C++}17$. To build everything according to `../src/CMakeLists.txt`, run
 
 ```
 > cd build
