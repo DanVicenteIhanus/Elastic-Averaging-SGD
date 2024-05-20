@@ -49,42 +49,42 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "eamsgd_cifar::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-eamsgd_cifar-e7d4c83b96ff043cb87a.json",
+					"jsonFile" : "target-eamsgd_cifar-776b0fc98122947a87f8.json",
 					"name" : "eamsgd_cifar",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "eamsgd_mnist::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-eamsgd_mnist-29478dadadab9c2f53d0.json",
+					"jsonFile" : "target-eamsgd_mnist-d82fcec1a0da7cdbbb80.json",
 					"name" : "eamsgd_mnist",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "easgd_cifar::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-easgd_cifar-3223c01ecb12953d09ae.json",
+					"jsonFile" : "target-easgd_cifar-433727ed2d9d0ca75e35.json",
 					"name" : "easgd_cifar",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "easgd_mnist::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-easgd_mnist-ff822ea0ef692501cb16.json",
+					"jsonFile" : "target-easgd_mnist-0ec058164dc6287a089a.json",
 					"name" : "easgd_mnist",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "msgd_cifar::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-msgd_cifar-97be7f36409f68b359a4.json",
+					"jsonFile" : "target-msgd_cifar-2de4e1f2195e0c7603ea.json",
 					"name" : "msgd_cifar",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "msgd_mnist::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-msgd_mnist-d9ffedebb04ae5fc1e2f.json",
+					"jsonFile" : "target-msgd_mnist-1a0a3bd82c9ed24e21e3.json",
 					"name" : "msgd_mnist",
 					"projectIndex" : 0
 				}
@@ -94,8 +94,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/danvicente/skola/sf2568 - parallell/Project/build",
-		"source" : "/Users/danvicente/skola/sf2568 - parallell/Project/src"
+		"build" : "/Users/danvicente/skola/SF2568 - Parallell/Project/build",
+		"source" : "/Users/danvicente/skola/SF2568 - Parallell/Project/src"
 	},
 	"version" : 
 	{

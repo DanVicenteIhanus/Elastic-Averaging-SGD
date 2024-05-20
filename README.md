@@ -33,45 +33,53 @@ After download has been made, you unzip/untar to a folder openmpi-2.0.x/ and run
 ____
 #### **STEP 2: LIBTORCH** ####
 To install Libtorch, follow the link and download the appropriate build for your system configurations. https://pytorch.org/
-**NOTE:** we are using Mac (with M1) and thus the default C++/Java build for $\texttt{arm64}$. This version does not support ROCm and CUDA at the time of writing this documentation. We build Libtorch in $\texttt{/usr/local/libtorch}$, but you may specify the exact path in $\texttt{CMakeLists.txt}$.
+**NOTE:** we are using Mac (with M1) and thus the default C++/Java build for $\texttt{arm64}$. This version does not support ROCm and CUDA at the time of writing this documentation. We build Libtorch in $\texttt{/usr/local/libtorch}$, but you may specify the exact path in `/src/CMakeLists.txt`.
 
-The datasets we have used are $\texttt{MNIST}$ and $\texttt{CIFAR10}$. To make our scripts work, download the datasets into $\texttt{"../dataset"}$ from the following links,
+The datasets we have used are $\texttt{MNIST}$ and $\texttt{CIFAR10}$. To make our scripts work, download the datasets into $\texttt{"../dataset/mnist"}$ and $\texttt{"../dataset/cifar-10-batches-bin"}$ from the following links,
 
 $\texttt{MNIST}:$ https://github.com/cvdfoundation/mnist?tab=readme-ov-file
 
 $\texttt{CIFAR-10}:$ https://www.cs.toronto.edu/~kriz/cifar.html
-
-We use CMake to build/compile the scripts. At the moment of writing this documentation, $\texttt{libtorch}$ requires compilers with support for $\texttt{c++}17$. The current experiments are using $\texttt{EAMSGD\\_cifar.cpp}$ and $\texttt{MSGD\\_cifar.cpp}$. But you can modify the CMake file to run experiments for the $\texttt{MNIST}$ dataset as well.
 ____
 #### **STEP 3: TRAIN THE CNN** ####
-To build the projects, run the following in the terminal 
+We use CMake to build/compile the scripts. At the moment of writing this documentation, $\texttt{libtorch}$ requires compilers with support for $\texttt{c++}17$. To build everything according to `../src/CMakeLists.txt`, run
+
 ```
-> cd src
+> cd build
+> cmake ../src
 > cmake --build . --config Release
+> cd ..
 ```
+If everything is setup correctly, you should have executables for running the MSGD (sequential) script,  EASGD and EAMSGD (parallel) scripts for both the $\texttt{MNIST}$ and $\texttt{CIFAR-10}$ datasets. To run the training with EAMSGD, we specify the parameters in the command-line arguments in the following order $\tau$, $\beta$, $\delta$. We are using the learning rate $0.01$ for every run, but you can change this hyperparameter manually in the corresponding script.
 
-If everything is setup correctly, you should have executables for running the MSGD (sequential) script and the EAMSGD (parallel) script. To run the training with EAMSGD, we specify the parameters in the command-line arguments in the following order $\tau$, $\beta$, $\delta$. 
-
-**EXAMPLE:** Training the CNN using the EAMSGD training routine with 8 workers (and one root/center node) and the hyperparameters $\tau = 4$, $\beta = 2$ and $\delta = 0.9$ is done by running
+**EXAMPLE:** Training the CNN on the  $\texttt{CIFAR-10}$ dataset using the EAMSGD training routine with 8 workers (and one root/center node) and the hyperparameters $\tau = 4$, $\alpha = 0.125$ and $\delta = 0.9$ is done by running
 
 ```
 > cd src 
-> mpiexec -n 9 ./eamsgd 4 2 0.9
+> mpiexec -n 9 ./eamsgd_cifar 4 0.125 0.9
 ```
-The training using MSGD is done analogously. **EXAMPLE:** with $\delta = 0.9$ you run
+**EXAMPLE:** Training the CNN on the $\texttt{MNIST}$ dataset using the EAMSGD training routine with 4 workers (and one root/center node) and the hyperparameters $\tau = 2$, $\alpha = 0.25$ and $\delta = 0.9$ is done by running
+
+```
+> cd src 
+> mpiexec -n 5 ./eamsgd_mnist 4 0.25 0.9
+```
+The training using MSGD is done analogously. **EXAMPLE:** Training on $\texttt{MNIST}$ with $\delta = 0.9$ is done by running
 ```
 > cd src
-> ./msgd 0.9
+> ./msgd_cifar 0.9
 ```
-**NOTES:** We are using the learning rate $0.01$ for every run, but you can change this hyperparameter manually in the corresponding script.
 
-If you prefer to run all the experiments you can run 
+There are some predefined experiment setups contained in bash-scripts (e.g `../src/experiments.sh`, `../src/experiment_easgd.sh` etc.)
+
+**EXAMPLE:** Running EAMSGD and MSGD training for many different values of the hyperparameters. (Generating most of the figures in the report)
 
 ```
 > cd src 
 > sh ./experiments.sh
 ```
-In $\texttt{./src/experiments.sh}$, we run EAMSGD and MSGD training for many different values of the hyperparameters. **WARNING:** This bash-job can take several days to finish depending on the grid size
+
+ **WARNING:** This bash-job can take several days to finish depending on the grid size.
 
 ## References
 <a id="1">[1] Sixing Zhang, Anna Choromanska, Yann LeCun, Deep learning with Elastic Averaging SGD, https://arxiv.org/abs/1412.6651 </a> 
