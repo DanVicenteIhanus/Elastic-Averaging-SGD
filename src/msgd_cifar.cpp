@@ -177,10 +177,8 @@ int main(int argc, char* argv[]) {
       test_sample_mean_loss = test_running_loss / num_test_samples;
       std::cout << "Testset - Loss: " << test_sample_mean_loss << ", Accuracy: " << test_accuracy << '\n';
     }
-    // Log to file in txt
     file << duration.count() << "," << accuracy << "," << sample_mean_loss << "," << test_accuracy << "," << test_sample_mean_loss <<"\n";
-  } // epoch loop
-
+  } 
   file.close();
   return 0;
 }

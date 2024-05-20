@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.5"
@@ -24,7 +24,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "",
 			"projects" : 
 			[
 				{
@@ -49,42 +49,42 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "eamsgd_cifar::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-eamsgd_cifar-Debug-4eec895da8c08c92564c.json",
+					"jsonFile" : "target-eamsgd_cifar-e7d4c83b96ff043cb87a.json",
 					"name" : "eamsgd_cifar",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "eamsgd_mnist::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-eamsgd_mnist-Debug-c51b7d3269d22041e465.json",
+					"jsonFile" : "target-eamsgd_mnist-29478dadadab9c2f53d0.json",
 					"name" : "eamsgd_mnist",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "easgd_cifar::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-easgd_cifar-Debug-fbf91feba774027cb44d.json",
+					"jsonFile" : "target-easgd_cifar-3223c01ecb12953d09ae.json",
 					"name" : "easgd_cifar",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "easgd_mnist::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-easgd_mnist-Debug-eb0ad482cbfca8207e03.json",
+					"jsonFile" : "target-easgd_mnist-ff822ea0ef692501cb16.json",
 					"name" : "easgd_mnist",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "msgd_cifar::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-msgd_cifar-Debug-121c08a8407d475887cb.json",
+					"jsonFile" : "target-msgd_cifar-97be7f36409f68b359a4.json",
 					"name" : "msgd_cifar",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "msgd_mnist::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-msgd_mnist-Debug-8eeb86c7017ff8fe6919.json",
+					"jsonFile" : "target-msgd_mnist-d9ffedebb04ae5fc1e2f.json",
 					"name" : "msgd_mnist",
 					"projectIndex" : 0
 				}
@@ -94,8 +94,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/danvicente/skola/SF2568 - Parallell/Project/build",
-		"source" : "/Users/danvicente/skola/SF2568 - Parallell/Project/src"
+		"build" : "/Users/danvicente/skola/sf2568 - parallell/Project/build",
+		"source" : "/Users/danvicente/skola/sf2568 - parallell/Project/src"
 	},
 	"version" : 
 	{

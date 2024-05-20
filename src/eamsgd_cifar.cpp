@@ -36,7 +36,6 @@ std::fstream setup_result_file(int size, int rank, int tau, double alpha, double
             file << "Duration,Accuracy,Sample_Mean_loss,Total_comm_time\n";
         }
     }
-
     return file;
 }
 
@@ -65,7 +64,6 @@ int main(int argc, char* argv[]) {
   int tau = std::stoi(argv[1]);
   double alpha = std::stod(argv[2]);
   double delta = std::stod(argv[3]);
-  //const float alpha = beta/(tau*(size - 1)); // depends on beta, tau (for stability)
   const double momentum_param = 0.0;
 
   // clocks for timing
@@ -354,7 +352,7 @@ int main(int argc, char* argv[]) {
           param[i].value().data().add_(momentum[i].value().data()); 
         }
         t ++;
-      } // batch loop
+      } 
 
       auto sample_mean_loss = running_loss / num_train_samples;
       auto accuracy = static_cast<double>(num_correct) / num_train_samples;

@@ -9,39 +9,43 @@ using namespace std::chrono;
 
 torch::Device device(torch::kCPU);
 
-/* 
-TODO:
-  2. Tune hyperparameters (elastic force etc) ? tau = {4, 16, 32}
-  3. Grid-search to generate more data
-  4. Refactor code..
-*/
+std::fstream setup_result_file(double delta) {
+    std::ostringstream filename;
+    filename << "../results/mnist/msgd/stats_mnist_MSGD_delta_" << delta << ".txt";
+    
+    // Open file for writing
+    std::fstream file;
+    file.open(filename.str(), std::fstream::out | std::fstream::app);
+    
+    // Check if the file is new to write the header
+    file.seekg(0, std::ios::end); // go to the end of file
+    if (file.tellg() == 0) { // if file size is 0, it's new
+      file << "Duration,Accuracy,Sample_Mean_Loss,Test_Accuracy,Test_Mean_loss\n"; // write the header
+    }
+    return file;
+}
 
 int main(int argc, char* argv[]) {
-  
+  if (argc != 2) {
+    std::cerr << "Usage: " << argv[0] << "<delta>" << std::endl;
+    return 1;
+  }
   // == Hyperparameters == //
   const int num_classes = 10;
   const int batch_size = 1000; 
   const int num_epochs = 10; 
   const double lr = 0.01;
-  const double momentum = 0.9;
+  const double delta = std::stod(argv[1]);
 
+  // allocate mem for stats
+  double test_accuracy;
+  double test_sample_mean_loss;
+  double sample_mean_loss;
+  double accuracy;
   auto start = high_resolution_clock::now(); // timing the training
 
-  // ====================== //
   // Setup file for results
-  // ====================== //
-  std::ostringstream filename;
-  filename << "../data/training_stats_sequential_momentum_batch_size_" << batch_size << ".txt";
-  
-  // Open file for writing
-  std::fstream file;
-  file.open(filename.str(), std::fstream::out | std::fstream::app);
-  
-  // Check if the file is new to write the header
-  file.seekg(0, std::ios::end); // go to the end of file
-  if (file.tellg() == 0) { // if file size is 0, it's new
-    file << "Duration,Accuracy,Sample_Mean_Loss\n"; // write the header
-  }
+  std::fstream file = setup_result_file(delta);
 
   // MNIST data from pytorch datasets
   const std::string MNIST_path = "../dataset/mnist/";
@@ -70,7 +74,7 @@ int main(int argc, char* argv[]) {
   
   // define optimizer
   torch::optim::SGDOptions options(lr);
-  options.momentum(momentum);
+  options.momentum(delta);
   torch::optim::SGD optimizer(model->parameters(), options);
 
   // get model-size and define array of parameters  
@@ -102,12 +106,11 @@ int main(int argc, char* argv[]) {
 		double running_loss = 0.0;
 		size_t num_correct = 0;
 		for (auto &batch : *train_loader) {
-			// getting dimensions of tensor
-      
+
 			auto data = batch.data.to(device);
 			auto target = batch.target.to(device);
 
-			// forward pass d
+			// forward pass
 			auto output = model->forward(data);
 			
 			// compute loss
@@ -117,61 +120,52 @@ int main(int argc, char* argv[]) {
 			// predict
 			auto prediction = output.argmax(1);
       
-        optimizer.zero_grad();
-        loss.backward();
-        optimizer.step();
-		num_correct += prediction.eq(target).sum().item<int64_t>(); //np.sum(prediction == target)
+      optimizer.zero_grad();
+      loss.backward();
+      optimizer.step();
+		  num_correct += prediction.eq(target).sum().item<int64_t>(); //np.sum(prediction == target)
 		} // batch loop
 
     // print epoch results in terminal
-    auto sample_mean_loss = running_loss / num_train_samples;
-    auto accuracy = static_cast<double>(num_correct) / num_train_samples;
-    std::cout << "RANK: "<< " Epoch [" << (epoch + 1) << "/" << num_epochs << "], Trainset - Loss: "
+    sample_mean_loss = running_loss / num_train_samples;
+    accuracy = static_cast<double>(num_correct) / num_train_samples;
+    std::cout << " Epoch [" << (epoch + 1) << "/" << num_epochs << "], Trainset - Loss: "
         << sample_mean_loss << ", Accuracy: " << accuracy << '\n';
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>(stop - start);
     std::cout << "duration = " << duration.count() << "\n";
 
-    // Log to file in txt
-    file << duration.count() << "," << accuracy << "," << sample_mean_loss << "\n";
-
-  } // epoch loop
-
-  // ============= //
-  // TESTING PHASE // 
-  // ============= //
-
-    std::cout << "Training finished!\n\n";
-    std::cout << "--------------------------------------------------------\n";
-    std::cout << "Testing... num_test_samples = " << num_test_samples << "\n";
-    std::cout << "--------------------------------------------------------\n";
-    // Test the model
+    // ============= //
+    // == Testing == //
+    // ============= //
     model->eval();
-    torch::InferenceMode no_grad;
+    double test_running_loss = 0.0;
+    size_t test_num_correct = 0;
+    { 
+      torch::InferenceMode no_grad;
+      for (const auto& batch : *test_loader) {
+        auto data = batch.data.to(device);
+        auto target = batch.target.to(device);
 
-	double test_running_loss = 0.0;
-	size_t test_num_correct = 0;
-	for (const auto& batch : *test_loader) {
-		auto data = batch.data.to(device);
-		auto target = batch.target.to(device);
+        // forward pass
+        auto output = model->forward(data);
 
-		// forward pass
-		auto output = model->forward(data);
+        // loss update
+        auto loss = torch::nn::functional::cross_entropy(output, target);
+        test_running_loss += loss.item<double>() * data.size(0);
 
-		// loss update
-		auto loss = torch::nn::functional::cross_entropy(output, target);
-		test_running_loss += loss.item<double>() * data.size(0);
-
-		// prediction & accuracy
-		auto prediction = output.argmax(1);
-		test_num_correct += prediction.eq(target).sum().item<int64_t>();
-	
-	}
-  
-	std::cout << "Testing finished!\n";
-	auto test_accuracy = static_cast<double>(test_num_correct) / num_test_samples;
-	auto test_sample_mean_loss = test_running_loss / num_test_samples;
-	std::cout << "Testset - Loss: " << test_sample_mean_loss << ", Accuracy: " << test_accuracy << '\n';
+        // prediction & accuracy
+        auto prediction = output.argmax(1);
+        test_num_correct += prediction.eq(target).sum().item<int64_t>();
+      
+      }
+      std::cout << "Testing finished!\n";
+      test_accuracy = static_cast<double>(test_num_correct) / num_test_samples;
+      test_sample_mean_loss = test_running_loss / num_test_samples;
+      std::cout << "Testset - Loss: " << test_sample_mean_loss << ", Accuracy: " << test_accuracy << '\n';
+    }
+    file << duration.count() << "," << accuracy << "," << sample_mean_loss << "," << test_accuracy << "," << test_sample_mean_loss <<"\n";
+  } 
   file.close();
   return 0;
 }

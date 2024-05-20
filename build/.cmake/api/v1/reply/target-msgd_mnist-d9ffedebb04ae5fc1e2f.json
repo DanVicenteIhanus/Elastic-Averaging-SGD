@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "/Users/danvicente/skola/SF2568 - Parallell/Project/src/msgd_mnist"
+			"path" : "/Users/danvicente/skola/sf2568 - parallell/Project/src/msgd_mnist"
 		}
 	],
 	"backtrace" : 1,
@@ -98,7 +98,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0"
+					"fragment" : "-std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0"
 				}
 			],
 			"defines" : 
@@ -159,10 +159,6 @@
 	{
 		"commandFragments" : 
 		[
-			{
-				"fragment" : "-g",
-				"role" : "flags"
-			},
 			{
 				"fragment" : "",
 				"role" : "flags"

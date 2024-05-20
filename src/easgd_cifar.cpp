@@ -306,7 +306,6 @@ int main(int argc, char* argv[]) {
       auto stop = high_resolution_clock::now();
       auto duration = duration_cast<milliseconds>(stop - start);
       file << duration.count() << "," << accuracy << "," << sample_mean_loss << "\n";
-
     }
   }  
   file.close();
