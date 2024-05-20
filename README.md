@@ -62,7 +62,7 @@ If everything is setup correctly, you should have executables for running the MS
 
 ```
 > cd src 
-> mpiexec -n 5 ./eamsgd_mnist 4 0.25 0.9
+> mpiexec -n 5 ./eamsgd_mnist 2 0.25 0.9
 ```
 The training using MSGD is done analogously. **EXAMPLE:** Training on $\texttt{MNIST}$ with $\delta = 0.9$ is done by running
 ```
