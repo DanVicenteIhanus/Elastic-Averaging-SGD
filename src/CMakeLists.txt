@@ -9,21 +9,44 @@ find_package(MPI REQUIRED)
 include_directories(SYSTEM ${MPI_C_INCLUDE_PATH} ${MPI_CXX_INCLUDE_PATH})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+#
+# MNIST
+#
 
 # MSGD
-add_executable(msgd msgd_cifar.cpp convnet_cifar.cpp cifar10.cpp)
-target_link_libraries(msgd ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
-set_property(TARGET msgd PROPERTY CXX_STANDARD 17)
+add_executable(msgd_mnist msgd.cpp convnet.cpp)
+target_link_libraries(msgd_mnist ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
+set_property(TARGET msgd_mnist PROPERTY CXX_STANDARD 17)
 
 # EAMSGD
-add_executable(eamsgd eamsgd_cifar.cpp convnet_cifar.cpp cifar10.cpp)
-target_link_libraries(eamsgd ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
-set_property(TARGET eamsgd PROPERTY CXX_STANDARD 17)
+add_executable(eamsgd_mnist eamsgd.cpp convnet.cpp)
+target_link_libraries(eamsgd_mnist ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
+set_property(TARGET eamsgd_mnist PROPERTY CXX_STANDARD 17)
 
 # EASGD
-add_executable(easgd easgd_cifar.cpp convnet_cifar.cpp cifar10.cpp)
-target_link_libraries(easgd ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
-set_property(TARGET easgd PROPERTY CXX_STANDARD 17)
+add_executable(easgd_mnist easgd.cpp convnet.cpp)
+target_link_libraries(easgd_mnist ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
+set_property(TARGET easgd_mnist PROPERTY CXX_STANDARD 17)
+
+#
+# CIFAR-10
+#
+# MSGD
+add_executable(msgd_cifar msgd_cifar.cpp convnet_cifar.cpp cifar10.cpp)
+target_link_libraries(msgd_cifar ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
+set_property(TARGET msgd_cifar PROPERTY CXX_STANDARD 17)
+
+# EAMSGD
+add_executable(eamsgd_cifar eamsgd_cifar.cpp convnet_cifar.cpp cifar10.cpp)
+target_link_libraries(eamsgd_cifar ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
+set_property(TARGET eamsgd_cifar PROPERTY CXX_STANDARD 17)
+
+# EASGD
+add_executable(easgd_cifar easgd_cifar.cpp convnet_cifar.cpp cifar10.cpp)
+target_link_libraries(easgd_cifar ${TORCH_LIBRARIES} ${MPI_LIBRARIES})
+set_property(TARGET easgd_cifar PROPERTY CXX_STANDARD 17)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED_ON)
