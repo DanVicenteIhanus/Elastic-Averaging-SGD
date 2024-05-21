@@ -1,7 +1,8 @@
 .DS_Store
 .bin
-dataset/cifar-10-batches-bin
-data/cifar-10-batches-bin
+dataset/cifar-10-batches-bin/*
+dataset/mnist/*
+plots/*
 src/cmake_install.cmake
 src/CMakeCache.txt
 src/Makefile
